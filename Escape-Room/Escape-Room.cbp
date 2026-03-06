@@ -31,6 +31,32 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="configuracion.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="configuracion.h" />
+		<Unit filename="data/conexiones.txt" />
+		<Unit filename="data/jugadores.txt" />
+		<Unit filename="data/objetos.txt" />
+		<Unit filename="data/partida.txt" />
+		<Unit filename="data/puzles.txt" />
+		<Unit filename="data/salas.txt" />
+		<Unit filename="ficheros.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="ficheros.h" />
+		<Unit filename="juego.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="juego.h" />
+		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="main.h" />
+		<Unit filename="puzles.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="puzles.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
