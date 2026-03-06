@@ -1,0 +1,6 @@
+#ifndef CONFIGURACION
+#define CONFIGURACION
+
+
+
+#endif // CONFIGURACION

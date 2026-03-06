@@ -1,7 +1,9 @@
 #include <stdio.h>
 
-int main(){
 
+//Todas las opciones para guardar la partida, crear, cargar...
+
+int main(){
 
 
 
