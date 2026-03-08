@@ -1,21 +1,33 @@
 #include <stdio.h>
 #include "main.h"
+#include "ficheros.h"
 
 void mostrar_titulo();
 
 int main(){
 
-    char usuario[15], clave[20];
+    char usuario[10], clave[8];        //En el fichero jugadores.txt  usuario = campo "jugador"
+    int booleano=0;
 
     mostrar_titulo();
 
     printf("Inicie sesion o registrese para continuar\n");
 
     printf("\nUsuario: ");
-    //scanf("%s", usuario);
+    scanf("%s", usuario);
 
-    printf("\nClave: ");
-    //scanf("%s", clave);
+    booleano=comprobar_usuario(usuario);
+
+    if(booleano==1){
+
+        printf("\nClave: ");
+        scanf("%s", clave);
+
+    }else{
+
+        printf("Usuario no encontrado.");
+    }
+
 
 
 }
