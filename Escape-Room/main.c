@@ -5,13 +5,17 @@ void mostrar_titulo();
 
 int main(){
 
+    char usuario[15], clave[20];
+
     mostrar_titulo();
 
     printf("Inicie sesion o registrese para continuar\n");
-    printf("\nNombre: ");
+
+    printf("\nUsuario: ");
+    //scanf("%s", usuario);
 
     printf("\nClave: ");
-
+    //scanf("%s", clave);
 
 
 }
