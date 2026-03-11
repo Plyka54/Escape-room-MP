@@ -22,14 +22,32 @@ int comprobar_usuario(char *user){
     }
 
 
-    for (i=0; i<=guiones;i++){  //mi idea es contar guiones hasta el campo "jugador" que es donde esta el usuario
-
-
-
-    }
 
 
 
 
     return encontrado;
 }
+
+void carga(jugadores j){
+    FILE *f;
+    f=fopen("data/jugadores.txt","r");
+    if (fichero==NULL){
+
+        printf("\nHa habido un error en la apertura del fichero\n");
+    }
+
+     jugador j;
+     char linea[200];
+     int i;
+
+     while(fgets(linea,200,f)!=NULL){
+
+     j.id_jugador=strtok(linea,"-");
+     j.nomb_jugador=strtok(NULL,"-");
+     j.jugador=strtok(NULL,"-");
+     j.contraseña=strtok(NULL,"-");
+     j.id_obj=strtok(NULL,"\n");
+     i++;
+    }
+    }
