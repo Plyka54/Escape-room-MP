@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "main.h"
 #include "ficheros.h"
 #include "configuracion.h"
@@ -8,14 +9,13 @@ void mostrar_titulo();
 int main(){
 
     char usuario[10], clave[8];         //En el fichero jugadores.txt  usuario = campo "jugador"
-    int user=0, password=0;             //Booleanos
+    int user=0, password=0;             //Booleanos para el login
     int opcion;
 
     mostrar_titulo();
 
 
 // LOGIN DE USUARIO O REGISTRO -----------------------------------------------------------
-
 
     printf("Inicie sesion o registrese para continuar\n");
 
@@ -67,7 +67,7 @@ int main(){
 
             case 2: //Cargar partida
 
-
+                Cargar_partida();
 
                 break;
 
@@ -108,8 +108,14 @@ void mostrar_titulo(){
 
 }
 
+
+//Cabecera: void registro()
+//Precondicion:
+//Postcondicion: Se rellena la estructura "Jugadores" con los datos del nuevo jugador
 void registro(){ //me hace falta la estructura de lucia en configuracion
 
+
+        //Tendría que rellenar el fichero directamente desde esta funcion
 
     char Nomb_comp[20], usuario[10], clave[8];
 
