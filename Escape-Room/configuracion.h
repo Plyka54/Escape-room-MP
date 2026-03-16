@@ -8,9 +8,10 @@ typedef struct
     int id_jugador;
     char nomb_jugador[21];
     char jugador[11];
-    char contraseña[9];
-    char id_obj[5];
+    char contrasena[9]; //HE CAMBIADO LA Ñ PORQUE SINO EL PROGRAMA NO FUNCIONA PARA QUE USEIS SIEMPRE SIN LA Ñ
+    char id_obj[5][4];
 } Jugadores;
+
 
 typedef struct
 {
