@@ -44,6 +44,17 @@ void carga(jugadores lista[20],int *total_leidos){
     }
     *total_leidos=i;
     fclose(f);
+
+    f=fopen("data/salas.txt","r");
+    if(f==NULL){
+        printf("\n Ha habido un error en la apertura del fichero\n")
+    }
+    i=0;
+    while(fgets(linea,200,f)!=NULL && i<13){
+        aux=strtok(linea,"-");
+        if(aux) partida.sala[i].id_sala=atoi(aux);
+
+    }
     }
 
 //Cabecera: int comprobar_usuario(char *user)
