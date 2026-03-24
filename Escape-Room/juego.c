@@ -39,7 +39,7 @@ void menu_opciones_juego(int ubicacion_actual, partida p){
 
         case 1: //describir sala
 
-            printf("%s", partida.sala[ubicacion_actual].descripcion);
+            printf("%s", p.sala[ubicacion_actual].descripcion);
 
             break;
 
@@ -83,7 +83,7 @@ void menu_opciones_juego(int ubicacion_actual, partida p){
         default:
 
             printf("No puedo hacer otra cosa");
-            system(clear);
+            system("cls");
             break;
     }
 

@@ -11,25 +11,31 @@ int main(){
     char usuario[10], clave[8];         //En el fichero jugadores.txt  usuario = campo "jugador"
     int user=0, password=0;             //Booleanos para el login
     int opcion;
+    partida p;
 
     mostrar_titulo();
 
+    //CARGAMOS LOS FICHEROS
+    int total_usuarios;
+    carga(p,&total_usuarios);
+
 
 // LOGIN DE USUARIO O REGISTRO -----------------------------------------------------------
+    int u;
 
     printf("Inicie sesion o registrese para continuar\n");
 
     printf("\nUsuario: ");
     scanf("%s", usuario);
 
-    user=comprobar_usuario(usuario);
+    user=comprobar_usuario(p,usuario,total_usuarios,&u);
 
     if(user==1){
 
         printf("\nClave: ");
         scanf("%s", clave);
 
-        pasword=comprobar_clave(clave);  //si la clave es correcta password=1
+        password=comprobar_clave(p,clave,u);  //si la clave es correcta password=1
 
     }else{
 
