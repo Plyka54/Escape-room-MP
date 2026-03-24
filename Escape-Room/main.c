@@ -27,15 +27,18 @@ int main(){
 
     printf("\nUsuario: ");
     scanf("%s", usuario);
+    fflush(stdin);
 
     user=comprobar_usuario(p,usuario,total_usuarios,&u);
 
     if(user==1){
 
         printf("\nClave: ");
-        scanf("%s", clave);
+        scanf(" %s", clave);
 
         password=comprobar_clave(p,clave,u);  //si la clave es correcta password=1
+        if(password) printf("Contraseña correcta\n");
+        else {printf("Contraseña incorrecta\n");}
 
     }else{
 
