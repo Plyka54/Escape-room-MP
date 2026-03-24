@@ -37,8 +37,8 @@ int main(){
         scanf(" %s", clave);
 
         password=comprobar_clave(p,clave,u);  //si la clave es correcta password=1
-        if(password) printf("Contraseña correcta\n");
-        else {printf("Contraseña incorrecta\n");}
+        if(password) printf("Contrasena correcta\n");
+        else {printf("Contrasena incorrecta\n");}
 
     }else{
 
