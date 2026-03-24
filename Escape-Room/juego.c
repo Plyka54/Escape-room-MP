@@ -8,6 +8,8 @@ void Inicio_escape_room(){
 
     int ubicacion_actual=1; //esto pa la estructura
     system("clear");
+    printf("%s\n", partida.sala[ubicacion_actual].nombre_sala);
+    printf("--------------------------------\n");
 
     //voy a ser una dramas que todos los sepais
 

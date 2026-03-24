@@ -1,5 +1,7 @@
 #include <stdio.h>
+#include <string.h>
 #include "ficheros.h"
+#include "configuracion.h"
 
 //lectura y escritura de ficheros
 
@@ -36,7 +38,7 @@ void carga(jugadores lista[20],int *total_leidos){
         //ID OBJETO
         int j=0;
         while((aux=strtok(NULL,"-\n"))!=NULL && j<5){
-            strncpy(lista[i].id_obj[j],aux);
+            strcpy(lista[i].id_obj[j],aux);
             j++;
         }
 
@@ -47,7 +49,7 @@ void carga(jugadores lista[20],int *total_leidos){
 
     f=fopen("data/salas.txt","r");
     if(f==NULL){
-        printf("\n Ha habido un error en la apertura del fichero\n")
+        printf("\n Ha habido un error en la apertura del fichero\n");
     }
     i=0;
     while(fgets(linea,200,f)!=NULL && i<13){

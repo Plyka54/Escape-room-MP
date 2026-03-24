@@ -43,7 +43,7 @@ void Bienvenida(){
 
         case 2: //Cargar partida
 
-            Cargar_partida();
+            //Cargar_partida();
 
             break;
 
