@@ -2,6 +2,7 @@
 #define CONFIGURACION
 #include <stdio.h>
 
+void Bienvenida();
 
 typedef struct
 {
@@ -9,7 +10,7 @@ typedef struct
     char nomb_jugador[21];
     char jugador[11];
     char contrasena[9]; //HE CAMBIADO LA Ñ PORQUE SINO EL PROGRAMA NO FUNCIONA PARA QUE USEIS SIEMPRE SIN LA Ñ
-    char id_obj[5][5];
+    char id_obj[5][5]; //inventario
 } jugadores;
 
 
@@ -18,7 +19,7 @@ typedef struct
     int id_sala;
     char nombre_sala[31];
     char tipo[8]; /* INICIAL, NORMAL O SALIDA */
-    char descrip[151];
+    char descripcion[151];
 } salas;
 
 typedef struct

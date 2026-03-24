@@ -1,0 +1,2 @@
+OB01-Tarjeta de luz de aula-Tarjeta que me permite encender las luces de todas las aulas-01
+OB02-Nota doblada-Nota encontrada en el aula B01, contiene la clave "4ngE14"-01

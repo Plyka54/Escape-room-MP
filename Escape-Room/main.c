@@ -43,46 +43,9 @@ int main(){
 // BIENVENIDA Y COMIENZO --------------------------------------------------------
 
 
-    if (password==1){
+    if (password==1){   //EL CONTENIDO DEL IF TIENE QUE SER UNA FUNCION APARTE
 
-        system(clear);
-        printf("\n\n\n ¡Bienvenido a Escape Room ESI!\n\n\n");
-
-
-        printf("Introduce lo que quieras hacer\n");
-
-        printf("1. Nueva Partida\n");
-        printf("2. Cargar Partida\n");
-        printf("3. Salir\n");
-
-        scanf("%d", &opcion);
-
-        switch(opcion){
-
-            case 1:
-
-                Nueva_partida();
-
-                break;
-
-            case 2: //Cargar partida
-
-                Cargar_partida();
-
-                break;
-
-            case 3: //Salir
-
-
-                break;
-
-            default:
-
-                printf("Opcion no valida");
-
-                break;
-
-        }
+        Bienvenida();
 
     }
 

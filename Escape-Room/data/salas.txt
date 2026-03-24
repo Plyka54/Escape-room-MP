@@ -1,13 +1,13 @@
-01-Pasillo Principal-NORMAL-Pasillo principal que conecta todos los demás pasillos, situado despues de pasar el Hall
-02-Hall-NORMAL-Vestíbulo que
-03-Aula Magna-NORMAL-
-04-Biblioteca-NORMAL-
+01-Aula de teoria-INICIAL-Parece un aula normal y corriente, las luces estan apagadas. Hay una especie de panel en la puerta que me pide una especie de clave.
+02-Pasillo aulas B-NORMAL-Solo un pasillo, puedo ver la puerta del baño y de otras aulas, me pregunto si podre entrar a alguna.
+03-Aula Magna-NORMAL-Es un aula mucho mas grande que la otra. Hay bastantes mesas y una pizarra.
+04-Biblioteca-NORMAL-Mesas y estanterias se extienden hasta bastante lejos
 05-Laboratorio-NORMAL-
 06-Despacho del Profesor-NORMAL-
 07-Cafeteria-NORMAL-
 08-Cuarto de Limpieza-NORMAL-
 09-Aula de Practicas-NORMAL-
-10-Aula de teoria-INICIAL-
+10-Pasillo Principal-NORMAL-Pasillo principal que conecta todos los demás pasillos, situado despues de pasar el Hall
 11-Entrada-SALIDA-
 12-Pasillo A-NORMAL-
-13-Pasillo B-NORMAL-
+13-Hall-NORMAL-Vestíbulo que
