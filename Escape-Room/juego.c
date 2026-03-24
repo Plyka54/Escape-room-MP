@@ -4,11 +4,11 @@
 #include "configuracion.h"
 
 
-void Inicio_escape_room(){
+void Inicio_escape_room(partida p){
 
-    int ubicacion_actual=1; //esto pa la estructura
+    int ubicacion_actual=0; //esto pa la estructura
     system("clear");
-    printf("%s\n", partida.sala[ubicacion_actual].nombre_sala);
+    printf("%s\n", p.sala[ubicacion_actual].nombre_sala);
     printf("--------------------------------\n");
 
     //voy a ser una dramas que todos los sepais
@@ -21,10 +21,10 @@ void Inicio_escape_room(){
 
     printf("Poco a poco te incorporas y te levantas de lo que parece ser un pupitre.\n");
 
-    menu_opciones_juego(ubicacion_actual);
+    menu_opciones_juego(ubicacion_actual, p);
 }
 
-void menu_opciones_juego(int ubicacion_actual){
+void menu_opciones_juego(int ubicacion_actual, partida p){
 
     int eleccion=11;
 
