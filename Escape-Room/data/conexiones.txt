@@ -1,18 +1,18 @@
-C1-01-Aula de teoria-02-Pasillo B-Bloqueada-P01
-C2-02-Pasillo B-03-Baño Pasillo B-Activa-0
-C3-02-Pasillo B-04-Pasillo Principal-Activa-0
-C4-04-Pasillo Principal-05-Aula Magna-Bloqueada-OB03
-C5-04-Pasillo Principal-06-Biblioteca-Activa-0
-C6-04-Pasillo Principal-07-Pasillo E-Activa-0
-C7-07-Pasillo E-08-Laboratorio E-Activa-0
-C8-04-Pasillo principal-09-Pasillo A-Activa-0
-C9-09-Pasillo A-10-Despacho del profesor-Activa-0
-C10-04-Pasillo Princpal-11-Cafeteria-Activa-0
-C11-11-Cafeteria-12-Cuarto de Limpieza-Activa-0
-C12-04-Pasillo Principal-13-Pasillo C-Activa0
-C13-02-Pasillo B-14-Aula de Practicas B-Activa-0
-C14-06-Biblioteca-15-Copisteria-Activa-0
-C15-04-Pasillo Principal-16-Conserjeria-Activa-0
-C16-16-Conserjeria-17-Hall-Activa-0
-C17-17-Hall-18-Entrada-Activa-0
+C01-01-02-Bloqueada-P01
+C02-02-03-Activa-0
+C03-02-04-Activa-0
+C04-04-05-Bloqueada-OB03
+C05-04-06-Activa-0
+C06-04-07-Activa-0
+C07-07-08-Activa-0
+C08-04-09-Activa-0
+C09-09-10-Activa-0
+C10-04-11-Activa-0
+C11-11-12-Activa-0
+C12-04-13-Activa0
+C13-02-14-Activa-0
+C14-06-15-Activa-0
+C15-04-16-Activa-0
+C16-16-17-Activa-0
+C17-17-18-Activa-0
 
