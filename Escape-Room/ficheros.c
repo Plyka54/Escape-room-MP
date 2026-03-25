@@ -72,7 +72,7 @@ void carga(partida p,int *total_leidos){
     i=0;
     while(fgets(linea,200,f)!=NULL && i<13){
         aux=strtok(linea,"-");
-        if(aux) p.conexion[i].id_conexion=atoi(aux);
+        if(aux) strcpy(p.conexion[i].id_conexion,aux);
         aux=strtok(linea,"-");
         if(aux) p.conexion[i].id_origen=atoi(aux);
         aux=strtok(linea,"-");
