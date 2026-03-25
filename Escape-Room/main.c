@@ -23,7 +23,7 @@ int main(){
 // LOGIN DE USUARIO O REGISTRO -----------------------------------------------------------
     int u;
 
-    printf("Inicie sesion o registrese para continuar\n");
+    printf("Inicie sesion o registrese para continuar\n"); //habra que poner para elegir una
 
     printf("\nUsuario: ");
     scanf("%s", usuario);
@@ -34,7 +34,7 @@ int main(){
     if(user==1){
 
         printf("\nClave: ");
-        scanf(" %s", clave);
+        scanf(" %s", &clave[0]);
 
         password=comprobar_clave(p,clave,u);  //si la clave es correcta password=1
         if(password) printf("Contrasena correcta\n");

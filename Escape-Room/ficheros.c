@@ -145,9 +145,9 @@ int comprobar_usuario(partida p,char user[11], int total_leidos, int *u){ //la u
 //cabecera: int comprobar_clave(jugadores lista[20], char clave, int u);
 //precondicion: se debe haber comprobado el usuario antes
 //poscondicion: la funcion devuelve un booleano que indicara si la clave es la del usuario
-int comprobar_clave(partida p, char *clave, int u){
-    int comprobado;
-    if(strcmp(clave,p.jugador[u].contrasena)) comprobado=1;
+int comprobar_clave(partida p, char clave[8], int u){
+    int comprobado=0;
+    if(strcmp(clave,p.jugador[u].contrasena)==0) comprobado=1;
 
     return comprobado;
 }
