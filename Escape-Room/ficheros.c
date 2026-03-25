@@ -9,7 +9,7 @@
 //precondicion:
 //poscondicion:cargar en la estructura la informacion de todos los usuarios guardados en el
 //fichero jugadores.txt
-void carga(partida p,int *total_leidos){
+void carga(partida *p,int *total_leidos){
     FILE *f;
     f=fopen("data/jugadores.txt","r");
     if (f==NULL){
@@ -25,20 +25,20 @@ void carga(partida p,int *total_leidos){
      while(fgets(linea,200,f)!=NULL && i<20){ //memoria dinamica: realloc de lo que habia +1
         //ID(lo convierto en entero)
         aux=strtok(linea,"-");
-        if(aux) p.jugador[i].id_jugador=atoi(aux);
+        if(aux) p->jugador[i].id_jugador=atoi(aux);
         //NOMBRE (solo lo copio)
         aux=strtok(NULL,"-");
-        if(aux) strcpy(p.jugador[i].nomb_jugador,aux);
+        if(aux) strcpy(p->jugador[i].nomb_jugador,aux);
         //JUGADOR
         aux=strtok(NULL,"-");
-        if(aux) strcpy(p.jugador[i].jugador,aux);
+        if(aux) strcpy(p->jugador[i].jugador,aux);
         //CONTRASEÑA
         aux=strtok(NULL,"-");
-        if(aux) strcpy(p.jugador[i].contrasena,aux);
+        if(aux) strcpy(p->jugador[i].contrasena,aux);
         //ID OBJETO
         int j=0;
         while((aux=strtok(NULL,"-\n"))!=NULL && j<5){
-            strcpy(p.jugador[i].id_obj[j],aux);
+            strcpy(p->jugador[i].id_obj[j],aux);
             j++;
         }
 
@@ -54,33 +54,33 @@ void carga(partida p,int *total_leidos){
     i=0;
     while(fgets(linea,200,f)!=NULL && i<13){
         aux=strtok(linea,"-");
-        if(aux) p.sala[i].id_sala=atoi(aux);
-        aux=strtok(linea,"-");
-        if(aux) strcpy(p.sala[i].nombre_sala,aux);
-        aux=strtok(linea,"-");
-        if(aux) strcpy(p.sala[i].tipo,aux);
-        aux=strtok(linea,"\n");
-        if(aux) strcpy(p.sala[i].descripcion,aux);
+        if(aux) p->sala[i].id_sala=atoi(aux);
+        aux=strtok(NULL,"-");
+        if(aux) strcpy(p->sala[i].nombre_sala,aux);
+        aux=strtok(NULL,"-");
+        if(aux) strcpy(p->sala[i].tipo,aux);
+        aux=strtok(NULL,"\n");
+        if(aux) strcpy(p->sala[i].descripcion,aux);
         i++;
     }
     fclose(f);
 
-    f=fopen("data/conexiones.txt","r");
+   f=fopen("data/conexiones.txt","r");
     if(f==NULL){
         printf("\n Ha habido un error en la apertura del fichero\n");
     }
     i=0;
     while(fgets(linea,200,f)!=NULL && i<13){
         aux=strtok(linea,"-");
-        if(aux) strcpy(p.conexion[i].id_conexion,aux);
-        aux=strtok(linea,"-");
-        if(aux) p.conexion[i].id_origen=atoi(aux);
-        aux=strtok(linea,"-");
-        if(aux) p.conexion[i].id_destino=atoi(aux);
-        aux=strtok(linea,"\n");
-        if(aux) strcpy(p.conexion[i].estado,aux);
-        aux=strtok(linea,"\n");
-        if(aux) strcpy(p.conexion[i].cond,aux);
+        if(aux) strcpy(p->conexion[i].id_conexion,aux);
+        aux=strtok(NULL,"-");
+        if(aux) p->conexion[i].id_origen=atoi(aux);
+        aux=strtok(NULL,"-");
+        if(aux) p->conexion[i].id_destino=atoi(aux);
+        aux=strtok(NULL,"-");
+        if(aux) strcpy(p->conexion[i].estado,aux);
+        aux=strtok(NULL,"\n");
+        if(aux) strcpy(p->conexion[i].cond,aux);
         i++;
     }
     fclose(f);
@@ -92,13 +92,13 @@ void carga(partida p,int *total_leidos){
     i=0;
     while(fgets(linea,200,f)!=NULL && i<13){
         aux=strtok(linea,"-");
-        if(aux) strcpy(p.objeto[i].id_obj,aux);
-        aux=strtok(linea,"-");
-        if(aux) strcpy(p.objeto[i].nomb_obj,aux);
-        aux=strtok(linea,"-");
-        if(aux) strcpy(p.objeto[i].descrip,aux);
-        aux=strtok(linea,"\n");
-        if(aux) p.objeto[i].id_sala=atoi(aux);
+        if(aux) strcpy(p->objeto[i].id_obj,aux);
+        aux=strtok(NULL,"-");
+        if(aux) strcpy(p->objeto[i].nomb_obj,aux);
+        aux=strtok(NULL,"-");
+        if(aux) strcpy(p->objeto[i].descrip,aux);
+        aux=strtok(NULL,"\n");
+        if(aux) p->objeto[i].id_sala=atoi(aux);
         i++;
     }
     fclose(f);
@@ -110,17 +110,17 @@ void carga(partida p,int *total_leidos){
     i=0;
     while(fgets(linea,200,f)!=NULL && i<13){
         aux=strtok(linea,"-");
-        if(aux) strcpy(p.puzle[i].id_puzles,aux);
-        aux=strtok(linea,"-");
-        if(aux) strcpy(p.puzle[i].nomb_puz,aux);
-        aux=strtok(linea,"-");
-        if(aux) p.puzle[i].id_sala=atoi(aux);
-        aux=strtok(linea,"\n");
-        if(aux) strcpy(p.puzle[i].tipo,aux);
-        aux=strtok(linea,"\n");
-        if(aux) strcpy(p.puzle[i].descrip,aux);
-        aux=strtok(linea,"\n");
-        if(aux) strcpy(p.puzle[i].sol,aux);
+        if(aux) strcpy(p->puzle[i].id_puzles,aux);
+        aux=strtok(NULL,"-");
+        if(aux) strcpy(p->puzle[i].nomb_puz,aux);
+        aux=strtok(NULL,"-");
+        if(aux) p->puzle[i].id_sala=atoi(aux);
+        aux=strtok(NULL,"-");
+        if(aux) strcpy(p->puzle[i].tipo,aux);
+        aux=strtok(NULL,"-");
+        if(aux) strcpy(p->puzle[i].descrip,aux);
+        aux=strtok(NULL,"\n");
+        if(aux) strcpy(p->puzle[i].sol,aux);
         i++;
     }
     fclose(f);
