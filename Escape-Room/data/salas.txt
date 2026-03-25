@@ -1,17 +1,17 @@
 01-Aula de teoria-INICIAL-Parece un aula normal y corriente, las luces estan apagadas. Hay una especie de panel en la puerta que me pide una especie de clave.
-02-Pasillo aulas B-NORMAL-Solo un pasillo, puedo ver la puerta del baño y de otras aulas, me pregunto si podre entrar a alguna.
-03-Baño Pasillo B-NORMAL-Hábitación con varios retretes situada al lado del pasillo B.
-04-Aula Magna-NORMAL-Es un aula mucho mas grande que la otra. Hay bastantes mesas y una pizarra.
-05-Biblioteca-NORMAL-Mesas y estanterias se extienden hasta bastante lejos.
-06-Pasillo E-NORMAL-Solo un pasillo, puedo ver la puerta del baño y de otras aulas.
-07-Laboratorio-NORMAL- Hay varios puestos de ordenadores.
-08-Despacho del Profesor-NORMAL-Habitación con una mesa con varios cajones.
-09-Pasillo A-NORMAL-Solo un pasillo con los despachos de los profesores.
-10-Cafeteria-NORMAL-Cafeteria situada en la 1ºPlanta
-11-Cuarto de Limpieza-NORMAL-Cuarto con varias estanterias con productos y herramientas.
-12-Pasillo C-Solo un pasillo, con la puerta del baño y de otras aulas de prácticas.
-13-Aula de Practicas-NORMAL-Aula con varios puestos de fabricación.
-14-Pasillo Principal-NORMAL-Pasillo principal que conecta todos los demás pasillos, situado despues de pasar el Hall
+02-Pasillo B-NORMAL-Solo un pasillo, puedo ver la puerta del baño y de otras aulas, me pregunto si podre entrar a alguna.
+03-Baño Pasillo B-NORMAL-Hábitación con varios retretes situada al lado del pasillo B. Nos encontramos una llave
+04-Pasillo Principal-NORMAL-Pasillo principal que conecta todos los demás pasillos
+05-Aula Magna-NORMAL-Es un aula mucho mas grande que la otra. Hay bastantes mesas y una pizarra.
+06-Biblioteca-NORMAL-Mesas y estanterias se extienden hasta bastante lejos.
+07-Pasillo E-NORMAL-Solo un pasillo, puedo ver la puerta del baño y de otras aulas.
+08-Laboratorio-NORMAL- Hay varios puestos de ordenadores.
+09-Despacho del Profesor-NORMAL-Habitación con una mesa con varios cajones.
+10-Pasillo A-NORMAL-Solo un pasillo con los despachos de los profesores.
+11-Cafeteria-NORMAL-Cafeteria situada en la 1ºPlanta
+12-Cuarto de Limpieza-NORMAL-Cuarto con varias estanterias con productos y herramientas.
+13-Pasillo C-Solo un pasillo, con la puerta del baño y de otras aulas de prácticas.
+14-Aula de Practicas-NORMAL-Aula con varios puestos de fabricación.
 15-Copisteria-NORMAL-Sala llena de material escolar y varios papeles.
 16-Conserjeria-NORMAL-Sala con mucha documentación la cual tiene pistas para llegar a la salida.
 17-Hall-NORMAL-Vestíbulo que esta cerca de la salida.

@@ -1,1 +1,8 @@
-P01-Panel B01-01-codigo-Introduce la clave correcta en el panel de la puerta-4ngE14
+P01-Panel B01-01-Codigo-Introduce la clave correcta en el panel de la puerta-4ngE14
+P02-Puzzle-?-Palabra-Oro parece plato no es, ¿de que hablo?-Platano
+P03-Panel-?-Codigo-Introducir clave encontrada en el papel-Invariante
+P04-
+P05-
+P06-
+P07-
+P08-

@@ -3,7 +3,7 @@ C02-02-Hall-07-Cafeteria-Activa-0
 C03-02-Hall-01-Pasillo Principal-Activa-0
 C04-01-Pasillo Principal-12-Pasillo A-Bloqueada-OB01
 C05-12-Pasillo A-03-Aula Magna-Bloqueada-OB02
-C06-01-Pasillo Principal-04-Biblioteca-Bloqueada-OB03
+C06-01-Pasillo Principal-04-Biblioteca-Bloqueada-
 C07-13-Pasillo B-01-Pasillo Principal-Activa-0
 C08-10-Aula de Teoria-13-Pasillo B-Bloqueada-OB04
 C09-07-Cafeteria-14-Pasillo Primera Planta-Activa-0
@@ -11,5 +11,8 @@ C10-14-Pasillo Primera Planta-06-Despacho del Profesor-Bloqueada-OB05
 C11-14-Pasillo Primera Planta-05-Laboratorio-Bloqueada-OB06
 C12-14-Pasillo Primera Planta-09-Aula de Practicas-Activa-0
 C13-01-Pasillo Principal-08-Cuarto de Limpieza-Activa-0
-C14-01-Aula de teoria-02-Pasillo B-Activa-0
 
+C14-01-Aula de teoria-02-Pasillo B-Bloqueada-P01
+C15-02-Pasillo B-03-Baño Pasillo B-Activa-0
+C16-02-Pasillo B-04-Pasillo Principal-Activa-0
+C17-04-Pasillo Principal-05-Aula Magna-Bloqueada-OB03
