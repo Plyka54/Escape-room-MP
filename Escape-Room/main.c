@@ -17,7 +17,7 @@ int main(){
 
     //CARGAMOS LOS FICHEROS
     int total_usuarios;
-    carga(p,&total_usuarios);
+    carga(&p,&total_usuarios);
 
 
 // LOGIN DE USUARIO O REGISTRO -----------------------------------------------------------

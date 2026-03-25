@@ -4,11 +4,11 @@
 #include "configuracion.h"
 
 
-void Inicio_escape_room(partida p){
+void Inicio_escape_room(partida *p){
 
     int ubicacion_actual=0; //esto pa la estructura
     system("clear");
-    printf("%s\n", p.sala[ubicacion_actual].nombre_sala);
+    printf("%s\n", p->sala[ubicacion_actual].nombre_sala);
     printf("--------------------------------\n");
 
     //voy a ser una dramas que todos los sepais
