@@ -70,7 +70,7 @@ void carga(partida *p,int *total_leidos){
         printf("\n Ha habido un error en la apertura del fichero\n");
     }
     i=0;
-    while(fgets(linea,200,f)!=NULL && i<13){
+    while(fgets(linea,200,f)!=NULL && i<20){
         aux=strtok(linea,"-");
         if(aux) strcpy(p->conexion[i].id_conexion,aux);
         aux=strtok(NULL,"-");
@@ -108,6 +108,7 @@ void carga(partida *p,int *total_leidos){
         printf("\n Ha habido un error en la apertura del fichero\n");
     }
     i=0;
+
     while(fgets(linea,200,f)!=NULL && i<13){
         aux=strtok(linea,"-");
         if(aux) strcpy(p->puzle[i].id_puzles,aux);
@@ -116,7 +117,7 @@ void carga(partida *p,int *total_leidos){
         aux=strtok(NULL,"-");
         if(aux) p->puzle[i].id_sala=atoi(aux);
         aux=strtok(NULL,"-");
-        if(aux) strcpy(p->puzle[i].tipo,aux);
+        if(aux) strcpy(p->puzle[i].tipo,aux); //----
         aux=strtok(NULL,"-");
         if(aux) strcpy(p->puzle[i].descrip,aux);
         aux=strtok(NULL,"\n");
@@ -124,6 +125,7 @@ void carga(partida *p,int *total_leidos){
         i++;
     }
     fclose(f);
+
     }
 
 //Cabecera: int comprobar_usuario(char *user)

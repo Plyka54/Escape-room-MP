@@ -27,7 +27,7 @@ typedef struct
     char id_puzles[4]; // es por ejemplo P01,P02,...
     char nomb_puz[16];
     int id_sala;
-    int tipo; /* Código es 0 o Palabra es 1 */
+    char tipo[10];
     char descrip[151];
     char sol[51]; /* solución */
 } puzles;
@@ -45,8 +45,8 @@ typedef struct
     char id_conexion[4];
     int id_origen;
     int id_destino;
-    int estado; /* Activo es 0 y Bloqueado es 1 */
-    int cond; /* booleano 0 si no aplica, id_obj o id_puzle */
+    char estado[10];
+    char cond[10];
 } conexiones;
 
 typedef struct
