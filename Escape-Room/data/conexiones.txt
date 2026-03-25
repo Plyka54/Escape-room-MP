@@ -7,5 +7,12 @@ C6-04-Pasillo Principal-07-Pasillo E-Activa-0
 C7-07-Pasillo E-08-Laboratorio E-Activa-0
 C8-04-Pasillo principal-09-Pasillo A-Activa-0
 C9-09-Pasillo A-10-Despacho del profesor-Activa-0
-C10-04-Pasillo Princpal-11-Cafeteria-Actividad
+C10-04-Pasillo Princpal-11-Cafeteria-Activa-0
+C11-11-Cafeteria-12-Cuarto de Limpieza-Activa-0
+C12-04-Pasillo Principal-13-Pasillo C-Activa0
+C13-02-Pasillo B-14-Aula de Practicas B-Activa-0
+C14-06-Biblioteca-15-Copisteria-Activa-0
+C15-04-Pasillo Principal-16-Conserjeria-Activa-0
+C16-16-Conserjeria-17-Hall-Activa-0
+C17-17-Hall-18-Entrada-Activa-0
 
