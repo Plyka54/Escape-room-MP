@@ -6,7 +6,7 @@
 
 //Todas las opciones para guardar la partida, crear, cargar...
 
-void Nueva_partida(partida p);
+void Nueva_partida(partida *p);
 void Cargar_partida(partida *p);
 
 
@@ -17,7 +17,7 @@ void Cargar_partida(partida *p)
 
 }
 
-void Bienvenida(partida p){
+void Bienvenida(partida *p){
 
     int opcion=0;
 
@@ -37,7 +37,7 @@ void Bienvenida(partida p){
 
         case 1:
 
-            Nueva_partida(p);
+            Nueva_partida(&p);
 
             break;
 
@@ -62,11 +62,10 @@ void Bienvenida(partida p){
 
 }
 
-void Nueva_partida(partida p){
+void Nueva_partida(partida *p){
 
 
-    Inicio_escape_room(p);
-
+    Inicio_escape_room(&p);
 
 
 
