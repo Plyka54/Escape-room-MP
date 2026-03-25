@@ -85,14 +85,15 @@ void menu_opciones_juego(int ubicacion_actual, partida *p){
 
         default:
 
-            printf("No puedo hacer otra cosa\n");
-            system("pause");
-            system("cls");
-            break;
+            printf("No puedo hacer eso\n");
+
+        break;
+
     }
 
+        system("cls");
 
-   }while (eleccion<=10 && eleccion>0);
+   }while (eleccion>10);
 
 
 
