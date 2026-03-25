@@ -6,25 +6,28 @@
 
 void Inicio_escape_room(partida *p){
 
-    int ubicacion_actual=0; //esto pa la estructura
-    system("clear");
+    int ubicacion_actual=0; //esto pa la estructura, lo suyo seria ir actualizando en funcion de el id_sala
+    system("cls");
     printf("%s\n", p->sala[ubicacion_actual].nombre_sala);
     printf("--------------------------------\n");
 
     //voy a ser una dramas que todos los sepais
-
+    printf("\033[33m");
     printf("Mhm... Donde estoy?\n");
 
+    printf("\033[0m");
     printf("Una tenue luz se filtraba por una ventanilla que habia en la puerta.\n");
 
+    printf("\033[33m");
     printf("No recuerdo nada...\n");
 
+    printf("\033[0m");
     printf("Poco a poco te incorporas y te levantas de lo que parece ser un pupitre.\n");
 
-    menu_opciones_juego(ubicacion_actual, p);
+    menu_opciones_juego(ubicacion_actual, &p);
 }
 
-void menu_opciones_juego(int ubicacion_actual, partida p){
+void menu_opciones_juego(int ubicacion_actual, partida *p){
 
     int eleccion=11;
 
@@ -39,7 +42,7 @@ void menu_opciones_juego(int ubicacion_actual, partida p){
 
         case 1: //describir sala
 
-            printf("%s", p.sala[ubicacion_actual].descripcion);
+            printf("%s", p->sala[ubicacion_actual].descripcion);
 
             break;
 
@@ -77,7 +80,7 @@ void menu_opciones_juego(int ubicacion_actual, partida p){
 
         case 10:  //volver
 
-            Bienvenida();
+            Bienvenida(&p);
             break;
 
         default:
