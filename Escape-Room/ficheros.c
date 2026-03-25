@@ -55,8 +55,16 @@ void carga(partida p,int *total_leidos){
     while(fgets(linea,200,f)!=NULL && i<13){
         aux=strtok(linea,"-");
         if(aux) p.sala[i].id_sala=atoi(aux);
-
+        aux=strtok(linea,"-");
+        if(aux) strcpy(p.sala[i].nombre_sala,aux);
+        aux=strtok(linea,"-");
+        if(aux) strcpy(p.sala[i].tipo,aux);
+        aux=strtok(linea,"\n");
+        if(aux) strcpy(p.sala[i].descripcion,aux);
+        i++;
     }
+    fclose(f);
+
     }
 
 //Cabecera: int comprobar_usuario(char *user)
