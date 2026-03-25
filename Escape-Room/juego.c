@@ -22,7 +22,7 @@ void Inicio_escape_room(partida *p){
     printf("No recuerdo nada...\n");
 
     printf("\033[0m");
-    printf("Poco a poco te incorporas y te levantas de lo que parece ser un pupitre.\n");
+    printf("Poco a poco te incorporas y te levantas de lo que parece ser un pupitre.\n\n\n");
 
     menu_opciones_juego(ubicacion_actual, &p);
 }
@@ -85,7 +85,8 @@ void menu_opciones_juego(int ubicacion_actual, partida *p){
 
         default:
 
-            printf("No puedo hacer otra cosa");
+            printf("No puedo hacer otra cosa\n");
+            system("pause");
             system("cls");
             break;
     }
