@@ -54,7 +54,7 @@ int main(){
 
     if (password==1){   //EL CONTENIDO DEL IF TIENE QUE SER UNA FUNCION APARTE
 
-        Bienvenida();
+        Bienvenida(p);
 
     }
 
