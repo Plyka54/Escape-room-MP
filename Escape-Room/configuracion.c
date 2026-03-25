@@ -21,11 +21,11 @@ void Bienvenida(partida p){
 
     int opcion=0;
 
-    system("clear");
-    printf("\n\n\n ¡Bienvenido a Escape Room ESI!\n\n\n");
+    system("cls");
+    printf("\n\n\n Bienvenido a Escape Room ESI!\n\n\n");
 
 
-    printf("Introduce lo que quieras hacer\n");
+    printf("Introduce lo que quieras hacer\n\n");
 
     printf("1. Nueva Partida\n");
     printf("2. Cargar Partida\n");
