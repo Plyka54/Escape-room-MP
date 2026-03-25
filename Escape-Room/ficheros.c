@@ -22,7 +22,7 @@ void carga(partida p,int *total_leidos){
      int i=0;
 
 
-     while(fgets(linea,200,f)!=NULL && i<20){
+     while(fgets(linea,200,f)!=NULL && i<20){ //memoria dinamica: realloc de lo que habia +1
         //ID(lo convierto en entero)
         aux=strtok(linea,"-");
         if(aux) p.jugador[i].id_jugador=atoi(aux);
@@ -55,8 +55,75 @@ void carga(partida p,int *total_leidos){
     while(fgets(linea,200,f)!=NULL && i<13){
         aux=strtok(linea,"-");
         if(aux) p.sala[i].id_sala=atoi(aux);
-
+        aux=strtok(linea,"-");
+        if(aux) strcpy(p.sala[i].nombre_sala,aux);
+        aux=strtok(linea,"-");
+        if(aux) strcpy(p.sala[i].tipo,aux);
+        aux=strtok(linea,"\n");
+        if(aux) strcpy(p.sala[i].descripcion,aux);
+        i++;
     }
+    fclose(f);
+
+    f=fopen("data/conexiones.txt","r");
+    if(f==NULL){
+        printf("\n Ha habido un error en la apertura del fichero\n");
+    }
+    i=0;
+    while(fgets(linea,200,f)!=NULL && i<13){
+        aux=strtok(linea,"-");
+        if(aux) p.conexion[i].id_conexion=atoi(aux);
+        aux=strtok(linea,"-");
+        if(aux) p.conexion[i].id_origen=atoi(aux);
+        aux=strtok(linea,"-");
+        if(aux) p.conexion[i].id_destino=atoi(aux);
+        aux=strtok(linea,"\n");
+        if(aux) strcpy(p.conexion[i].estado,aux);
+        aux=strtok(linea,"\n");
+        if(aux) strcpy(p.conexion[i].cond,aux);
+        i++;
+    }
+    fclose(f);
+
+    f=fopen("data/objetos.txt","r");
+    if(f==NULL){
+        printf("\n Ha habido un error en la apertura del fichero\n");
+    }
+    i=0;
+    while(fgets(linea,200,f)!=NULL && i<13){
+        aux=strtok(linea,"-");
+        if(aux) strcpy(p.objeto[i].id_obj,aux);
+        aux=strtok(linea,"-");
+        if(aux) strcpy(p.objeto[i].nomb_obj,aux);
+        aux=strtok(linea,"-");
+        if(aux) strcpy(p.objeto[i].descrip,aux);
+        aux=strtok(linea,"\n");
+        if(aux) p.objeto[i].id_sala=atoi(aux);
+        i++;
+    }
+    fclose(f);
+
+    f=fopen("data/puzles.txt","r");
+    if(f==NULL){
+        printf("\n Ha habido un error en la apertura del fichero\n");
+    }
+    i=0;
+    while(fgets(linea,200,f)!=NULL && i<13){
+        aux=strtok(linea,"-");
+        if(aux) strcpy(p.puzle[i].id_puzles,aux);
+        aux=strtok(linea,"-");
+        if(aux) strcpy(p.puzle[i].nomb_puz,aux);
+        aux=strtok(linea,"-");
+        if(aux) p.puzle[i].id_sala=atoi(aux);
+        aux=strtok(linea,"\n");
+        if(aux) strcpy(p.puzle[i].tipo,aux);
+        aux=strtok(linea,"\n");
+        if(aux) strcpy(p.puzle[i].descrip,aux);
+        aux=strtok(linea,"\n");
+        if(aux) strcpy(p.puzle[i].sol,aux);
+        i++;
+    }
+    fclose(f);
     }
 
 //Cabecera: int comprobar_usuario(char *user)
