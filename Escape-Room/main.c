@@ -19,7 +19,7 @@ int main(){
     //CARGAMOS LOS FICHEROS
     int total_usuarios;
     carga(&p,&total_usuarios);
-    //printf("%s\n",p.sala[2].descripcion);  -> para ir comprobando que se cargan bien los ficheros
+    //printf("%s\n",p.jugador[]);  -> para ir comprobando que se cargan bien los ficheros
 
 // LOGIN DE USUARIO O REGISTRO -----------------------------------------------------------
     int u;
@@ -31,6 +31,7 @@ int main(){
     fflush(stdin);
 
     user=comprobar_usuario(p,usuario,total_usuarios,&u);
+    printf("%s",p.jugador[u].id_obj[0]);
 
     if(user==1){
 
@@ -44,7 +45,7 @@ int main(){
     }else{
 
         printf("Usuario no encontrado.");
-        printf("Vamos a registrarte en la base de datos");
+        printf("Vamos a registrarte en la base de datos\n");
 
         void registro();
     }
@@ -86,9 +87,15 @@ void mostrar_titulo(){
 //Cabecera: void registro()
 //Precondicion:
 //Postcondicion: Se rellena la estructura "Jugadores" con los datos del nuevo jugador
-void registro(jugadores *nuevo)
+void registro(jugadores *nuevo) //aqui deberias cambiar la estructura y cargar partida no jugadores deberias poner (partida *p)
 {
-    FILE *f;
+   /* partida *reg=(partida *)realloc(sizeof(partida));
+    //verifica si se reservo bien
+    if(reg==NULL){
+        printf("Error: no se pudo asignar memoria.\n");
+    }
+    else{
+    FILE *f;*/
     //te falta abrir el fichero f=fopen...
 
     printf("Introduce tu nombre:");
@@ -101,4 +108,7 @@ void registro(jugadores *nuevo)
     fgets(nuevo->contrasena, sizeof(nuevo->contrasena),stdin);
 
     // falta lo del inventario vacio y tal mañana lo hago ._.
+
+    //aqui hay que hacer memoria dinamica
+    //}
 }

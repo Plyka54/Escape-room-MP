@@ -36,14 +36,26 @@ void carga(partida *p,int *total_leidos){
         aux=strtok(NULL,"-");
         if(aux) strcpy(p->jugador[i].contrasena,aux);
         //ID OBJETO
-        int j=0;
-        while((aux=strtok(NULL,"-\n"))!=NULL && j<5){
-            strcpy(p->jugador[i].id_obj[j],aux);
-            j++;
+        p->jugador[i].num_objetos=0;
+        p->jugador[i].id_obj=NULL;
+
+        aux= strtok(NULL, "-\n\r");
+        while(aux!=NULL){
+            p->jugador[i].num_objetos++;
+            int num_actual=p->jugador[i].num_objetos;
+
+            p->jugador[i].id_obj= (char **)realloc(p->jugador[i].id_obj,num_actual*sizeof(char *));
+            if(p->jugador[i].id_obj==NULL){
+                printf("Error de memoria asignando objeto.\n");
+            }
+
+            p->jugador[i].id_obj[num_actual-1]=(char *)malloc((strlen(aux)+1)*sizeof(char));
+            strcpy(p->jugador[i].id_obj[num_actual-1],aux);
+            aux=strtok(NULL,"-\n\r");
+        }
+        i++;
         }
 
-        i++;
-    }
     *total_leidos=i;
     fclose(f);
 

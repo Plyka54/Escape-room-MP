@@ -95,10 +95,10 @@ void menu_opciones_juego(int ubicacion_actual, partida *p){
 
             break;
 
-        case 4: //Coger objeto (si lo hay)
-  /*          int i;
+        case 4: {//Coger objeto (si lo hay)
+           int i;
             char op;
-            for(i=0;i<num_salas;i++){
+          /*  for(i=0;p.objeto[i].id_obj==NULL;i++){
                 if(ubicacion_actual==p.objeto[i].id_sala){
                     printf("Vaya parece que hay un %s\n",p.objeto[i].nomb_obj);
                     printf("Quieres cogerlo? s/n\n");
@@ -112,7 +112,7 @@ void menu_opciones_juego(int ubicacion_actual, partida *p){
             }*/
             system("pause");
             system("cls");
-
+        }
             break;
 
         case 5: //Soltar objeto (si es que tienes)
