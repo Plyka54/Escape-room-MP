@@ -163,6 +163,6 @@ void menu_opciones_juego(int ubicacion_actual, partida *p){
    }while (fin_de_juego==0 && volver_menu==0);
 
 
-
+        //En este punto del juego ya se puede escapar, hay que escribir el final
 
 }
