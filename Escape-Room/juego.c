@@ -48,7 +48,7 @@ void menu_opciones_juego(int ubicacion_actual, partida *p){
 
     switch (eleccion){
 
-        case 1: //describir sala
+        case 1: //describir sala - FUNCIONA NO TOCAR
 
             printf("%s\n\n", p->sala[ubicacion_actual].descripcion);
             system("pause");
@@ -65,13 +65,39 @@ void menu_opciones_juego(int ubicacion_actual, partida *p){
 
         case 3: //Moverse (fichero conexiones)
 
-            system("pause");
-            system("cls");
+            if(p->conexion[ubicacion_actual].cond!=0){ //esto hay que revisarlo porque no se que pasa si tengo mas de una conexion y una funciona y la otra no
+
+                printf("No puedo irme todavia, tengo que hacer algo aqui.\n\n");
+                system("pause");
+                system("cls");
+
+            }else {
+
+                printf("Parece que puedo ir a...\n\n");
+
+                for (int cont=0; cont<=17; cont++){ //recorremos todas las conexiones
+
+                    if (p->conexion[cont].id_origen == p->sala[ubicacion_actual].id_sala){
+
+                            //si el origen de la conexion coincide con la sala en la que estamos
+
+                            printf("%s\n", p->sala[p->conexion[cont].id_destino].nombre_sala);
+
+                            //tenemos que guardarnos este destino en un vector para poder elegir después.
+                    }
+
+                    cont++;
+
+                }
+
+            }
+
 
             break;
 
         case 4: //Coger objeto (si lo hay)
 
+            printf("Nada aun\n");
             system("pause");
             system("cls");
 
@@ -79,6 +105,7 @@ void menu_opciones_juego(int ubicacion_actual, partida *p){
 
         case 5: //Soltar objeto (si es que tienes)
 
+            printf("Nada aun\n");
             system("pause");
             system("cls");
 
@@ -86,12 +113,14 @@ void menu_opciones_juego(int ubicacion_actual, partida *p){
 
         case 6:  //Ver inventario
 
+            printf("Nada aun\n");
             system("pause");
             system("cls");
             break;
 
         case 7: //Usar objeto (Si es necesario en la sala)
 
+            printf("Nada aun\n");
             system("pause");
             system("cls");
 
@@ -99,6 +128,7 @@ void menu_opciones_juego(int ubicacion_actual, partida *p){
 
         case 8: //Resolver puzle (si hay puzle)
 
+            printf("Nada aun\n");
             system("pause");
             system("cls");
 
@@ -106,12 +136,13 @@ void menu_opciones_juego(int ubicacion_actual, partida *p){
 
         case 9:  //guardar partida
 
+            printf("Nada aun\n");
             system("pause");
             system("cls");
 
             break;
 
-        case 10:  //volver
+        case 10:  //volver - FUNCIONA NO TOCAR
 
             volver_menu=1;
             Bienvenida(&p);
