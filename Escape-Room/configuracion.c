@@ -29,7 +29,7 @@ void Bienvenida(partida *p){
 
     printf("1. Nueva Partida\n");
     printf("2. Cargar Partida\n");
-    printf("3. Salir\n");
+    printf("3. Salir\n\n");
 
     scanf("%d", &opcion);
 
@@ -37,7 +37,7 @@ void Bienvenida(partida *p){
 
         case 1:
 
-            Nueva_partida(&p);
+            Nueva_partida(p);
 
             break;
 
@@ -49,7 +49,7 @@ void Bienvenida(partida *p){
 
         case 3: //Salir
 
-
+            return 0;
             break;
 
         default:
@@ -65,7 +65,7 @@ void Bienvenida(partida *p){
 void Nueva_partida(partida *p){
 
 
-    Inicio_escape_room(&p);
+    Inicio_escape_room(p);
 
 
 

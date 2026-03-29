@@ -13,12 +13,12 @@ int main(){
     int opcion;
     partida p;
 
+
     mostrar_titulo();
 
     //CARGAMOS LOS FICHEROS
     int total_usuarios;
     carga(&p,&total_usuarios);
-
 
 // LOGIN DE USUARIO O REGISTRO -----------------------------------------------------------
     int u;
@@ -37,8 +37,8 @@ int main(){
         scanf(" %s", &clave[0]);
 
         password=comprobar_clave(p,clave,u);  //si la clave es correcta password=1
-        if(password) printf("Contrasena correcta\n");
-        else {printf("Contrasena incorrecta\n");}
+        if(password) printf("\nContrasena correcta\n");
+        else {printf("\nContrasena incorrecta\n");}
 
     }else{
 
@@ -51,9 +51,10 @@ int main(){
 
 // BIENVENIDA Y COMIENZO --------------------------------------------------------
 
-
     if (password==1){   //EL CONTENIDO DEL IF TIENE QUE SER UNA FUNCION APARTE
 
+        printf("\n");
+        system("pause");
         Bienvenida(p);
 
     }
