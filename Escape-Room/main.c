@@ -19,6 +19,7 @@ int main(){
     //CARGAMOS LOS FICHEROS
     int total_usuarios;
     carga(&p,&total_usuarios);
+    //printf("%s\n",p.sala[2].descripcion);  -> para ir comprobando que se cargan bien los ficheros
 
 // LOGIN DE USUARIO O REGISTRO -----------------------------------------------------------
     int u;
@@ -88,6 +89,7 @@ void mostrar_titulo(){
 void registro(jugadores *nuevo)
 {
     FILE *f;
+    //te falta abrir el fichero f=fopen...
 
     printf("Introduce tu nombre:");
     fgets(nuevo->nomb_jugador, sizeof(nuevo->nomb_jugador),stdin);

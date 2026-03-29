@@ -96,8 +96,20 @@ void menu_opciones_juego(int ubicacion_actual, partida *p){
             break;
 
         case 4: //Coger objeto (si lo hay)
+  /*          int i;
+            char op;
+            for(i=0;i<num_salas;i++){
+                if(ubicacion_actual==p.objeto[i].id_sala){
+                    printf("Vaya parece que hay un %s\n",p.objeto[i].nomb_obj);
+                    printf("Quieres cogerlo? s/n\n");
+                    scanf(" %c",&op);
+                    fflush(stdin);
+                    if(op=='s'){
 
-            printf("Nada aun\n");
+                    }
+
+                }
+            }*/
             system("pause");
             system("cls");
 
@@ -113,7 +125,8 @@ void menu_opciones_juego(int ubicacion_actual, partida *p){
 
         case 6:  //Ver inventario
 
-            printf("Nada aun\n");
+            printf("Los objetos que tengo encima son:\n");
+
             system("pause");
             system("cls");
             break;

@@ -10,7 +10,7 @@ typedef struct
     char nomb_jugador[21];
     char jugador[11];
     char contrasena[9]; //HE CAMBIADO LA Ñ PORQUE SINO EL PROGRAMA NO FUNCIONA PARA QUE USEIS SIEMPRE SIN LA Ñ
-    char id_obj[5][5]; //inventario
+    char id_obj[]; //inventario
 } jugadores;
 
 
