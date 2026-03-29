@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include "juego.h"
 #include "configuracion.h"
 
@@ -67,7 +68,16 @@ void menu_opciones_juego(int ubicacion_actual, partida *p){
 
         case 3: //Moverse (fichero conexiones)
 
-                printf("Veamos si puedo ir a algun sitio...\n\n");
+                printf("Veamos por donde puedo ir");
+
+                for (int j = 0; j < 3; j++) {
+                    printf(".");
+                    fflush(stdout);   // fuerza que el punto aparezca ya
+                    sleep(1);         // espera 1 segundo
+                }
+
+                printf("\n");
+
 
                 for (int cont=0; cont<=17; cont++){ //recorremos todas las conexiones
 
@@ -75,9 +85,14 @@ void menu_opciones_juego(int ubicacion_actual, partida *p){
                     if (p->conexion[cont].id_origen == p->sala[ubicacion_actual].id_sala){ //CONEXION ENCONTRADA
 
 
-                            if(p->conexion[cont].cond==0){ //CONEXION ABIERTA, POSIBLE DESPLAZAMIENTO DEL JUGADOR
+                          /*  printf("ORIGEN=%d DESTINO=%d COND=[%s]\n",
+                                p->conexion[cont].id_origen,
+                                p->conexion[cont].id_destino,
+                                p->conexion[cont].cond);*/
 
-                                printf("Puedo ir a [%s]\n", p->sala[p->conexion[cont].id_destino].nombre_sala);
+                            if(strcmp(p->conexion[cont].cond, "0")== 0){ //CONEXION ABIERTA, POSIBLE DESPLAZAMIENTO DEL JUGADOR
+
+                                printf("\nPuedo ir a [%s]\n", p->sala[p->conexion[cont].id_destino - 1].nombre_sala); //-1 porque el destino tiene id=2 y el indice debe ser el 1 (por ejemplo)
 
                                 printf("Quieres ir por aqui? (s/n)\n");
 
@@ -85,26 +100,24 @@ void menu_opciones_juego(int ubicacion_actual, partida *p){
 
                                     if (respuesta=='s'){ //Actualizamos la posicion actual del jugador
 
-                                        ubicacion_actual=p->sala[p->conexion[cont].id_destino].id_sala;
-                                        break; //no se a donde lleva este break
+                                        ubicacion_actual=p->sala[p->conexion[cont].id_destino - 1].id_sala -1; //el primer -1 accede al vector y el segundo -1 le cambia el valor a ubicacion actual
+                                        break; //no se a donde lleva este break -- LAURA ESTE BREAK TE LLEVA A LA VICTORIA
 
                                     }
 
-                                system("pause");
-                                system("cls");
-
                             }else{
 
-                                printf("Hay una salida bloqueada que me lleva a [%s]\n", p->sala[p->conexion[cont].id_destino].nombre_sala);
+                                printf("Hay una salida bloqueada que me lleva a [%s]\n", p->sala[p->conexion[cont].id_destino - 1].nombre_sala);
                                 printf("Quiza pueda hacer algo para desbloquear la salida\n\n");
+
                             }
 
                     }else if (p->conexion[cont].id_destino == p->sala[ubicacion_actual].id_sala){ //CONEXION ENCONTRADA
 
 
-                        if(p->conexion[cont].cond==0){ //CONEXION ABIERTA, POSIBLE DESPLAZAMIENTO DEL JUGADOR
+                        if(strcmp(p->conexion[cont].cond, "0")== 0){ //CONEXION ABIERTA, POSIBLE DESPLAZAMIENTO DEL JUGADOR
 
-                                printf("Puedo ir a [%s]\n", p->sala[p->conexion[cont].id_origen].nombre_sala);
+                                printf("Puedo ir a [%s]\n", p->sala[p->conexion[cont].id_origen -1].nombre_sala);
 
                                 printf("Quieres ir por aqui? (s/n)\n");
 
@@ -112,7 +125,7 @@ void menu_opciones_juego(int ubicacion_actual, partida *p){
 
                                     if (respuesta=='s'){ //Actualizamos la posicion actual del jugador
 
-                                        ubicacion_actual=p->sala[p->conexion[cont].id_origen].id_sala;
+                                        ubicacion_actual=p->sala[p->conexion[cont].id_origen -1].id_sala -1;
                                         break; //tampoco se donde lleva
 
                                     }
@@ -123,8 +136,8 @@ void menu_opciones_juego(int ubicacion_actual, partida *p){
                             printf("Quiza pueda hacer algo para desbloquear la salida\n\n");
                         }
 
-                    cont++;
 
+                    }
                 }
 
             break;
@@ -205,7 +218,7 @@ void menu_opciones_juego(int ubicacion_actual, partida *p){
 
     }
 
-}
+
 
    }while (fin_de_juego==0 && volver_menu==0);
 

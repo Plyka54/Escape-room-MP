@@ -1,6 +1,6 @@
 01-AULA DE TEORIA-INICIAL-Parece un aula normal, las luces apagadas. Hay un panel en la puerta que me pide una clave.
 02-PASILLO B-NORMAL-Solo un pasillo, puedo ver la puerta del baño y de otras aulas, me pregunto si podre entrar a alguna.
-03-BAÑO PASILLO B-NORMAL-Hábitación con varios retretes situada al lado del pasillo B. Nos encontramos una llave
+03-WC PASILLO B-NORMAL-Hábitación con varios retretes situada al lado del pasillo B. Nos encontramos una llave
 04-PASILLO PRINCIPAL-NORMAL-Pasillo principal que conecta todos los demás pasillos
 05-AULA MAGNA-NORMAL-Es un aula mucho mas grande que la otra. Hay bastantes mesas y una pizarra.
 06-BIBLIOTECA-NORMAL-Mesas y estanterias se extienden hasta bastante lejos.
