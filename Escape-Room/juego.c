@@ -73,9 +73,6 @@ void menu_opciones_juego(int ubicacion_actual, partida *p){
             }
             printf("Voy a buscar las salidas de esta sala...\n");
             cont=0;
-            printf("añade numero de la sala:");
-            scanf("%d",&ubicacion_actual);
-            fflush(stdin);
                 for(j=0;j<num_conexiones;j++){
                  if(p->sala[ubicacion_actual].id_sala==p->conexion[j].id_origen){
                      cont++;
@@ -160,20 +157,30 @@ void menu_opciones_juego(int ubicacion_actual, partida *p){
             break;
 
         case 4: {//Coger objeto (si lo hay)
-           int i;
+            int i,cont=0, objeto_cogido;
             char op;
-          /*  for(i=0;p.objeto[i].id_obj==NULL;i++){
-                if(ubicacion_actual==p.objeto[i].id_sala){
-                    printf("Vaya parece que hay un %s\n",p.objeto[i].nomb_obj);
-                    printf("Quieres cogerlo? s/n\n");
-                    scanf(" %c",&op);
-                    fflush(stdin);
-                    if(op=='s'){
-
-                    }
-
+            printf("Veamos que hay para coger...\n");
+            do{
+            for(i=0;i<num_objetos;i++){
+                if(p->sala[ubicacion_actual].id_sala==p->objeto[i].id_sala){
+                    cont++;
+                    printf("%d.%s\n",cont,p->objeto[i].nomb_obj);
                 }
-            }*/
+
+            }
+            printf("Que objeto deseas coger? (numero)\n");
+            scanf(" %c",&objeto_cogido);
+            fflush(stdin);
+
+            if(cont==0){
+                printf("No hay objetos en esta sala\n");
+                break;
+            }
+            printf("Desea coger otro objeto? s/n\n");
+            scanf(" %c",&op);
+            fflush(stdin);
+            }while(op=='s');
+
             system("pause");
             system("cls");
         }
