@@ -31,7 +31,6 @@ int main(){
     fflush(stdin);
 
     user=comprobar_usuario(p,usuario,total_usuarios,&u);
-    printf("%s",p.jugador[u].id_obj[0]);
 
     if(user==1){
 
