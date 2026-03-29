@@ -56,7 +56,7 @@ int main(){
 
         printf("\n");
         system("pause");
-        Bienvenida(p);
+        Bienvenida(&p,u);
 
     }
 
