@@ -3,6 +3,9 @@
 #include <unistd.h>
 #include "juego.h"
 #include "configuracion.h"
+#define num_objetos 4 //esto se tiene que cambiar porque supongo que habrá más
+#define num_salas 18
+#define num_conexiones 17
 
 
 void Inicio_escape_room(partida *p){
@@ -60,6 +63,33 @@ void menu_opciones_juego(int ubicacion_actual, partida *p){
             break;
 
         case 2: //examinar sala por objetos y salidas
+            printf("Voy a buscar cosas en la sala...\n");
+            printf("He encontrado:\n");
+            int i,j,cont=0;
+            for(i=0;i<num_objetos;i++){
+                if(p->sala[ubicacion_actual].id_sala==p->objeto[i].id_sala){
+                    cont++;
+                    printf("%d.%s\n",cont,p->objeto[i].nomb_obj);
+                }
+            }
+            printf("Voy a buscar las salidas de esta sala...\n");
+            cont=0;
+            printf("añade numero de la sala:");
+            scanf("%d",&ubicacion_actual);
+            fflush(stdin);
+                for(j=0;j<num_conexiones;j++){
+                 if(p->sala[ubicacion_actual].id_sala==p->conexion[j].id_origen){
+                     cont++;
+                    printf("%d. %s\n",cont,p->sala[p->conexion[j].id_destino-1].nombre_sala);
+                 }
+                 if(p->sala[ubicacion_actual].id_sala==p->conexion[j].id_destino){
+                    cont++;
+                    printf("%d. %s\n",cont,p->sala[p->conexion[j].id_origen-1].nombre_sala);
+                 }
+                }
+
+
+
 
             system("pause");
             system("cls");

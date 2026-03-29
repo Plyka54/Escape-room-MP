@@ -36,13 +36,13 @@ void carga(partida *p,int *total_leidos){
         aux=strtok(NULL,"-");
         if(aux) strcpy(p->jugador[i].contrasena,aux);
         //ID OBJETO
-        p->jugador[i].num_objetos=0;
+        p->jugador[i].num_inventario=0;
         p->jugador[i].id_obj=NULL;
 
         aux= strtok(NULL, "-\n\r");
         while(aux!=NULL){
-            p->jugador[i].num_objetos++;
-            int num_actual=p->jugador[i].num_objetos;
+            p->jugador[i].num_inventario++;
+            int num_actual=p->jugador[i].num_inventario;
 
             p->jugador[i].id_obj= (char **)realloc(p->jugador[i].id_obj,num_actual*sizeof(char *));
             if(p->jugador[i].id_obj==NULL){
@@ -64,7 +64,7 @@ void carga(partida *p,int *total_leidos){
         printf("\n Ha habido un error en la apertura del fichero\n");
     }
     i=0;
-    while(fgets(linea,200,f)!=NULL && i<13){
+    while(fgets(linea,200,f)!=NULL && i<20){
         aux=strtok(linea,"-");
         if(aux) p->sala[i].id_sala=atoi(aux);
         aux=strtok(NULL,"-");
@@ -109,7 +109,7 @@ void carga(partida *p,int *total_leidos){
         if(aux) strcpy(p->objeto[i].nomb_obj,aux);
         aux=strtok(NULL,"-");
         if(aux) strcpy(p->objeto[i].descrip,aux);
-        aux=strtok(NULL,"\n");
+        aux=strtok(NULL,"\n\r");
         if(aux) p->objeto[i].id_sala=atoi(aux);
         i++;
     }
@@ -129,7 +129,7 @@ void carga(partida *p,int *total_leidos){
         aux=strtok(NULL,"-");
         if(aux) p->puzle[i].id_sala=atoi(aux);
         aux=strtok(NULL,"-");
-        if(aux) strcpy(p->puzle[i].tipo,aux); //----
+        if(aux) strcpy(p->puzle[i].tipo,aux);
         aux=strtok(NULL,"-");
         if(aux) strcpy(p->puzle[i].descrip,aux);
         aux=strtok(NULL,"\n");
