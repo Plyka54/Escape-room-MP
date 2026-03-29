@@ -31,7 +31,9 @@ void Inicio_escape_room(partida *p){
 
 void menu_opciones_juego(int ubicacion_actual, partida *p){
 
-    int volver_menu=0, fin_de_juego=0, eleccion=11;
+    int volver_menu=0, fin_de_juego=0, eleccion_switch=11;
+    char respuesta;
+
     system("pause");
     system("cls");
 
@@ -43,10 +45,10 @@ void menu_opciones_juego(int ubicacion_actual, partida *p){
     printf("1. Describir Sala\n2. Examinar Sala\n3. Moverse\n4. Coger objeto\n5. Soltar objeto\n");
     printf("6. Inventario\n7. Usar objeto\n8. Resolver puzle\n9. Guardar partida\n10. Volver\n\n\n");
 
-    scanf("%d", &eleccion);
+    scanf("%d", &eleccion_switch);
     printf("\n\n");
 
-    switch (eleccion){
+    switch (eleccion_switch){
 
         case 1: //describir sala - FUNCIONA NO TOCAR
 
@@ -65,33 +67,65 @@ void menu_opciones_juego(int ubicacion_actual, partida *p){
 
         case 3: //Moverse (fichero conexiones)
 
-            if(p->conexion[ubicacion_actual].cond!=0){ //esto hay que revisarlo porque no se que pasa si tengo mas de una conexion y una funciona y la otra no
-
-                printf("No puedo irme todavia, tengo que hacer algo aqui.\n\n");
-                system("pause");
-                system("cls");
-
-            }else {
-
-                printf("Parece que puedo ir a...\n\n");
+                printf("Veamos si puedo ir a algun sitio...\n\n");
 
                 for (int cont=0; cont<=17; cont++){ //recorremos todas las conexiones
 
-                    if (p->conexion[cont].id_origen == p->sala[ubicacion_actual].id_sala){
 
-                            //si el origen de la conexion coincide con la sala en la que estamos
+                    if (p->conexion[cont].id_origen == p->sala[ubicacion_actual].id_sala){ //CONEXION ENCONTRADA
 
-                            printf("%s\n", p->sala[p->conexion[cont].id_destino].nombre_sala);
 
-                            //tenemos que guardarnos este destino en un vector para poder elegir después.
-                    }
+                            if(p->conexion[cont].cond==0){ //CONEXION ABIERTA, POSIBLE DESPLAZAMIENTO DEL JUGADOR
+
+                                printf("Puedo ir a [%s]\n", p->sala[p->conexion[cont].id_destino].nombre_sala);
+
+                                printf("Quieres ir por aqui? (s/n)\n");
+
+                                    scanf(" %c", &respuesta);
+
+                                    if (respuesta=='s'){ //Actualizamos la posicion actual del jugador
+
+                                        ubicacion_actual=p->sala[p->conexion[cont].id_destino].id_sala;
+                                        break; //no se a donde lleva este break
+
+                                    }
+
+                                system("pause");
+                                system("cls");
+
+                            }else{
+
+                                printf("Hay una salida bloqueada que me lleva a [%s]\n", p->sala[p->conexion[cont].id_destino].nombre_sala);
+                                printf("Quiza pueda hacer algo para desbloquear la salida\n\n");
+                            }
+
+                    }else if (p->conexion[cont].id_destino == p->sala[ubicacion_actual].id_sala){ //CONEXION ENCONTRADA
+
+
+                        if(p->conexion[cont].cond==0){ //CONEXION ABIERTA, POSIBLE DESPLAZAMIENTO DEL JUGADOR
+
+                                printf("Puedo ir a [%s]\n", p->sala[p->conexion[cont].id_origen].nombre_sala);
+
+                                printf("Quieres ir por aqui? (s/n)\n");
+
+                                    scanf(" %c", &respuesta);
+
+                                    if (respuesta=='s'){ //Actualizamos la posicion actual del jugador
+
+                                        ubicacion_actual=p->sala[p->conexion[cont].id_origen].id_sala;
+                                        break; //tampoco se donde lleva
+
+                                    }
+
+                        }else{
+
+                            printf("Hay una salida bloqueada que me lleva a [%s]\n", p->sala[p->conexion[cont].id_origen].nombre_sala);
+                            printf("Quiza pueda hacer algo para desbloquear la salida\n\n");
+                        }
 
                     cont++;
 
                 }
-
-            }
-
 
             break;
 
@@ -171,7 +205,7 @@ void menu_opciones_juego(int ubicacion_actual, partida *p){
 
     }
 
-
+}
 
    }while (fin_de_juego==0 && volver_menu==0);
 
