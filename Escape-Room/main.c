@@ -85,24 +85,18 @@ void mostrar_titulo(){
 //Cabecera: void registro()
 //Precondicion:
 //Postcondicion: Se rellena la estructura "Jugadores" con los datos del nuevo jugador
-void registro(){ //me hace falta la estructura de lucia en configuracion
+void registro(jugadores *nuevo)
+{
+    FILE *f;
 
+    printf("Introduce tu nombre:");
+    fgets(nuevo->nomb_jugador, sizeof(nuevo->nomb_jugador),stdin);
 
-        //Tendría que rellenar el fichero directamente desde esta funcion
+    printf("\nIntroduce tu nombre de usuario (10 caracteres max): ");
+    fgets(nuevo->jugador, sizeof(nuevo->jugador),stdin);
 
-    char Nomb_comp[20], usuario[10], clave[8];
+    printf("\nIntroduce una contraseña (8 caracteres max):");
+    fgets(nuevo->contrasena, sizeof(nuevo->contrasena),stdin);
 
-
-    printf("Introduce tu nombre completo: ");
-
-
-
-    printf("Introduce tu nombre de usuario (10 caracteres maximo): ");
-
-
-
-    printf("Introduce una clave (8 caracteres maximo): ");
-
-
-
+    // falta lo del inventario vacio y tal mañana lo hago ._.
 }
