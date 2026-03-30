@@ -11,7 +11,7 @@ int main(){
     char usuario[11], clave[9];         //En el fichero jugadores.txt  usuario = campo "jugador"
     int user=0, password=0;             //Booleanos para el login
     int opcion;
-    partida p;
+    partida p; //= {0};
 
 
     mostrar_titulo();
@@ -46,8 +46,9 @@ int main(){
         printf("Usuario no encontrado.");
         printf("Vamos a registrarte en la base de datos\n");
 
+        getchar();
         registro(&p);
-        password=1;
+        // password=1;
     }
 
 
@@ -126,25 +127,33 @@ void registro(partida *p) //aqui deberias cambiar la estructura y cargar partida
 
            printf("Introduce tu nombre:");
            fgets(reg->jugador[pos].nomb_jugador, sizeof(reg->jugador[pos].nomb_jugador),stdin);
+           reg->jugador[pos].nomb_jugador[strcspn(reg->jugador[pos].nomb_jugador, "\n")] = '\0';
 
            printf("\nIntroduce tu nombre de usuario (10 caracteres max): ");
            fgets(reg->jugador[pos].jugador, sizeof(reg->jugador[pos].jugador),stdin);
+           reg->jugador[pos].jugador[strcspn(reg->jugador[pos].jugador, "\n")] = '\0';
+
 
            printf("\nIntroduce una contraseña (8 caracteres max):");
            fgets(reg->jugador[pos].contrasena, sizeof(reg->jugador[pos].contrasena),stdin);
+           reg->jugador[pos].contrasena[strcspn(reg->jugador[pos].contrasena, "\n")] = '\0';
 
            //inventario vacio habria que hacer creo una funcion para añadir los objetos
            reg->jugador[pos].num_inventario=0;
            reg->jugador[pos].id_obj = NULL;
 
-           f=fopen("data/jugadores.txt","ab");
+           f=fopen("data/jugadores.txt","w");
 
            if(f==NULL)
            {
                printf("Error al abrir el fichero.\n");
            } else
            {
-               fprintf(f, "%d-%s-%s-%s\n",reg->jugador[pos].id_jugador,reg->jugador[pos].nomb_jugador,reg->jugador[pos].jugador,reg->jugador[pos].contrasena);
+               fprintf(f, "%02d-%s-%s-%s-\n",
+                        reg->jugador[pos].id_jugador,
+                        reg->jugador[pos].nomb_jugador,
+                        reg->jugador[pos].jugador,
+                        reg->jugador[pos].contrasena);
 
                fclose(f);
 

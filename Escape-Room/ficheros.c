@@ -145,7 +145,7 @@ void carga(partida *p,int *total_leidos){
 //Postcondicion: La funcion devuelve un booleano que indicará si el usuario coincide con alguno existente en el fichero "jugadores.txt"
 int comprobar_usuario(partida p,char user[11], int total_leidos, int *u){ //la u es para luego ubicar en que posicion del array esta el usuario y no tener que buscarlo otra vez okkk
     int i, encontrado=0;
-    for(i=0;i<total_leidos-1;i++){
+    for(i=0;i<total_leidos-1;i++){    // al final no hice nada tranquila
         if(strcmp(user,p.jugador[i].jugador)==0) {
             *u=i;
             encontrado=1;}
