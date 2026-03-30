@@ -8,7 +8,7 @@ void mostrar_titulo();
 
 int main(){
 
-    char usuario[10], clave[8];         //En el fichero jugadores.txt  usuario = campo "jugador"
+    char usuario[11], clave[9];         //En el fichero jugadores.txt  usuario = campo "jugador"
     int user=0, password=0;             //Booleanos para el login
     int opcion;
     partida p;
@@ -46,8 +46,8 @@ int main(){
         printf("Usuario no encontrado.");
         printf("Vamos a registrarte en la base de datos\n");
 
-        getchar();
         registro(&p);
+        password=1;
     }
 
 
@@ -137,18 +137,14 @@ void registro(partida *p) //aqui deberias cambiar la estructura y cargar partida
            reg->jugador[pos].num_inventario=0;
            reg->jugador[pos].id_obj = NULL;
 
-           f=fopen("jugadores.txt","ab");
+           f=fopen("data/jugadores.txt","ab");
 
            if(f==NULL)
            {
                printf("Error al abrir el fichero.\n");
            } else
            {
-               fwrite(&reg->jugador[pos].id_jugador,sizeof(int),1,f);
-               fwrite(&reg->jugador[pos].nomb_jugador,sizeof(char),sizeof(reg->jugador[pos].nomb_jugador),f);
-               fwrite(&reg->jugador[pos].jugador,sizeof(char),sizeof(reg->jugador[pos].jugador),f);
-               fwrite(&reg->jugador[pos].contrasena,sizeof(char),sizeof(reg->jugador[pos].contrasena),f);
-               fwrite(&reg->jugador[pos].num_inventario,sizeof(int),1,f);
+               fprintf(f, "%d-%s-%s-%s\n",reg->jugador[pos].id_jugador,reg->jugador[pos].nomb_jugador,reg->jugador[pos].jugador,reg->jugador[pos].contrasena);
 
                fclose(f);
 
@@ -156,7 +152,7 @@ void registro(partida *p) //aqui deberias cambiar la estructura y cargar partida
 
                printf("Jugador registrado con exito.\n");
            }
-       }        //por que no pones solo un free(reg) al final? (laura)
-    }  //aqui hay que hacer memoria dinamica
+       }
+    }    //aqui hay que hacer memoria dinamica
     free(reg);
 }
