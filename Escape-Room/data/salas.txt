@@ -1,17 +1,17 @@
 01-AULA DE TEORIA B-INICIAL-Parece un aula normal, las luces apagadas. Hay un panel en la puerta que me pide una clave.
-02-PASILLO B-NORMAL-Solo un pasillo, puedo ver la puerta del baño y de otras aulas, me pregunto si podre entrar a alguna.
-03-WC PASILLO B-NORMAL-Hábitación con varios retretes situada al lado del pasillo B. Nos encontramos una llave
-04-PASILLO PRINCIPAL-NORMAL-Pasillo principal que conecta todos los demás pasillos
+02-PASILLO B-NORMAL-Solo un pasillo, puedo ver varias puertas, me pregunto si podre entrar a alguna.
+03-WC PASILLO B-NORMAL-Habitacion con varios retretes situada al lado del pasillo B. Parece que hay algo en el suelo.
+04-PASILLO PRINCIPAL-NORMAL-Es un pasillo enorme, hay bastantes mesas y algunas maquinas expendedoras.
 05-AULA MAGNA A-NORMAL-Es un aula mucho mas grande que la otra. Hay bastantes mesas y una pizarra.
 06-BIBLIOTECA-NORMAL-Mesas y estanterias se extienden hasta bastante lejos.
-07-PASILLO F-NORMAL-Solo un pasillo, puedo ver la puerta del baño y de otras aulas.
-08-LABORATORIO C-NORMAL- Hay varios puestos de ordenadores.
-09-PASILLO A-NORMAL-Solo un pasillo con los despachos de los profesores.
-10-DESPACHO DEL PROFESOR-NORMAL-Habitación con una mesa con varios cajones.
-11-CAFETERIA-NORMAL-Cafeteria situada en la 1ºPlanta
-12-CUARTO DE LIMPIEZA-NORMAL-Cuarto con varias estanterias con productos y herramientas.
-13-PASILLO C-Solo un pasillo, con la puerta del baño y de otras aulas de prácticas.
-14-AULA DE PRACTICAS B-NORMAL-Aula con varios puestos de fabricación.
+07-PASILLO F-NORMAL-Solo un pasillo, aqui parecen estar todos los despachos de los profesores.
+08-LABORATORIO C-NORMAL- Hay varios puestos de ordenadores y materiales de laboratorio.
+09-PASILLO A-NORMAL-Un pasillo normal, hay una papelera delante del aula magna.
+10-DESPACHO DEL PROFESOR-NORMAL-Hay una mesa en el centro con muchos cajones y papeles que parecen importantes.
+11-CAFETERIA-NORMAL-Una cafeteria, hay muchas mesas. Me pregunto si habra algo de comer a estas horas.
+12-CUARTO DE LIMPIEZA-NORMAL-Cuarto con varias estanterias con productos de limpieza y herramientas.
+13-PASILLO C-Solo un pasillo, con la puerta del WC y de otras aulas de prácticas.
+14-AULA DE PRACTICAS B-NORMAL-Aqui hay varios puestos de fabricación. Parece que se han dejado el proyector encendido.
 15-COPISTERIA-NORMAL-Sala llena de material escolar y varios papeles.
 16-CONSERJERIA-NORMAL-Sala con mucha documentación la cual tiene pistas para llegar a la salida.
 17-HALL-NORMAL-Vestíbulo que esta cerca de la salida.

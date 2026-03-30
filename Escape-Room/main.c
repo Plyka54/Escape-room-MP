@@ -158,6 +158,6 @@ void registro(partida *p) //aqui deberias cambiar la estructura y cargar partida
                printf("Jugador registrado con exito.\n");
                free(reg);
            }
-       }
+       }        //por que no pones solo un free(reg) al final? (laura)
     }     //aqui hay que hacer memoria dinamica
 }
