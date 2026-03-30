@@ -7,12 +7,14 @@
 #define num_salas 18
 #define num_conexiones 17
 
+void mostrar_mapa();
 
 void Inicio_escape_room(partida *p){
 
     int ubicacion_actual=0; //esto pa la estructura, lo suyo seria ir actualizando en funcion de el id_sala
     system("cls");
-                                                //printf("DEBUG: id_sala = %d\n", p->sala[0].id_sala); si pone 0 no esta cargado
+
+                            //printf("DEBUG: id_sala = %d\n", p->sala[0].id_sala); si pone 0 no esta cargado
 
     printf(" %s\n", p->sala[ubicacion_actual].nombre_sala);
     printf("--------------------------------\n\n");
@@ -35,7 +37,7 @@ void Inicio_escape_room(partida *p){
 
 void menu_opciones_juego(int ubicacion_actual, partida *p){
 
-    int volver_menu=0, fin_de_juego=0, eleccion_switch=11;
+    int volver_menu=0, fin_de_juego=0, eleccion_switch=11, mapa=0;      //casi todos son booleanos
     char respuesta;
 
     system("pause");
@@ -62,7 +64,7 @@ void menu_opciones_juego(int ubicacion_actual, partida *p){
 
             break;
 
-        case 2: //examinar sala por objetos y salidas
+        case 2: //examinar sala por objetos y salidas - FUNCIONA NO TOCAR
             printf("Voy a buscar cosas en la sala...\n");
             printf("He encontrado:\n");
             int i,j,cont=0;
@@ -93,7 +95,16 @@ void menu_opciones_juego(int ubicacion_actual, partida *p){
 
             break;
 
-        case 3: //Moverse (fichero conexiones)
+        case 3: //Moverse (fichero conexiones)  FUNCIONA - NO TOCAR
+
+                if(mapa==1){ //si tenemos el mapa podremos usarlo siempre que queramos
+
+                    printf("Quieres ver el mapa antes de moverte? (s/n)\n");
+                    scanf(" %c", &respuesta);
+
+                    if (respuesta=='s') mostrar_mapa();
+
+                }
 
                 printf("Veamos por donde puedo ir");
 
@@ -261,5 +272,30 @@ void menu_opciones_juego(int ubicacion_actual, partida *p){
 
 
         //En este punto del juego ya se puede escapar, hay que escribir el final
+
+}
+
+void mostrar_mapa(){
+
+
+printf(
+"          [AULA PRACTICAS]                     [PASILLO F]--[DESPACHO DEL PROFESOR]\n"
+"                      |                          |\n"
+"                      |                          |\n"
+"    [AULA TEORIA]--[PASILLO B]--[P A S I L L O   P R I N C I P A L]--[BIBLIOTECA]\n"
+"                      |           |       |              |       |\n"
+"                      |           |       |              |       |\n"
+"                      |           |       |              |       |\n"
+"                     [WC]         |   [CAFETERIA]        | [CONSERJERIA]--[COPISTERIA]\n"
+"                                  |       |              |       |\n"
+"                                  |       |              |       |\n"
+"                                  |  [CUARTO LIMPIEZA]   |     [HALL]--[ENTRADA DE LA ESI]\n"
+"                                  |                      |\n"
+"                              [PASILLO A]                |\n"
+"                                  |                 [PASILLO C]\n"
+"                                  |                      |\n"
+"                             [AULA MAGNA]                |\n"
+"                                                   [LABORATORIO C]\n"
+);
 
 }
