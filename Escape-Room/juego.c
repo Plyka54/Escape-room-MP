@@ -3,13 +3,15 @@
 #include <unistd.h>
 #include "juego.h"
 #include "configuracion.h"
+#include "ficheros.h"
 #define num_objetos 4 //esto se tiene que cambiar porque supongo que habrá más
 #define num_salas 18
 #define num_conexiones 17
 
 void mostrar_mapa();
 
-void Inicio_escape_room(partida *p){
+void Inicio_escape_room(partida *p,int u){
+
 
     int ubicacion_actual=0; //esto pa la estructura, lo suyo seria ir actualizando en funcion de el id_sala
     system("cls");
@@ -32,10 +34,12 @@ void Inicio_escape_room(partida *p){
     printf("\033[0m");
     printf("Poco a poco te incorporas y te levantas de lo que parece ser un pupitre.\n\n\n");
 
-    menu_opciones_juego(ubicacion_actual, p);
+    p->jugador[u].num_inventario = 0;
+    p->jugador[u].id_obj = NULL;
+    menu_opciones_juego(ubicacion_actual, p,u);
 }
 
-void menu_opciones_juego(int ubicacion_actual, partida *p){
+void menu_opciones_juego(int ubicacion_actual, partida *p,int u){
 
     int volver_menu=0, fin_de_juego=0, eleccion_switch=11, mapa=0;      //casi todos son booleanos
     char respuesta;
@@ -181,35 +185,54 @@ void menu_opciones_juego(int ubicacion_actual, partida *p){
             break;
 
         case 4: {//Coger objeto (si lo hay)
-            int i,cont=0, objeto_cogido;
-            char op;
+            int i, cont, num_actual;
+            char op1, op2;
+            char **inventario;
+
             printf("Veamos que hay para coger...\n");
-            do{
-            for(i=0;i<num_objetos;i++){
-                if(p->sala[ubicacion_actual].id_sala==p->objeto[i].id_sala){
-                    cont++;
-                    printf("%d.%s\n",cont,p->objeto[i].nomb_obj);
+
+            do {
+                cont = 0;
+                for (i = 0; i < num_objetos; i++) {
+                    if (p->sala[ubicacion_actual].id_sala == p->objeto[i].id_sala) {
+                        cont++;
+                        printf("He encontrado un %s\n", p->objeto[i].nomb_obj);
+                        printf("Desea cogerlo? s/n\n");
+                        scanf(" %c", &op1);
+
+
+                        if (op1 == 's') {
+                            p->jugador[u].num_inventario++;
+                            num_actual = p->jugador[u].num_inventario;
+
+                            inventario = (char **)realloc(p->jugador[u].id_obj, num_actual * sizeof(char *));
+
+                            if (inventario != NULL) {
+                                p->jugador[u].id_obj = inventario;
+
+                                p->jugador[u].id_obj[num_actual - 1] = strdup(p->objeto[i].id_obj);
+
+                                printf("¡Has cogido el objeto: %s!\n", p->objeto[i].nomb_obj);
+                                p->objeto[i].id_sala = -1; // Lo quitamos de la sala
+                            } else {
+                                printf("Error de memoria.\n");
+                                p->jugador[u].num_inventario--; // Deshacemos el incremento si falla
+                            }
+                        }
+                    }
                 }
 
-            }
-            printf("Que objeto deseas coger? (numero)\n");
-            scanf(" %c",&objeto_cogido);
-            fflush(stdin);
+                if (cont == 0) printf("No hay nada más aquí.\n");
 
-            if(cont==0){
-                printf("No hay objetos en esta sala\n");
-                break;
-            }
-            printf("Desea coger otro objeto? s/n\n");
-            scanf(" %c",&op);
-            fflush(stdin);
-            }while(op=='s');
+                printf("Desea coger otro objeto? s/n\n");
+                scanf(" %c", &op2);
+
+            } while (op2 == 's');
 
             system("pause");
             system("cls");
-        }
             break;
-
+        }
         case 5: //Soltar objeto (si es que tienes)
 
             printf("Nada aun\n");
@@ -253,7 +276,7 @@ void menu_opciones_juego(int ubicacion_actual, partida *p){
         case 10:  //volver - FUNCIONA NO TOCAR
 
             volver_menu=1;
-            Bienvenida(&p);
+            Bienvenida(&p,u);
             break;
 
         default:

@@ -2,7 +2,6 @@
 #define CONFIGURACION
 #include <stdio.h>
 
-void Bienvenida();
 
 typedef struct
 {
@@ -58,5 +57,8 @@ typedef struct
     objetos objeto[20];
     conexiones conexion[20];
 } partida; /* aqui se unen todas las estructuras */
+
+void Bienvenida(partida *p,int u);
+
 
 #endif // CONFIGURACION
