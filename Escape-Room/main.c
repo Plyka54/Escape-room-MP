@@ -46,6 +46,7 @@ int main(){
         printf("Usuario no encontrado.");
         printf("Vamos a registrarte en la base de datos\n");
 
+        getchar();
         registro(&p);
     }
 
@@ -119,7 +120,6 @@ void registro(partida *p) //aqui deberias cambiar la estructura y cargar partida
        if(pos==-1)
        {
            printf("No hay espacio para más jugadores.\n");
-           free(reg);  // si finalmente es realloc esto hay que quitarlo
        } else
        {
            reg->jugador[pos].id_jugador = max_id+1;
@@ -142,7 +142,6 @@ void registro(partida *p) //aqui deberias cambiar la estructura y cargar partida
            if(f==NULL)
            {
                printf("Error al abrir el fichero.\n");
-               free(reg);
            } else
            {
                fwrite(&reg->jugador[pos].id_jugador,sizeof(int),1,f);
@@ -156,8 +155,8 @@ void registro(partida *p) //aqui deberias cambiar la estructura y cargar partida
                *p=*reg;
 
                printf("Jugador registrado con exito.\n");
-               free(reg);
            }
        }        //por que no pones solo un free(reg) al final? (laura)
-    }     //aqui hay que hacer memoria dinamica
+    }  //aqui hay que hacer memoria dinamica
+    free(reg);
 }
