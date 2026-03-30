@@ -3,3 +3,4 @@ OB02-Nota doblada-Nota encontrada en el aula B01, contiene la clave "4ngE14"-01
 OB03-LLave Aula Magna- Es encontrada en el baño para abrir el aula magna-03
 OB04-Papel del Suelo-Papel encontrado en ????? para desbloquear la puerta ???-??
 OB05-Mapa de la ESI-Encontrado en ???, son unos planos de la ESI
+OB06-Hoja de codigo morse-Hoja suelta que sobresalia de un libro de la biblioteca

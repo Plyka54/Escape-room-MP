@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <windows.h>
 #include "juego.h"
 #include "configuracion.h"
 #include "ficheros.h"
@@ -12,11 +13,10 @@ void mostrar_mapa();
 
 void Inicio_escape_room(partida *p,int u){
 
-
     int ubicacion_actual=0; //esto pa la estructura, lo suyo seria ir actualizando en funcion de el id_sala
     system("cls");
 
-                            //printf("DEBUG: id_sala = %d\n", p->sala[0].id_sala); si pone 0 no esta cargado
+        //printf("DEBUG: id_sala = %d\n", p->sala[0].id_sala); si pone 0 no esta cargado
 
     printf(" %s\n", p->sala[ubicacion_actual].nombre_sala);
     printf("--------------------------------\n\n");
@@ -65,6 +65,8 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u){
             printf("%s\n\n", p->sala[ubicacion_actual].descripcion);
             system("pause");
             system("cls");
+
+            if(ubicacion_actual==13) puzle_morse(p);
 
             break;
 
@@ -320,5 +322,13 @@ printf(
 "                             [AULA MAGNA]                |\n"
 "                                                   [LABORATORIO C]\n"
 );
+
+}
+
+void diccionario_morse(){
+
+    printf("A = .-\nB = -...\nC = -.-.\nE = .\nI = ..\nO = ---\nU = ..-\nS = ...\n");
+
+    printf("\nParece que la parte de abajo se ha mojado, no puedo seguir leyendo.");
 
 }
