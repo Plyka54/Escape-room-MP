@@ -46,7 +46,7 @@ int main(){
         printf("Usuario no encontrado.");
         printf("Vamos a registrarte en la base de datos\n");
 
-        void registro();
+        registro(&p);
     }
 
 
@@ -86,28 +86,78 @@ void mostrar_titulo(){
 //Cabecera: void registro()
 //Precondicion:
 //Postcondicion: Se rellena la estructura "Jugadores" con los datos del nuevo jugador
-void registro(jugadores *nuevo) //aqui deberias cambiar la estructura y cargar partida no jugadores deberias poner (partida *p)
+void registro(partida *p) //aqui deberias cambiar la estructura y cargar partida no jugadores deberias poner (partida *p)
 {
-   /* partida *reg=(partida *)realloc(sizeof(partida));
-    //verifica si se reservo bien
-    if(reg==NULL){
+    int i,j;
+    int pos=-1;
+    int max_id=0;  // esto es para calcular el siguiente id
+    partida *reg;
+    FILE *f;
+
+    reg=(partida *)malloc(sizeof(partida)); //Angela verifica he puesto malloc pero pusiste realloc
+
+    if(reg==NULL)
+    {
         printf("Error: no se pudo asignar memoria.\n");
-    }
-    else{
-    FILE *f;*/
-    //te falta abrir el fichero f=fopen...
+    } else
+    {
+       *reg=*p;
 
-    printf("Introduce tu nombre:");
-    fgets(nuevo->nomb_jugador, sizeof(nuevo->nomb_jugador),stdin);
+       for(i=0; i<20; i++)
+       {
+           if(reg->jugador[i].id_jugador == 0 && pos == -1)
+           {
+               pos=i;
+           }
 
-    printf("\nIntroduce tu nombre de usuario (10 caracteres max): ");
-    fgets(nuevo->jugador, sizeof(nuevo->jugador),stdin);
+           if(reg->jugador[i].id_jugador > max_id)
+           {
+               max_id = reg->jugador[i].id_jugador;
+           }
+       }
 
-    printf("\nIntroduce una contraseña (8 caracteres max):");
-    fgets(nuevo->contrasena, sizeof(nuevo->contrasena),stdin);
+       if(pos==-1)
+       {
+           printf("No hay espacio para más jugadores.\n");
+           free(reg);  // si finalmente es realloc esto hay que quitarlo
+       } else
+       {
+           reg->jugador[pos].id_jugador = max_id+1;
 
-    // falta lo del inventario vacio y tal mañana lo hago ._.
+           printf("Introduce tu nombre:");
+           fgets(reg->jugador[pos].nomb_jugador, sizeof(reg->jugador[pos].nomb_jugador),stdin);
 
-    //aqui hay que hacer memoria dinamica
-    //}
+           printf("\nIntroduce tu nombre de usuario (10 caracteres max): ");
+           fgets(reg->jugador[pos].jugador, sizeof(reg->jugador[pos].jugador),stdin);
+
+           printf("\nIntroduce una contraseña (8 caracteres max):");
+           fgets(reg->jugador[pos].contrasena, sizeof(reg->jugador[pos].contrasena),stdin);
+
+           //inventario vacio habria que hacer creo una funcion para añadir los objetos
+           reg->jugador[pos].num_inventario=0;
+           reg->jugador[pos].id_obj = NULL;
+
+           f=fopen("jugadores.txt","ab");
+
+           if(f==NULL)
+           {
+               printf("Error al abrir el fichero.\n");
+               free(reg);
+           } else
+           {
+               fwrite(&reg->jugador[pos].id_jugador,sizeof(int),1,f);
+               fwrite(&reg->jugador[pos].nomb_jugador,sizeof(char),sizeof(reg->jugador[pos].nomb_jugador),f);
+               fwrite(&reg->jugador[pos].jugador,sizeof(char),sizeof(reg->jugador[pos].jugador),f);
+               fwrite(&reg->jugador[pos].contrasena,sizeof(char),sizeof(reg->jugador[pos].contrasena),f);
+               fwrite(&reg->jugador[pos].num_inventario,sizeof(int),1,f);
+
+               fclose(f);
+
+               *p=*reg;
+
+               printf("Jugador registrado con exito.\n");
+               free(reg);
+           }
+       }
+    }     //aqui hay que hacer memoria dinamica
 }
