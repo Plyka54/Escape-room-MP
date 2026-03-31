@@ -16,7 +16,7 @@ void Inicio_escape_room(partida *p,int u){
     int ubicacion_actual=0; //esto pa la estructura, lo suyo seria ir actualizando en funcion de el id_sala
     system("cls");
 
-        //printf("DEBUG: id_sala = %d\n", p->sala[0].id_sala); si pone 0 no esta cargado
+    //printf("DEBUG: id_sala = %d\n", p->sala[0].id_sala); si pone 0 no esta cargado
 
     printf(" %s\n", p->sala[ubicacion_actual].nombre_sala);
     printf("--------------------------------\n\n");
@@ -39,9 +39,12 @@ void Inicio_escape_room(partida *p,int u){
     menu_opciones_juego(ubicacion_actual, p,u);
 }
 
+//Cabecera: void menu_opciones_juego(int ubicacion_actual, partida *p,int u)
+//Precondicion: Ubicacion actual del jugador inicializada
+//Postcondicion: La funcion presenta todas las opciones del menu del juego
 void menu_opciones_juego(int ubicacion_actual, partida *p,int u){
-
-    int volver_menu=0, fin_de_juego=0, eleccion_switch=11, mapa=0;      //casi todos son booleanos
+                                                                        //Lo de declarar 40 variables iguales en cada caso hay que arreglarlo eh
+    int volver_menu=0, fin_de_juego=0, eleccion_switch=11, mapa=0, puzle=0;      //casi todos son booleanos
     char respuesta;
 
     system("pause");
@@ -178,6 +181,7 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u){
 
                             printf("Hay una salida bloqueada que me lleva a [%s]\n", p->sala[p->conexion[cont].id_origen].nombre_sala);
                             printf("Quiza pueda hacer algo para desbloquear la salida\n\n");
+                            system("pause");
                         }
 
 
@@ -259,14 +263,47 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u){
 
             break;
 
-        case 8: //Resolver puzle (si hay puzle)
+        case 8:{ //Resolver puzle (si hay puzle) FUNCIONA NO TOCAR
 
-            printf("Nada aun\n");
+            char solucion[51];
+
+            for(int cont=0;cont<4;cont++){ //Recorremos todos los puzles     OJO QUE SI METEMOS MÁS HAY QUE CAMBIAR ESTE BUCLE
+
+                if(p->puzle[cont].id_sala == p->sala[ubicacion_actual].id_sala){ //puzle en esta sala
+
+                    puzle=1;
+                    printf("Puzle: %s\n\n", p->puzle[cont].descrip);
+
+                    scanf("%s", solucion);
+
+                    if(strcmp(p->puzle[cont].sol, solucion)==0){
+
+                            printf("Genial! He resuelto el puzle y parece que una salida se ha desbloqueado.\n\n");
+
+                        for(int iteracion=0; iteracion<17;iteracion++){ //recorremos las conexiones para desbloquear la buena
+
+                            if(strcmp(p->conexion[iteracion].cond, p->puzle[cont].id_puzles)==0){
+
+                                strcpy(p->conexion[iteracion].cond, "0");
+                                strcpy(p->conexion[iteracion].estado, "Activa");
+
+                            }
+
+                        }
+
+                    }else printf("Parece que esta clave es incorrecta...\n");
+
+                }
+
+            }
+
+            if(puzle==0) printf("Parece que no hay ningun puzle que resolver aqui.\n");
+
             system("pause");
             system("cls");
 
             break;
-
+        }
         case 9:  //guardar partida
 
             printf("Nada aun\n");

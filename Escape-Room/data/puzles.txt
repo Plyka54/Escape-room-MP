@@ -1,4 +1,4 @@
 P01-Panel B01-01-Codigo-Introduce la clave correcta en el panel de la puerta-4ngE14
-P02-Puzzle-?-Palabra-Oro parece plato no es, ¿de que hablo?-Platano
-P03-Panel-?-Codigo-Introducir clave encontrada en el papel-Invariante
-P04-Panel conserjeria-Palabra-Introducir clave, quizas haga falta traducir algo-UCA
+P02-Puzzle-03-Palabra-Oro parece plato no es, ¿de que hablo?-Platano
+P03-Panel-02-Codigo-Introducir clave encontrada en el papel-Invariante
+P04-Panel Morse-16-Palabra-Introducir clave, quizas haga falta traducir algo-UCA
