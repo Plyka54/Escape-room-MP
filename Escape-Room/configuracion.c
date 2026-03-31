@@ -6,11 +6,9 @@
 
 //Todas las opciones para guardar la partida, crear, cargar...
 
-void Nueva_partida(partida *p,int u);
-void Cargar_partida(partida *p);
 
 
-void Cargar_partida(partida *p)
+void Cargar_partida(partida *p, int u)
 {
     /* cargar la situacion de partida.txt */
 
@@ -62,13 +60,33 @@ void Bienvenida(partida *p,int u){
 
 }
 
-void Nueva_partida(partida *p,int u){
+void Nueva_partida(partida *p,int u)
+{
+    int total_usuarios;
+    int i;
 
+    system("cls");
+    printf("\nCreando una Nueva partida...\n");
+    carga(p, &total_usuarios);
+    printf("Datas cargados correctamente.\n");
+
+
+    for(i=0; i<p->jugador[u].num_inventario;i++)
+    {
+        free(p->jugador[u].id_obj[i]);
+    }
+
+    free(p->jugador[u].id_obj);
+    p->jugador[u].id_obj=NULL;
+    p->jugador[u].num_inventario=0;     // 0 objetos
+
+    printf("Inventario vaciado.\n");
+
+    system("pause");
+
+    //Los printf son para ir indicando que las cosas funcionan
 
     Inicio_escape_room(p,u);
-
-
-
 }
 
 

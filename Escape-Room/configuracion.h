@@ -58,7 +58,8 @@ typedef struct
     conexiones conexion[20];
 } partida; /* aqui se unen todas las estructuras */
 
-void Bienvenida(partida *p,int u);
-
+void Nueva_partida(partida *p,int u);
+void Cargar_partida(partida *p, int u);
+void Bienvenida(partida *p, int u);
 
 #endif // CONFIGURACION

@@ -48,7 +48,7 @@ int main(){
 
         getchar();
         registro(&p);
-        // password=1;
+        // password=1; eso es pa cuando mi funcion escriba en el fichero que el programa no termine
     }
 
 
@@ -162,6 +162,6 @@ void registro(partida *p) //aqui deberias cambiar la estructura y cargar partida
                printf("Jugador registrado con exito.\n");
            }
        }
-    }    //aqui hay que hacer memoria dinamica
+    }
     free(reg);
 }
