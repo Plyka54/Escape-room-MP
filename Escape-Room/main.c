@@ -142,7 +142,7 @@ void registro(partida *p) //aqui deberias cambiar la estructura y cargar partida
            reg->jugador[pos].num_inventario=0;
            reg->jugador[pos].id_obj = NULL;
 
-           f=fopen("data/jugadores.txt","w");
+           f=fopen("data/jugadores.txt","a");
 
            if(f==NULL)
            {
