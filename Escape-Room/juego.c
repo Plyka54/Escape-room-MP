@@ -75,13 +75,18 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u){
 
         case 2: //examinar sala por objetos y salidas - FUNCIONA NO TOCAR
             printf("Voy a buscar cosas en la sala...\n");
-            printf("He encontrado:\n");
             int i,j,cont=0;
             for(i=0;i<num_objetos;i++){
                 if(p->sala[ubicacion_actual].id_sala==p->objeto[i].id_sala){
+                    if(cont==0){
+                        printf("He encontrado...\n");
+                    }
                     cont++;
                     printf("%d.%s\n",cont,p->objeto[i].nomb_obj);
                 }
+            }
+            if(cont==0){
+                printf("En esta sala no parece haber ningun objeto\n");
             }
             printf("Voy a buscar las salidas de esta sala...\n");
             cont=0;
@@ -218,7 +223,7 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u){
 
                                 p->jugador[u].id_obj[num_actual - 1] = strdup(p->objeto[i].id_obj);
 
-                                printf("¡Has cogido el objeto: %s!\n", p->objeto[i].nomb_obj);
+                                printf("Has cogido el objeto: %s!\n", p->objeto[i].nomb_obj);
                                 p->objeto[i].id_sala = -1; // Lo quitamos de la sala
                             } else {
                                 printf("Error de memoria.\n");
@@ -228,7 +233,10 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u){
                     }
                 }
 
-                if (cont == 0) printf("No hay nada más aquí.\n");
+                if (cont == 0){
+                        printf("No hay nada más aquí.\n");
+                        break;
+                }
 
                 printf("Desea coger otro objeto? s/n\n");
                 scanf(" %c", &op2);
@@ -240,12 +248,52 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u){
             break;
         }
         case 5: //Soltar objeto (si es que tienes)
+            //AQUI LO UNICO QUE FALTA ES SI PONE OTRO NUMERO SE CIERRA EL PROGRAMA
+            {
+            int i,j,op;
+            printf("Veamos que objetos tengo en el inventario...\n");
+            if(p->jugador[u].num_inventario==0){
+                printf("No tienes ningun objeto en el inventario para soltar\n");
+                break;
+            }
+            else{
+                printf("Que objeto quieres soltar?\n");
+                for(i=0;i<p->jugador[u].num_inventario;i++){
+                    for(j=0;j<num_objetos;j++){
+                        if(strcmp(p->jugador[u].id_obj[i],p->objeto[j].id_obj)==0){
+                            printf("%d. %s\n",i+1,p->objeto[j].nomb_obj);
+                        }
+                    }
+                }
+                scanf("%d",&op);
+                int indice=op-1;
+                for(j=0;j<num_objetos;j++){ //para que el objeto se quede en la sala actual
+                    if(strcmp(p->jugador[u].id_obj[indice],p->objeto[j].id_obj)==0){
+                        p->objeto[j].id_sala=p->sala[ubicacion_actual].id_sala;
+                        printf("Has soltado %s\n",p->objeto[j].nomb_obj);
+                    }
+                }
+                //vaciar el inventario
+                free(p->jugador[u].id_obj[indice]);
+                for(i=indice;i<p->jugador[u].num_inventario;i++){
+                    p->jugador[u].id_obj[i]=p->jugador[u].id_obj[i+1];
+                }
+                p->jugador[u].num_inventario--;
 
-            printf("Nada aun\n");
+                //ajustar memoria
+                if (p->jugador[u].num_inventario > 0) {
+                    p->jugador[u].id_obj = (char **)realloc(p->jugador[u].id_obj, p->jugador[u].num_inventario * sizeof(char *));
+                }
+                    else {
+                        free(p->jugador[u].id_obj);
+                        p->jugador[u].id_obj = NULL;
+            }
+        }
+
             system("pause");
             system("cls");
 
-            break;
+            break;}
 
         case 6:  //Ver inventario
 
