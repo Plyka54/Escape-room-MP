@@ -138,7 +138,7 @@ void registro(partida *p) //aqui deberias cambiar la estructura y cargar partida
            fgets(reg->jugador[pos].contrasena, sizeof(reg->jugador[pos].contrasena),stdin);
            reg->jugador[pos].contrasena[strcspn(reg->jugador[pos].contrasena, "\n")] = '\0';
 
-           //inventario vacio habria que hacer creo una funcion para añadir los objetos -> ya esta hecha
+           //inventario vacio habria que hacer creo una funcion para añadir los objetos -> ya esta hecha -> vale angelita :)
            reg->jugador[pos].num_inventario=0;
            reg->jugador[pos].id_obj = NULL;
 

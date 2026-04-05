@@ -295,13 +295,34 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u){
 
             break;}
 
-        case 6:  //Ver inventario
+        case 6:  //Ver inventario - FUNCIONA
+        {
+            int i,j;
 
             printf("Los objetos que tengo encima son:\n");
+
+            if(p->jugador[u].num_inventario == 0)
+            {
+                printf("No tienes ningun objeto en el iventario.\n");
+            } else
+            {
+                for(i=0;i<p->jugador[u].num_inventario;i++)
+                {
+                    for(j=0;j<num_objetos;j++)
+                    {
+                        if(strcmp(p->jugador[u].id_obj[i], p->objeto[j].id_obj) == 0)
+                        {
+                            printf("%d. %s\n",i+1, p->objeto[j].nomb_obj);
+                        }
+                    }
+                }
+            }
 
             system("pause");
             system("cls");
             break;
+
+        }
 
         case 7: //Usar objeto (Si es necesario en la sala)
 
