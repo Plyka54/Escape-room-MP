@@ -299,7 +299,7 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u){
         {
             int i,j;
 
-            printf("Los objetos que tengo encima son:\n");
+            printf("Los objetos que tengo encima son:\n");  //Lucia aqui tienes que ponerlo en un if porque si no tienes ningun objeto queda feo (pruebalo y lo ves)
 
             if(p->jugador[u].num_inventario == 0)
             {
