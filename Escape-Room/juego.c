@@ -1,13 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 #include <windows.h>
 #include "juego.h"
 #include "configuracion.h"
 #include "ficheros.h"
-#define num_objetos 4 //esto se tiene que cambiar porque supongo que habrá más
-#define num_salas 18
-#define num_conexiones 17
 
 void mostrar_mapa();
 
@@ -299,13 +297,16 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u){
         {
             int i,j;
 
-            printf("Los objetos que tengo encima son:\n");  //Lucia aqui tienes que ponerlo en un if porque si no tienes ningun objeto queda feo (pruebalo y lo ves)
+              //Lucia aqui tienes que ponerlo en un if porque si no tienes ningun objeto queda feo (pruebalo y lo ves)
+              // Probado :)
 
             if(p->jugador[u].num_inventario == 0)
             {
-                printf("No tienes ningun objeto en el iventario.\n");
+                printf("No tienes ningun objeto en el inventario.\n");
             } else
             {
+                printf("Los objetos que tengo encima son:\n");
+
                 for(i=0;i<p->jugador[u].num_inventario;i++)
                 {
                     for(j=0;j<num_objetos;j++)
@@ -325,12 +326,14 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u){
         }
 
         case 7: //Usar objeto (Si es necesario en la sala)
+        {
 
             printf("Nada aun\n");
             system("pause");
             system("cls");
 
             break;
+        }
 
         case 8:{ //Resolver puzle (si hay puzle) FUNCIONA NO TOCAR
 
@@ -374,12 +377,37 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u){
             break;
         }
         case 9:  //guardar partida
+            // no me escribe otra vez estoy harta de los ficheros
+        {
+            FILE *f;
+            int i;
 
-            printf("Nada aun\n");
+            f=fopen("data/partida.txt","w");
+
+            if(f == NULL)
+            {
+                printf("Error al abrir el fichero de partida.\n");
+            } else
+            {
+                fprintf(f, "%02d-%d",
+                p->jugador[u].id_jugador,
+                p->sala[ubicacion_actual].id_sala);
+
+                for(i=0;i<p->jugador[u].num_inventario;i++)
+                {
+                    fprintf(f, "-%s", p->jugador[u].id_obj[i]);
+                }
+
+                fprintf(f,"\n");
+                fclose(f);
+                printf("\nPartida guardada con exito.\n");
+            }
+
             system("pause");
             system("cls");
 
             break;
+        }
 
         case 10:  //volver - FUNCIONA NO TOCAR
 
