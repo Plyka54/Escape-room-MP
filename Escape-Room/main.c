@@ -48,7 +48,7 @@ int main(){
 
         getchar();
         registro(&p);
-        // password=1; eso es pa cuando mi funcion escriba en el fichero que el programa no termine
+        password=1;
     }
 
 
@@ -149,6 +149,7 @@ void registro(partida *p) //aqui deberias cambiar la estructura y cargar partida
                printf("Error al abrir el fichero.\n");
            } else
            {
+               fflush(stdin);
                fprintf(f, "%02d-%s-%s-%s-\n",
                         reg->jugador[pos].id_jugador,
                         reg->jugador[pos].nomb_jugador,
