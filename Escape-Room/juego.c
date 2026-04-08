@@ -190,7 +190,8 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u){
 
                     }
                 }
-
+            system("pause");
+            system("cls");
             break;
 
         case 4: {//Coger objeto (si lo hay)
@@ -233,7 +234,7 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u){
                 }
 
                 if (cont == 0){
-                        printf("No hay nada más aquí.\n");
+                        printf("No hay nada mas aqui.\n");
                         break;
                 }
 
@@ -459,36 +460,64 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u){
             break;
         }
         case 9:  //guardar partida
-            // no me escribe otra vez estoy harta de los ficheros
+
         {
             FILE *f;
-            int i;
+            int i, id_leido;
+            char linea[200];
 
+            char **lineas_guardadas = NULL;
+            int num_lineas = 0;
+
+            //mira si hay alguna partida anterior guardada en el fichero y la borra
             f=fopen("data/partida.txt","a");
+            if (f != NULL) {
+                while (fgets(linea, sizeof(linea), f) != NULL) {
+                    if (sscanf(linea, "%d-", &id_leido) == 1) {
+                        if (id_leido != p->jugador[u].id_jugador) {
+                            char **temp = (char **)realloc(lineas_guardadas, (num_lineas + 1) * sizeof(char *));
+                            if (temp != NULL) {
+                                lineas_guardadas = temp;
+                                lineas_guardadas[num_lineas] = strdup(linea);
+                                num_lineas++;
+                            } else {
+                                printf("Error de memoria al leer el fichero.\n");
+                            }
+                        }
+                    }
+                }
+                fclose(f);
 
-            if(f == NULL)
-            {
-                printf("Error al abrir el fichero de partida.\n");
-            } else
-            {
-                fflush(stdin);
-                fprintf(f, "%02d-%d",
-                p->jugador[u].id_jugador,
-                p->sala[ubicacion_actual].id_sala);
+                //escribimos en el fichero
+                f = fopen("data/partida.txt", "w");
+                if (f == NULL) {
+                    printf("Error al abrir el fichero para guardar.\n");
+                } else {
+                    // A) Volcamos las líneas de los otros jugadores
+                    for (i = 0; i < num_lineas; i++) {
+                        fprintf(f, "%s", lineas_guardadas[i]);
+                        free(lineas_guardadas[i]); // Liberamos la memoria de la cadena ya usada
+                    }
 
-                for(i=0;i<p->jugador[u].num_inventario;i++)
-                {
-                    fprintf(f, "-%s", p->jugador[u].id_obj[i]);
+                    // Liberamos el vector principal ahora que está vacío
+                    free(lineas_guardadas);
+
+                    // B) Escribimos la NUEVA partida del jugador actual
+                    fprintf(f, "%02d-%d", p->jugador[u].id_jugador, p->sala[ubicacion_actual].id_sala);
+
+                    for (i = 0; i < p->jugador[u].num_inventario; i++) {
+                        fprintf(f, "-%s", p->jugador[u].id_obj[i]);
+                    }
+                    fprintf(f, "\n"); // El salto de línea fundamental
+
+                    fclose(f);
+                    printf("\nPartida guardada con exito.\n");
                 }
 
-                fclose(f);
-                printf("\nPartida guardada con exito.\n");
-            }
+                system("pause");
+                system("cls");
 
-            system("pause");
-            system("cls");
-
-            break;
+                break;
         }
 
         case 10:  //volver - FUNCIONA NO TOCAR

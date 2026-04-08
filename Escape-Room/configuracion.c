@@ -115,7 +115,6 @@ void Cargar_partida(partida *p, int u)  //  Comprobado
     } else
     {
         printf("Partida cargada con exito.\n");
-        system("pause");
         menu_opciones_juego(ubicacion_actual, p, u);
     }
 }
