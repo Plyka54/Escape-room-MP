@@ -49,6 +49,7 @@ int main(){
         getchar();
         registro(&p);
         password=1;
+
     }
 
 
@@ -88,7 +89,7 @@ void mostrar_titulo(){
 //Cabecera: void registro()
 //Precondicion:
 //Postcondicion: Se rellena la estructura "Jugadores" con los datos del nuevo jugador
-void registro(partida *p) //aqui deberias cambiar la estructura y cargar partida no jugadores deberias poner (partida *p)
+void registro(partida *p, int password) //aqui deberias cambiar la estructura y cargar partida no jugadores deberias poner (partida *p)
 {
     int i,j;
     int pos=-1;
@@ -164,5 +165,6 @@ void registro(partida *p) //aqui deberias cambiar la estructura y cargar partida
            }
        }
     }
+
     free(reg);
 }

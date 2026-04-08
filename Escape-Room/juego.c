@@ -464,13 +464,14 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u){
             FILE *f;
             int i;
 
-            f=fopen("data/partida.txt","w");
+            f=fopen("data/partida.txt","a");
 
             if(f == NULL)
             {
                 printf("Error al abrir el fichero de partida.\n");
             } else
             {
+                fflush(stdin);
                 fprintf(f, "%02d-%d",
                 p->jugador[u].id_jugador,
                 p->sala[ubicacion_actual].id_sala);
@@ -480,7 +481,6 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u){
                     fprintf(f, "-%s", p->jugador[u].id_obj[i]);
                 }
 
-                fprintf(f,"\n");
                 fclose(f);
                 printf("\nPartida guardada con exito.\n");
             }
