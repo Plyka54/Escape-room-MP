@@ -222,6 +222,7 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u){
                                 p->jugador[u].id_obj[num_actual - 1] = strdup(p->objeto[i].id_obj);
 
                                 printf("Has cogido el objeto: %s!\n", p->objeto[i].nomb_obj);
+                                printf("%s\n", p->objeto[i].descrip);  // esto es pa ver la descripcion
                                 p->objeto[i].id_sala = -1; // Lo quitamos de la sala
                             } else {
                                 printf("Error de memoria.\n");
@@ -327,11 +328,92 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u){
 
         case 7: //Usar objeto (Si es necesario en la sala)
         {
+            int i, j, op, indice, pos_objeto = -1, usado = 0;
+            char *id_usado;
 
-            printf("Nada aun\n");
+            if (p->jugador[u].num_inventario==0)
+            {
+                printf("No tienes ningun objeto en el inventario.\n");
+            } else
+            {
+                printf("Que objeto quieres usar?\n");   // Mostramos el inventario para elegir objeto
+
+                for (i=0;i<p->jugador[u].num_inventario;i++)
+                {
+                    for (j=0;j<num_objetos;j++)
+                    {
+                        if (strcmp(p->jugador[u].id_obj[i], p->objeto[j].id_obj)==0)
+                        {
+                            printf("%d. %s\n", i + 1, p->objeto[j].nomb_obj);
+                            break;
+                        }
+                    }
+                }
+
+                scanf("%d",&op);
+                indice=op-1;
+
+                if (indice<0 || indice>=p->jugador[u].num_inventario)
+                {
+                    printf("Opcion no valida.\n");
+                } else
+                {
+                    id_usado = p->jugador[u].id_obj[indice];   // Se guarda el id del objeto elegido
+
+                    for (j=0;j<num_objetos;j++)
+                    {
+                        if (strcmp(id_usado, p->objeto[j].id_obj)==0)
+                        {
+                            pos_objeto = j;
+                            break;
+                        }
+                    }
+
+                if (pos_objeto==-1)
+                {
+                    printf("No se ha encontrado ese objeto.\n");
+                }
+                else if (strcmp(id_usado,"OB05")==0)   // MAPA
+                {
+                    mapa = 1;
+                    printf("Has usado %s.\n", p->objeto[pos_objeto].nomb_obj);
+                    printf("%s\n", p->objeto[pos_objeto].descrip);
+                    printf("Ahora puedes consultar el mapa antes de moverte.\n");
+                }
+                else if (strcmp(id_usado,"OB06")==0)   // MORSE
+                {
+                    printf("Has usado %s.\n", p->objeto[pos_objeto].nomb_obj);
+                    printf("%s\n", p->objeto[pos_objeto].descrip);
+                    diccionario_morse();
+                    printf("\n");
+                }
+                else
+                {
+                    for (j=0;j<num_conexiones; j++)
+                    {
+                        if ((p->conexion[j].id_origen == p->sala[ubicacion_actual].id_sala || p->conexion[j].id_destino == p->sala[ubicacion_actual].id_sala) && strcmp(p->conexion[j].cond, id_usado) == 0)
+                        {
+                            strcpy(p->conexion[j].cond, "0");
+                            strcpy(p->conexion[j].estado, "Activa");
+                            printf("Has usado %s.\n", p->objeto[pos_objeto].nomb_obj);
+                            printf("%s\n", p->objeto[pos_objeto].descrip);
+                            printf("Parece que una salida se ha desbloqueado.\n");
+                            usado = 1;
+                            break;
+                        }
+                    }
+
+                    if (usado==0)
+                    {
+                        printf("Has usado %s.\n", p->objeto[pos_objeto].nomb_obj);
+                        printf("%s\n", p->objeto[pos_objeto].descrip);
+                    }
+                }
+            }
+        }
+
             system("pause");
             system("cls");
-
             break;
         }
 
