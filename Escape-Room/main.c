@@ -20,7 +20,6 @@ int main(){
     int total_usuarios;
     carga(&p,&total_usuarios);
 
-    printf("%s\n", p.objeto[3].id_obj);
 // LOGIN DE USUARIO O REGISTRO -----------------------------------------------------------
     int u;
 

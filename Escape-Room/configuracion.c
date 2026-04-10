@@ -19,6 +19,7 @@ void Cargar_partida(partida *p, int u)  //  Comprobado
     int ubicacion_actual=0;
     int encontrada=0;
     int i, j;
+    int mapa;
 
     system("cls");
     printf("\nCargando partida...\n");
@@ -40,7 +41,7 @@ void Cargar_partida(partida *p, int u)  //  Comprobado
     {
         printf("No existe  ninguna partida guardada.\n");
         system("pause");
-        return;
+        return 1;
     }
 
     while(fgets(linea, sizeof(linea), f) != NULL && encontrada ==0)
@@ -73,7 +74,7 @@ void Cargar_partida(partida *p, int u)  //  Comprobado
                         printf("Error de memoria al cargar inventario.\n");
                         fclose(f);
                         system("pause");
-                        return;
+                        return ;
                     }
 
                     p->jugador[u].id_obj = temp;
@@ -84,7 +85,7 @@ void Cargar_partida(partida *p, int u)  //  Comprobado
                         printf("Error de memoria al cargar inventario.\n");
                         fclose(f);
                         system("pause");
-                        return;
+                        return ;
                     }
 
                     strcpy(p->jugador[u].id_obj[p->jugador[u].num_inventario], aux);
@@ -98,7 +99,9 @@ void Cargar_partida(partida *p, int u)  //  Comprobado
                             break;
                         }
                     }
-
+                    if (strcmp(aux, p->objeto[3].id_obj) == 0) {
+                        mapa = 1;
+                    }
                      aux = strtok(NULL, "-\n\r");
                 }
             }
@@ -115,7 +118,7 @@ void Cargar_partida(partida *p, int u)  //  Comprobado
     } else
     {
         printf("Partida cargada con exito.\n");
-        menu_opciones_juego(ubicacion_actual, p, u);
+        menu_opciones_juego(ubicacion_actual, p, u, mapa);
     }
 }
 
