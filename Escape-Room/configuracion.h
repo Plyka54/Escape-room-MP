@@ -25,7 +25,7 @@ typedef struct
 typedef struct
 {
     char id_puzles[4]; // es por ejemplo P01,P02,...
-    char nomb_puz[16];
+    char nomb_puz[50];
     int id_sala;
     char tipo[10];
     char descrip[151];
@@ -36,7 +36,7 @@ typedef struct
 {
     char id_obj[5];
     char nomb_obj[21];  //16 pa el espacio del \0
-    char descrip[51];
+    char descrip[100];
     int id_sala; /* si es -1 esta en el inventario */
 } objetos;
 

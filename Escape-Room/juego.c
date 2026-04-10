@@ -68,8 +68,11 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u){
             system("cls");
 
             if(ubicacion_actual==13) puzle_morse(p);
-            if(ubicacion_actual==8) puzle_switch(p);
-            if(ubicacion_actual==7) puzle_despacho(p);
+            if(ubicacion_actual==7) puzle_switch(p);
+            if(ubicacion_actual==6) puzle_despacho(p);
+
+            system("pause");
+            system("cls");
 
             break;
 
@@ -424,7 +427,7 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u){
 
             char solucion[51];
 
-            for(int cont=0;cont<4;cont++){ //Recorremos todos los puzles     OJO QUE SI METEMOS MÁS HAY QUE CAMBIAR ESTE BUCLE
+            for(int cont=0;cont<5;cont++){ //Recorremos todos los puzles     OJO QUE SI METEMOS MÁS HAY QUE CAMBIAR ESTE BUCLE
 
                 if(p->puzle[cont].id_sala == p->sala[ubicacion_actual].id_sala){ //puzle en esta sala
 

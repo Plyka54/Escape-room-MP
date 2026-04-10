@@ -121,7 +121,7 @@ void carga(partida *p,int *total_leidos){
     }
     i=0;
 
-    while(fgets(linea,200,f)!=NULL && i<13){
+    while(fgets(linea,200,f)!=NULL && i<5){
         aux=strtok(linea,"-");
         if(aux) strcpy(p->puzle[i].id_puzles,aux);
         aux=strtok(NULL,"-");
@@ -132,7 +132,7 @@ void carga(partida *p,int *total_leidos){
         if(aux) strcpy(p->puzle[i].tipo,aux);
         aux=strtok(NULL,"-");
         if(aux) strcpy(p->puzle[i].descrip,aux);
-        aux=strtok(NULL,"\n");
+        aux=strtok(NULL,"\n\r");
         if(aux) strcpy(p->puzle[i].sol,aux);
         i++;
     }
