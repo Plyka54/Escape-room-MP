@@ -436,7 +436,7 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u){
 
             for(int cont=0;cont<5;cont++){ //Recorremos todos los puzles     OJO QUE SI METEMOS MÁS HAY QUE CAMBIAR ESTE BUCLE
 
-                if(p->puzle[cont].id_sala == p->sala[ubicacion_actual].id_sala){ //puzle en esta sala
+                if(p->puzle[cont].id_sala == p->sala[ubicacion_actual].id_sala && strcmp(p->conexion[cont].cond, "0")!=0){ //puzle en esta sala
 
                     puzle=1;
                     printf("Puzle: %s\n\n", p->puzle[cont].descrip);
@@ -446,6 +446,7 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u){
                     if(strcmp(p->puzle[cont].sol, solucion)==0){
 
                             printf("Genial! He resuelto el puzle y parece que una salida se ha desbloqueado.\n\n");
+                            puzle=0;
 
                         for(int iteracion=0; iteracion<17;iteracion++){ //recorremos las conexiones para desbloquear la buena
 
@@ -464,7 +465,7 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u){
 
             }
 
-            if(puzle==0) printf("Parece que no hay ningun puzle que resolver aqui.\n");
+            if(puzle==0) printf("Parece que no queda ningun puzle que resolver aqui.\n");
 
             system("pause");
             system("cls");
