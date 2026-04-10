@@ -6,7 +6,7 @@ C05-04-06-Activa-0
 C06-04-07-Activa-0
 C07-13-08-Activa-0
 C08-04-09-Activa-0
-C09-07-10-Activa-0
+C09-07-10-Bloqueada-0
 C10-04-11-Activa-0
 C11-11-12-Activa-0
 C12-04-13-Activa-0
@@ -14,4 +14,4 @@ C13-02-14-Activa-0
 C14-16-15-Activa-0
 C15-04-16-Bloqueada-P04
 C16-16-17-Activa-0
-C17-17-18-Activa-0
+C17-17-18-Bloqueada-0
