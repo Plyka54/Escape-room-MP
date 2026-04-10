@@ -230,10 +230,17 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u){
                                 printf("Has cogido el objeto: %s!\n", p->objeto[i].nomb_obj);
                                 printf("%s\n", p->objeto[i].descrip);  // esto es pa ver la descripcion
                                 p->objeto[i].id_sala = -1; // Lo quitamos de la sala
+
+                                printf("%s\n", p->jugador[u].id_obj[i]);
+
+                                //if (strcmp(p->jugador[u].id_obj[i], p->objeto[3].id_obj)==0) mapa=1;
+
                             } else {
                                 printf("Error de memoria.\n");
                                 p->jugador[u].num_inventario--; // Deshacemos el incremento si falla
                             }
+
+
                         }
                     }
                 }

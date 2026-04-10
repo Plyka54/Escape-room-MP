@@ -19,8 +19,8 @@ int main(){
     //CARGAMOS LOS FICHEROS
     int total_usuarios;
     carga(&p,&total_usuarios);
-    printf("%d\n",p.puzle[4].id_sala);
 
+    printf("%s\n", p.objeto[3].id_obj);
 // LOGIN DE USUARIO O REGISTRO -----------------------------------------------------------
     int u;
 
