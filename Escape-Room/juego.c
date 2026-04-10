@@ -460,7 +460,8 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u){
             break;
         }
         case 9:  //guardar partida
-
+            //no funciona por ahora
+/*
         {
             FILE *f;
             int i, id_leido;
@@ -518,7 +519,7 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u){
                 system("cls");
 
                 break;
-        }
+        }*/
 
         case 10:  //volver - FUNCIONA NO TOCAR
 
