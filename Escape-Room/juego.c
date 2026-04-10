@@ -119,7 +119,7 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u){
                     printf("Quieres ver el mapa antes de moverte? (s/n)\n");
                     scanf(" %c", &respuesta);
 
-                    if (respuesta=='s') mostrar_mapa();
+                    if (respuesta=='s'||respuesta=='S') mostrar_mapa();
 
                 }
 
@@ -231,9 +231,8 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u){
                                 printf("%s\n", p->objeto[i].descrip);  // esto es pa ver la descripcion
                                 p->objeto[i].id_sala = -1; // Lo quitamos de la sala
 
-                                printf("%s\n", p->jugador[u].id_obj[i]);
 
-                                //if (strcmp(p->jugador[u].id_obj[i], p->objeto[3].id_obj)==0) mapa=1;
+                                if (strcmp(p->jugador[u].id_obj[num_actual-1], p->objeto[3].id_obj)==0) mapa=1;
 
                             } else {
                                 printf("Error de memoria.\n");
