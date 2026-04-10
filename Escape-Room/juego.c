@@ -461,7 +461,7 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u){
         }
         case 9:  //guardar partida
             //no funciona por ahora
-/*
+
         {
             FILE *f;
             int i, id_leido;
@@ -471,7 +471,7 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u){
             int num_lineas = 0;
 
             //mira si hay alguna partida anterior guardada en el fichero y la borra
-            f=fopen("data/partida.txt","a");
+            f=fopen("data/partida.txt","r");
             if (f != NULL) {
                 while (fgets(linea, sizeof(linea), f) != NULL) {
                     if (sscanf(linea, "%d-", &id_leido) == 1) {
@@ -488,7 +488,7 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u){
                     }
                 }
                 fclose(f);
-
+            }
                 //escribimos en el fichero
                 f = fopen("data/partida.txt", "w");
                 if (f == NULL) {
@@ -519,7 +519,7 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u){
                 system("cls");
 
                 break;
-        }*/
+        }
 
         case 10:  //volver - FUNCIONA NO TOCAR
 
