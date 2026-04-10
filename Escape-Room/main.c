@@ -19,7 +19,7 @@ int main(){
     //CARGAMOS LOS FICHEROS
     int total_usuarios;
     carga(&p,&total_usuarios);
-    //printf("%s\n",p.jugador[]);  -> para ir comprobando que se cargan bien los ficheros
+    printf("%s\n",p.objeto[4].nomb_obj);
 
 // LOGIN DE USUARIO O REGISTRO -----------------------------------------------------------
     int u;

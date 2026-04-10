@@ -4,7 +4,7 @@
 04-PASILLO PRINCIPAL-NORMAL-Es un pasillo enorme, hay bastantes mesas y algunas maquinas expendedoras.
 05-AULA MAGNA A-NORMAL-Es un aula mucho mas grande que la otra. Hay bastantes mesas y una pizarra.
 06-BIBLIOTECA-NORMAL-Mesas y estanterias se extienden hasta bastante lejos.
-07-PASILLO F-NORMAL-Solo un pasillo, aqui parecen estar todos los despachos de los profesores.
+07-PASILLO F-NORMAL-Solo un pasillo, aqui esta el despacho de mi profesor, parece que hay que poner un pin para entrar.
 08-LABORATORIO C-NORMAL- Hay varios puestos de ordenadores y materiales de laboratorio.
 09-PASILLO A-NORMAL-Un pasillo normal, hay una papelera delante del aula magna.
 10-DESPACHO DEL PROFESOR-NORMAL-Hay una mesa en el centro con muchos cajones y papeles que parecen importantes.

@@ -35,7 +35,7 @@ typedef struct
 typedef struct
 {
     char id_obj[5];
-    char nomb_obj[16];  //16 pa el espacio del \0
+    char nomb_obj[21];  //16 pa el espacio del \0
     char descrip[51];
     int id_sala; /* si es -1 esta en el inventario */
 } objetos;

@@ -68,6 +68,8 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u){
             system("cls");
 
             if(ubicacion_actual==13) puzle_morse(p);
+            if(ubicacion_actual==8) puzle_switch(p);
+            if(ubicacion_actual==7) puzle_despacho(p);
 
             break;
 

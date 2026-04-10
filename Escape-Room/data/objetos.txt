@@ -1,6 +1,6 @@
 OB01-Tarjeta Luces-Tarjeta que me permite encender las luces de todas las aulas-01
 OB02-Nota doblada-Nota hallada en el aula B01,contiene clave 4ngE14-01
-OB03-LLave Aula Magna- Es encontrada en el baño para abrir el aula magna-03
+OB03-LLave Aula Magna-Es encontrada en el bano para abrir el aula magna-03
 OB04-Mapa de la ESI-Encontrado en el cuarto de limpieza, son unos planos de la ESI-12
-OB05-Hoja de codigo morse-Hoja suelta que sobresalia de un libro de la biblioteca-06
-OB06-Switch roto-Encuentras un viejo switch lleno de polvo. Curiosamente, alguien ha conectado cuatro cables de diferentes colores conectados. El cable rojo está en el puerto 8, el azul en el 1, el verde en el 5 y el amarillo en el 2-08
+OB05-Hoja de Codigo Morse-Hoja suelta que sobresalia de un libro de la biblioteca-06
+OB06-Switch roto-Encuentras un viejo switch lleno de polvo-08
