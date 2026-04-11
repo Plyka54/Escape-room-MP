@@ -15,6 +15,6 @@
 15-COPISTERIA-NORMAL-Sala llena de material escolar y varios papeles.
 16-CONSERJERIA-NORMAL-Sala con mucha documentación la cual tiene pistas para llegar a la salida.
 17-HALL-NORMAL-Vestíbulo que esta cerca de la salida.
-18-ENTRADA-SALIDA-El exterior esta aquí.
+18-SALIDA(entrada ESI)-SALIDA-El exterior esta aquí.
 
 
