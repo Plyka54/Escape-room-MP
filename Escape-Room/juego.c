@@ -467,20 +467,24 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u, int mapa){
                             puzle=0;
 
 
-                    }else printf("Parece que esta clave es incorrecta...\n");
+                    }else{
+
+                        printf("Parece que esta clave es incorrecta...\n");
+
+                    }
 
 
+                }
 
 
-
-            if(puzle==0) printf("Parece que no queda ningun puzle que resolver aqui.\n");
+            }if(puzle==0) printf("Parece que no queda ningun puzle que resolver aqui.\n");
 
             system("pause");
             system("cls");
 
             break;
         }
-            }
+
         case 9:  //guardar partida
 
 
