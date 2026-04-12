@@ -434,42 +434,44 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u, int mapa){
 
             char solucion[51];
 
+
             for(int cont=0;cont<5;cont++){ //Recorremos todos los puzles     OJO QUE SI METEMOS MÁS HAY QUE CAMBIAR ESTE BUCLE
 
-                printf("LUGAR DE PUZLE %d\n", p->puzle[cont].id_sala);
-                printf(" SALA ACTUAL %d\n", p->sala[ubicacion_actual].id_sala);
-                if(p->puzle[cont].id_sala == p->sala[ubicacion_actual].id_sala && strcmp(p->conexion[cont].cond, "0")!=0){ //puzle en esta sala
-                    printf("PUZLE ENCONTRADO");
+                int conexion_asociada = -1; // lo pongo aqui pa que reinicie valor
+
+                if(p->puzle[cont].id_sala == p->sala[ubicacion_actual].id_sala){ //puzle en esta sala
+
+                        for (int k = 0; k < 17; k++) { //Recorremos las conexiones para ver en cual esta el puzle encontrado.
+                            if (strcmp(p->conexion[k].cond, p->puzle[cont].id_puzles) == 0) {
+                                conexion_asociada = k;
+                                break;
+                            }
+                        }
+
+                    //Si recorriendo las conexiones no encontramos ninguna, se pasa a lo siguiente y no se muestra el puzle otra vez
+
+                if (conexion_asociada == -1 || strcmp(p->conexion[conexion_asociada].cond, "0") == 0) continue;
+
                     puzle=1;
-                    printf("PUZLE ID: %s\n", p->puzle[cont].id_puzles);
+                    printf("Parece que tenemos un puzle. Veamos...\n");
                     printf("Puzle: %s\n\n", p->puzle[cont].descrip);
 
                     scanf("%s", solucion);
 
                     if(strcmp(p->puzle[cont].sol, solucion)==0){
 
-                            printf("Genial! He resuelto el puzle y parece que una salida se ha desbloqueado.\n\n");
+                            printf("Genial! He resuelto el puzle y parece que una salida se ha desbloqueado. Debería investigarlo.\n\n");
 
+                            strcpy(p->conexion[conexion_asociada].cond, "0"); //cambiamos fichero
+                            strcpy(p->conexion[conexion_asociada].estado, "Activa");
+                            puzle=0;
 
-
-                        for(int iteracion=0; iteracion<17;iteracion++){ //recorremos las conexiones para desbloquear la buena
-
-                            if(strcmp(p->conexion[iteracion].cond, p->puzle[cont].id_puzles)==0){
-
-                                strcpy(p->conexion[iteracion].cond, "0");
-                                strcpy(p->conexion[iteracion].estado, "Activa");
-                                puzle=0;
-
-
-                            }
-
-                        }
 
                     }else printf("Parece que esta clave es incorrecta...\n");
 
                 }
 
-            }
+
 
             if(puzle==0) printf("Parece que no queda ningun puzle que resolver aqui.\n");
 
@@ -558,7 +560,7 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u, int mapa){
 
 
 
-   }while (fin_de_juego==0 && volver_menu==0);
+   }while(fin_de_juego==0 && volver_menu==0);
 
 
         //En este punto del juego ya se puede escapar, hay que escribir el final
