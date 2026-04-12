@@ -469,7 +469,7 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u, int mapa){
 
                     }else printf("Parece que esta clave es incorrecta...\n");
 
-                }
+
 
 
 
@@ -480,8 +480,9 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u, int mapa){
 
             break;
         }
+            }
         case 9:  //guardar partida
-            //no funciona por ahora
+
 
         {
             FILE *f;
