@@ -9,8 +9,12 @@
 
 void mostrar_mapa();
 
+//Cabecera: void Inicio_escape_room(partida *p,int u)
+//Precondicion: El usuario debe de estar en una partida nueva, no en una cargada.
+//Postcondicion: Se inicializan a 0 distintos campos de las estructuras y comienzan la historia del juego.
 void Inicio_escape_room(partida *p,int u){
 
+    int mapa=0;
     p->jugador[u].ubicacion_actual=0; //esto pa la estructura, lo suyo seria ir actualizando en funcion de el id_sala
     system("cls");
 
@@ -34,7 +38,7 @@ void Inicio_escape_room(partida *p,int u){
 
     p->jugador[u].num_inventario = 0;
     p->jugador[u].id_obj = NULL;
-    int mapa=0;
+
     menu_opciones_juego(p,u,mapa);
 }
 
@@ -43,7 +47,7 @@ void Inicio_escape_room(partida *p,int u){
 //Postcondicion: La funcion presenta todas las opciones del menu del juego
 void menu_opciones_juego( partida *p,int u, int mapa){
                                                                         //Lo de declarar 40 variables iguales en cada caso hay que arreglarlo eh
-    int volver_menu=0, fin_de_juego=0, eleccion_switch=11, puzle=0;      //casi todos son booleanos
+    int volver_menu=0, fin_de_juego=0, eleccion_switch=11, puzle=0;     //Booleanos
     char respuesta;
     int ubicacion_actual, destino;
     ubicacion_actual=p->jugador[u].ubicacion_actual;
@@ -64,7 +68,7 @@ void menu_opciones_juego( partida *p,int u, int mapa){
 
     switch (eleccion_switch){
 
-        case 1: //describir sala - FUNCIONA NO TOCAR
+        case 1: //describir sala - FUNCIONA
 
             printf("\033[33m");
             printf("%s\n\n", p->sala[ubicacion_actual].descripcion);
@@ -104,10 +108,12 @@ void menu_opciones_juego( partida *p,int u, int mapa){
             printf("\033[0m");
 
             if(cont==0){
+
                 printf("\033[33m");
                 printf("En esta sala no parece haber ningun objeto\n");
                 printf("\033[0m");
             }
+
             printf("\033[33m");
             printf("\nVoy a buscar las salidas de esta sala...\n\n");
             printf("\033[0m");

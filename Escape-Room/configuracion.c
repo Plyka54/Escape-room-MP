@@ -148,16 +148,16 @@ void Bienvenida(partida *p,int u){
 
             break;
 
-        case 2: //Cargar partida
+        case 2:
 
             Cargar_partida(p,u);
 
-
             break;
 
-        case 3: //Salir
+        case 3:
 
             exit(0);
+
             break;
 
         default:
