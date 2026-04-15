@@ -201,13 +201,14 @@ void menu_opciones_juego( partida *p,int u, int mapa){
 
                         if(strcmp(p->conexion[cont].cond, "0")== 0){ //CONEXION ABIERTA, POSIBLE DESPLAZAMIENTO DEL JUGADOR
 
+                                printf("\033[33m");
                                 printf("Puedo ir a [%s]\n", p->sala[p->conexion[cont].id_origen -1].nombre_sala);
-
+                                printf("\033[0m");
                                 printf("Quieres ir por aqui? (s/n)\n");
 
                                     scanf(" %c", &respuesta);
 
-                                    if (respuesta=='s'){ //Actualizamos la posicion actual del jugador
+                                    if (respuesta=='s' || respuesta=='S'){ //Actualizamos la posicion actual del jugador
 
                                         ubicacion_actual=p->sala[p->conexion[cont].id_origen -1].id_sala -1;
                                         break; //tampoco se donde lleva
@@ -215,9 +216,10 @@ void menu_opciones_juego( partida *p,int u, int mapa){
                                     }
 
                         }else{
-
+                            printf("\033[33m");
                             printf("Hay una salida bloqueada que me lleva a [%s]\n", p->sala[p->conexion[cont].id_origen].nombre_sala);
                             printf("Quiza pueda hacer algo para desbloquear la salida\n\n");
+                            printf("\033[0m");
                             system("pause");
                         }
 
@@ -233,19 +235,23 @@ void menu_opciones_juego( partida *p,int u, int mapa){
             char op1, op2;
             char **inventario;
 
+            printf("\033[33m");
             printf("Veamos que hay para coger...\n");
+            printf("\033[0m");
 
             do {
                 cont = 0;
                 for (i = 0; i < num_objetos; i++) {
                     if (p->sala[ubicacion_actual].id_sala == p->objeto[i].id_sala) {
                         cont++;
+                        printf("\033[33m");
                         printf("He encontrado un %s\n", p->objeto[i].nomb_obj);
-                        printf("Desea cogerlo? s/n\n");
+                        printf("\033[0m");
+                        printf("Quieres cogerlo? s/n\n");
                         scanf(" %c", &op1);
 
 
-                        if (op1 == 's') {
+                        if (op1 == 's' || op1=='S') {
                             p->jugador[u].num_inventario++;
                             num_actual = p->jugador[u].num_inventario;
 
@@ -274,11 +280,13 @@ void menu_opciones_juego( partida *p,int u, int mapa){
                 }
 
                 if (cont == 0){
+                        printf("\033[33m");
                         printf("No hay nada mas aqui.\n");
+                        printf("\033[0m");
                         break;
                 }
 
-                printf("Desea coger otro objeto? s/n\n");
+                printf("Quieres coger otro objeto? (s/n)\n");
                 scanf(" %c", &op2);
 
             } while (op2 == 's' || op2=='S');
@@ -291,7 +299,11 @@ void menu_opciones_juego( partida *p,int u, int mapa){
             //AQUI LO UNICO QUE FALTA ES SI PONE OTRO NUMERO SE CIERRA EL PROGRAMA
             {
             int i,j,op;
+
+            printf("\033[33m");
             printf("Veamos que objetos tengo en el inventario...\n");
+            printf("\033[0m");
+
             if(p->jugador[u].num_inventario==0){
                 printf("No tienes ningun objeto en el inventario para soltar\n");
                 system("pause");
@@ -461,7 +473,9 @@ void menu_opciones_juego( partida *p,int u, int mapa){
                             strcpy(p->conexion[j].estado, "Activa");
                             printf("Has usado %s.\n", p->objeto[pos_objeto].nomb_obj);
                             printf("%s\n", p->objeto[pos_objeto].descrip);
+                            printf("\033[33m");
                             printf("Parece que una salida se ha desbloqueado.\n");
+                            printf("\033[0m");
                             usado = 1;
                             break;
                         }
@@ -504,14 +518,18 @@ void menu_opciones_juego( partida *p,int u, int mapa){
                 if (conexion_asociada == -1 || strcmp(p->conexion[conexion_asociada].cond, "0") == 0) continue;
 
                     puzle=1;
-                    printf("Parece que tenemos un puzle. Veamos...\n");
+                    printf("\033[33m");
+                    printf("Parece que tenemos un puzle. Veamos...\n\n");
+                    printf("\033[0m");
                     printf("Puzle: %s\n\n", p->puzle[cont].descrip);
 
                     scanf("%s", solucion);
 
-                    if(strcmp(p->puzle[cont].sol, solucion)==0){
+                    if(strcmp(p->puzle[cont].sol, solucion)==0){ //METER QUE CONEXION ES LA QUE SE HA ABIERTO
 
+                            printf("\033[33m");
                             printf("Genial! He resuelto el puzle y parece que una salida se ha desbloqueado. Deberia investigarlo.\n\n");
+                            printf("\033[0m");
 
                             strcpy(p->conexion[conexion_asociada].cond, "0"); //cambiamos fichero
                             strcpy(p->conexion[conexion_asociada].estado, "Activa");
@@ -520,16 +538,18 @@ void menu_opciones_juego( partida *p,int u, int mapa){
 
                     }else{
 
+                        printf("\033[33m");
                         printf("Parece que esta clave es incorrecta...\n");
+                        printf("\033[0m");
 
                     }
 
 
                 }
 
-
+            printf("\033[33m");
             }if(puzle==0) printf("Parece que no queda ningun puzle que resolver aqui.\n");
-
+            printf("\033[0m");
             system("pause");
             system("cls");
 
@@ -606,7 +626,9 @@ void menu_opciones_juego( partida *p,int u, int mapa){
 
         default:
 
+            printf("\033[33m");
             printf("No puedo hacer eso\n");
+            printf("\033[0m");
             system("pause");
             system("cls");
 
@@ -652,6 +674,8 @@ void diccionario_morse(){
 
     printf("A = .-\nB = -...\nC = -.-.\nE = .\nI = ..\nO = ---\nU = ..-\nS = ...\n");
 
+    printf("\033[33m");
     printf("\nParece que la parte de abajo se ha mojado, no puedo seguir leyendo.");
+    printf("\033[0m");
 
 }
