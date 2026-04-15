@@ -134,7 +134,7 @@ void registro(partida *p, int password) //aqui deberias cambiar la estructura y 
            reg->jugador[pos].jugador[strcspn(reg->jugador[pos].jugador, "\n")] = '\0';
 
 
-           printf("\nIntroduce una contraseña (8 caracteres max):");
+           printf("\nIntroduce una contrasena (8 caracteres max):");
            fgets(reg->jugador[pos].contrasena, sizeof(reg->jugador[pos].contrasena),stdin);
            reg->jugador[pos].contrasena[strcspn(reg->jugador[pos].contrasena, "\n")] = '\0';
 
