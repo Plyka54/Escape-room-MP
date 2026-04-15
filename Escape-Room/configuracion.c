@@ -19,7 +19,7 @@ void Cargar_partida(partida *p, int u)  //  Comprobado
     int ubicacion_actual=0;
     int encontrada=0;
     int i, j;
-    int mapa;
+    int mapa=0;
 
     system("cls");
     printf("\nCargando partida...\n");
@@ -60,6 +60,7 @@ void Cargar_partida(partida *p, int u)  //  Comprobado
                 if(aux!=NULL)
                 {
                     ubicacion_actual=atoi(aux)-1;
+                    p->jugador[u].ubicacion_actual=ubicacion_actual;
                 }
 
                 aux=strtok(NULL,"-\n\r");
@@ -118,7 +119,8 @@ void Cargar_partida(partida *p, int u)  //  Comprobado
     } else
     {
         printf("Partida cargada con exito.\n");
-        menu_opciones_juego(ubicacion_actual, p, u, mapa);
+        printf("%d\n",ubicacion_actual);
+        menu_opciones_juego(p, u, mapa);
     }
 }
 
@@ -149,6 +151,7 @@ void Bienvenida(partida *p,int u){
         case 2: //Cargar partida
 
             Cargar_partida(p,u);
+
 
             break;
 

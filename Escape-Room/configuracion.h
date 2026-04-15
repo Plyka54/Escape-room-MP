@@ -11,6 +11,7 @@ typedef struct
     char contrasena[9]; //HE CAMBIADO LA Ñ PORQUE SINO EL PROGRAMA NO FUNCIONA PARA QUE USEIS SIEMPRE SIN LA Ñ
     char **id_obj; //inventario
     int num_inventario;
+    int ubicacion_actual;
 } jugadores;
 
 

@@ -42,6 +42,7 @@ void puzle_switch (partida *p){
     printf("Es raro que haya cables conectados a este switch lleno de polvo...\n");
     printf("Hay un cable azul conectado al puerto 1, un cable amarillo conectado al puerto 2, un cable verde conectado al puerto 5 y un cable rojo conectado al puerto 2\n");
     printf("Esto es muy raro...\n\n\n");
+
     //8152
 }
 

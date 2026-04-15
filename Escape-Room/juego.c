@@ -11,12 +11,12 @@ void mostrar_mapa();
 
 void Inicio_escape_room(partida *p,int u){
 
-    int ubicacion_actual=0; //esto pa la estructura, lo suyo seria ir actualizando en funcion de el id_sala
+    p->jugador[u].ubicacion_actual=0; //esto pa la estructura, lo suyo seria ir actualizando en funcion de el id_sala
     system("cls");
 
     //printf("DEBUG: id_sala = %d\n", p->sala[0].id_sala); si pone 0 no esta cargado
 
-    printf(" %s\n", p->sala[ubicacion_actual].nombre_sala);
+    printf(" %s\n", p->sala[p->jugador[u].ubicacion_actual].nombre_sala);
     printf("--------------------------------\n\n");
 
     //voy a ser una dramas que todos los sepais
@@ -35,16 +35,18 @@ void Inicio_escape_room(partida *p,int u){
     p->jugador[u].num_inventario = 0;
     p->jugador[u].id_obj = NULL;
     int mapa=0;
-    menu_opciones_juego(ubicacion_actual, p,u,mapa);
+    menu_opciones_juego(p,u,mapa);
 }
 
 //Cabecera: void menu_opciones_juego(int ubicacion_actual, partida *p,int u)
 //Precondicion: Ubicacion actual del jugador inicializada
 //Postcondicion: La funcion presenta todas las opciones del menu del juego
-void menu_opciones_juego(int ubicacion_actual, partida *p,int u, int mapa){
+void menu_opciones_juego( partida *p,int u, int mapa){
                                                                         //Lo de declarar 40 variables iguales en cada caso hay que arreglarlo eh
     int volver_menu=0, fin_de_juego=0, eleccion_switch=11, puzle=0;      //casi todos son booleanos
     char respuesta;
+    int ubicacion_actual;
+    ubicacion_actual=p->jugador[u].ubicacion_actual;
 
     system("pause");
     system("cls");
@@ -68,8 +70,7 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u, int mapa){
             printf("%s\n\n", p->sala[ubicacion_actual].descripcion);
             printf("\033[0m");
 
-            system("pause");
-            system("cls");
+
 
             if(ubicacion_actual==13) puzle_morse(p);
             if(ubicacion_actual==7) puzle_switch(p);
@@ -293,6 +294,8 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u, int mapa){
             printf("Veamos que objetos tengo en el inventario...\n");
             if(p->jugador[u].num_inventario==0){
                 printf("No tienes ningun objeto en el inventario para soltar\n");
+                system("pause");
+                system("cls");
                 break;
             }
             else{
@@ -304,7 +307,27 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u, int mapa){
                         }
                     }
                 }
-                scanf("%d",&op);
+
+
+                //por si se introduce una letra
+                if (scanf("%d", &op) != 1) {
+                    printf("Error: Debes introducir un numero.\n");
+
+                    fflush(stdin);
+
+                    system("pause");
+                    system("cls");
+                    break;
+                }
+
+
+                if (op < 1 || op > p->jugador[u].num_inventario) {
+                    printf("Error: Ese numero no corresponde a ningun objeto de tu inventario.\n");
+                    system("pause");
+                    system("cls");
+                    break;
+                }
+
                 int indice=op-1;
                 for(j=0;j<num_objetos;j++){ //para que el objeto se quede en la sala actual
                     if(strcmp(p->jugador[u].id_obj[indice],p->objeto[j].id_obj)==0){
@@ -312,6 +335,7 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u, int mapa){
                         printf("Has soltado %s\n",p->objeto[j].nomb_obj);
                     }
                 }
+
                 //vaciar el inventario
                 free(p->jugador[u].id_obj[indice]);
                 for(i=indice;i<p->jugador[u].num_inventario;i++){
@@ -487,7 +511,7 @@ void menu_opciones_juego(int ubicacion_actual, partida *p,int u, int mapa){
 
                     if(strcmp(p->puzle[cont].sol, solucion)==0){
 
-                            printf("Genial! He resuelto el puzle y parece que una salida se ha desbloqueado. Debería investigarlo.\n\n");
+                            printf("Genial! He resuelto el puzle y parece que una salida se ha desbloqueado. Deberia investigarlo.\n\n");
 
                             strcpy(p->conexion[conexion_asociada].cond, "0"); //cambiamos fichero
                             strcpy(p->conexion[conexion_asociada].estado, "Activa");
