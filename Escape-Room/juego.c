@@ -45,7 +45,7 @@ void menu_opciones_juego( partida *p,int u, int mapa){
                                                                         //Lo de declarar 40 variables iguales en cada caso hay que arreglarlo eh
     int volver_menu=0, fin_de_juego=0, eleccion_switch=11, puzle=0;      //casi todos son booleanos
     char respuesta;
-    int ubicacion_actual;
+    int ubicacion_actual, destino;
     ubicacion_actual=p->jugador[u].ubicacion_actual;
 
     system("pause");
@@ -531,6 +531,20 @@ void menu_opciones_juego( partida *p,int u, int mapa){
                             printf("Genial! He resuelto el puzle y parece que una salida se ha desbloqueado. Deberia investigarlo.\n\n");
                             printf("\033[0m");
 
+
+                            if (p->conexion[conexion_asociada].id_origen == p->sala[ubicacion_actual].id_sala) {    //ESTO ES PARA VER CUAL SE HA ABIERTO.
+
+                                destino = p->conexion[conexion_asociada].id_destino - 1;
+
+                            } else {
+
+                                destino = p->conexion[conexion_asociada].id_origen - 1;
+
+                            }
+
+
+                            printf("Has abierto el camino a [%s]!\n\n", p->sala[destino].nombre_sala);
+
                             strcpy(p->conexion[conexion_asociada].cond, "0"); //cambiamos fichero
                             strcpy(p->conexion[conexion_asociada].estado, "Activa");
                             puzle=0;
@@ -548,6 +562,7 @@ void menu_opciones_juego( partida *p,int u, int mapa){
                 }
 
             printf("\033[33m");
+
             }if(puzle==0) printf("Parece que no queda ningun puzle que resolver aqui.\n");
             printf("\033[0m");
             system("pause");

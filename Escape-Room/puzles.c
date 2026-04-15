@@ -40,7 +40,7 @@ void puzle_morse(partida *p){
 
 void puzle_switch (partida *p){
     printf("Es raro que haya cables conectados a este switch lleno de polvo...\n");
-    printf("Hay un cable azul conectado al puerto 1, un cable amarillo conectado al puerto 2, un cable verde conectado al puerto 5 y un cable rojo conectado al puerto 2\n");
+    printf("Hay un cable azul conectado al puerto 1, un cable rojo conectado al puerto 2, un cable verde conectado al puerto 5 y un cable amarillo conectado al puerto 8\n");
     printf("Esto es muy raro...\n\n\n");
 
     //8152
@@ -49,5 +49,5 @@ void puzle_switch (partida *p){
 void puzle_despacho(partida *p){
     printf("Parece que hay un panel de acceso para entrar al despacho de mi profesor...\n");
     printf("Me pregunto cual sera el pin, alomejor ahi dentro hay una forma de salir...\n");
-    printf("Es raro que arriba del panel de acceso hay como unos circulos de colores,\nel primero es rojo, el segundo azul, el tercero verde y el ultimo amarillo\n\n\n");
+    printf("Es raro que arriba del panel de acceso hay como unos circulos de colores,\nel primero es amarillo, el segundo azul, el tercero verde y el ultimo rojo\n\n\n");
 }

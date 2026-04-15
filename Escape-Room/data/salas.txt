@@ -11,10 +11,10 @@
 11-CAFETERIA-NORMAL-Una cafeteria, hay muchas mesas. Me pregunto si habra algo de comer a estas horas.
 12-CUARTO DE LIMPIEZA-NORMAL-Cuarto con varias estanterias con productos de limpieza y herramientas.
 13-PASILLO C-Solo un pasillo, con la puerta del WC y de otras aulas de practicas.
-14-AULA DE PRACTICAS B-NORMAL-Aqui hay varios puestos de fabricación. Parece que se han dejado el proyector encendido.
+14-AULA DE PRACTICAS B-NORMAL-Aqui hay varios puestos de fabricacion. Parece que se han dejado el proyector encendido.
 15-COPISTERIA-NORMAL-Sala llena de material escolar y varios papeles.
 16-CONSERJERIA-NORMAL-Sala con mucha documentacion la cual tiene pistas para llegar a la salida.
-17-HALL-NORMAL-Vestíbulo que esta cerca de la salida.
-18-SALIDA(entrada ESI)-SALIDA-El exterior esta aquí.
+17-HALL-NORMAL-Vestibulo que esta cerca de la salida.
+18-SALIDA(entrada ESI)-SALIDA-El exterior esta aqui.
 
 
