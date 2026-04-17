@@ -661,13 +661,18 @@ void menu_opciones_juego( partida *p,int u, int mapa){
 
    }while(fin_de_juego==0 && volver_menu==0);
 
-        printf("\033[33m");
-        printf("-Nada mas abrir la puerta, eche a correr sin mirar atras, con miedo a que alguien pudiese haberme visto salir.-\n\n ");
-        printf("-Ya estaba amaneciendo, asi que me escondi entre los arboles, esperando a que algun autobus con alumnos llegase.\n");
-        printf("\033[0m");
-        printf("Pasada 1 hora, por fin viste llegar a un autobus de Cadiz, e incapaz de asistir ese dia a las clases de MP, decidiste irte a casa.\n");
+        if(fin_de_juego==1){
 
-        printf("\nENHORABUENA, HAS CONSEGUIDO ESCAPAR DE LA ESI\n");
+            printf("\033[33m");
+            printf("-Nada mas abrir la puerta, eche a correr sin mirar atras, con miedo a que alguien pudiese haberme visto salir.-\n\n ");
+            printf("-Ya estaba amaneciendo, asi que me escondi entre los arboles, esperando a que algun autobus con alumnos llegase.-\n");
+            printf("\033[0m");
+            printf("Pasada 1 hora, por fin viste llegar a un autobus de Cadiz, e incapaz de asistir ese dia a las clases de MP, decidiste irte a casa.\n");
+
+            printf("\nENHORABUENA, HAS CONSEGUIDO ESCAPAR DE LA ESI\n");
+
+        }
+
 
 }
 
