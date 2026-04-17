@@ -455,14 +455,14 @@ void menu_opciones_juego( partida *p,int u, int mapa){
                 {
                     printf("No se ha encontrado ese objeto.\n");
                 }
-                else if (strcmp(id_usado,"OB05")==0)   // MAPA
+                else if (strcmp(id_usado,"OB04")==0)   // MAPA
                 {
                     mapa = 1;
                     printf("Has usado %s.\n", p->objeto[pos_objeto].nomb_obj);
                     printf("%s\n", p->objeto[pos_objeto].descrip);
                     printf("Ahora puedes consultar el mapa antes de moverte.\n");
                 }
-                else if (strcmp(id_usado,"OB06")==0)   // MORSE
+                else if (strcmp(id_usado,"OB05")==0)   // MORSE
                 {
                     printf("Has usado %s.\n", p->objeto[pos_objeto].nomb_obj);
                     printf("%s\n", p->objeto[pos_objeto].descrip);
