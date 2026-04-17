@@ -13,7 +13,7 @@
 13-PASILLO C-Solo un pasillo, con la puerta del WC y de otras aulas de practicas.
 14-AULA DE PRACTICAS B-NORMAL-Aqui hay varios puestos de fabricacion. Parece que se han dejado el proyector encendido.
 15-COPISTERIA-NORMAL-Sala llena de material escolar y varios papeles.
-16-CONSERJERIA-NORMAL-Sala con mucha documentacion la cual tiene pistas para llegar a la salida.
+16-CONSERJERIA-NORMAL-Sala con mucha documentacion, carteles de la universidad y algunos ordenadores apagados.
 17-HALL-NORMAL-Vestibulo que esta cerca de la salida.
 18-SALIDA(entrada ESI)-SALIDA-El exterior esta aqui.
 

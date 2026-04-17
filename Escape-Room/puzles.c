@@ -60,3 +60,43 @@ void puzle_despacho(partida *p){
     printf("Es raro que arriba del panel de acceso hay como unos circulos de colores,\nel primero es amarillo, el segundo azul, el tercero verde y el ultimo rojo\n\n\n");
     printf("\033[0m");
 }
+
+void puzle_final(partida *p){ //cuando entras a conserjeria 16
+
+    printf("\033[33m");
+    printf("Ahora que me fijo... Esta sala tiene muchos documentos, no habra algo que me ayude a salir?\n\n");
+    printf("\033[0m");
+    printf("Como ultima esperanza, esperas encontrar algo que te ayude a escapar por fin de este sitio.\n");
+    printf("Ya empiezas a estar harto de dar vueltas sin saber muy bien que hacer...\n\n");
+
+    printf("...\n\n");
+    system("pause");
+    printf("\033[33m");
+    printf("Que es esto?\n\n");
+    printf("\033[0m");
+    printf("Despues de estar toqueteando un rato, te encuentras una agenda al fondo de un cajon\n");
+
+    printf("La hojeas un poco por encima hasta que abres una pagina con una doblez en la parte superior\n\n");
+
+    printf("\033[36m"); //celestito
+    printf(
+        "  _______________________________\n"
+        "/_______________________________/|\n"
+        "|                              | |\n"
+        "|  Hey Lucia, no deberias      | |\n"
+        "|  volver a olvidar el codigo  | |\n"
+        "|  de la puerta. Ya sabes      | |\n"
+        "|  como se pone el guarda de   | |\n"
+        "|  seguridad cada vez que      | |\n"
+        "|  suena la alarma por fallar  | |\n"
+        "|  el codigo 3 veces.          | |\n"
+        "|                              | |\n"
+        "|            4869              | |\n"
+        "|                              | |\n"
+        "|  No lo olvides, no quiero    | |\n"
+        "|  que nos bajen el sueldo.    | /\n"
+        "|______________________________|/\n");
+
+        printf("\033[0m");
+
+}

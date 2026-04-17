@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <windows.h>
 #include "juego.h"
+#include "puzles.h"
 #include "configuracion.h"
 #include "ficheros.h"
 
@@ -46,8 +47,8 @@ void Inicio_escape_room(partida *p,int u){
 //Precondicion: Ubicacion actual del jugador inicializada
 //Postcondicion: La funcion presenta todas las opciones del menu del juego
 void menu_opciones_juego( partida *p,int u, int mapa){
-                                                                        //Lo de declarar 40 variables iguales en cada caso hay que arreglarlo eh
-    int volver_menu=0, fin_de_juego=0, eleccion_switch=11, puzle=0;     //Booleanos
+                                                                        º           //Lo de declarar 40 variables iguales en cada caso hay que arreglarlo eh
+    int volver_menu=0, fin_de_juego=0, eleccion_switch=11, puzle=0, alarma=3;       //Booleanos
     char respuesta;
     int ubicacion_actual, destino;
     ubicacion_actual=p->jugador[u].ubicacion_actual;
@@ -76,9 +77,10 @@ void menu_opciones_juego( partida *p,int u, int mapa){
 
 
 
-            if(ubicacion_actual==13) puzle_morse(p);
+            if(ubicacion_actual==13) puzle_morse(p); //acordaos que los puzles hay que ponerlos en un numero menos porque es un vector las salas
             if(ubicacion_actual==7) puzle_switch(p);
             if(ubicacion_actual==6) puzle_despacho(p);
+            if(ubicacion_actual==15) puzle_final(p);
 
             system("pause");
             system("cls");
