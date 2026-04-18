@@ -167,7 +167,7 @@ void menu_opciones_juego( partida *p,int u, int mapa){
                 printf("\033[0m");
 
 
-                for (int cont=0; cont<num_conexiones; cont++){ //recorremos todas las conexiones
+                for (int cont=0; cont<=17; cont++){ //recorremos todas las conexiones
 
 
                     if (p->conexion[cont].id_origen == p->sala[ubicacion_actual].id_sala){ //CONEXION ENCONTRADA
@@ -191,8 +191,6 @@ void menu_opciones_juego( partida *p,int u, int mapa){
                                     if (respuesta=='s' || respuesta=='S'){ //Actualizamos la posicion actual del jugador
 
                                         ubicacion_actual=p->sala[p->conexion[cont].id_destino - 1].id_sala -1; //el primer -1 accede al vector y el segundo -1 le cambia el valor a ubicacion actual
-                                        p->jugador[u].ubicacion_actual=ubicacion_actual;  // se guarda en la memoria
-
                                         break; //no se a donde lleva este break -- LAURA ESTE BREAK TE LLEVA A LA VICTORIA
 
                                     }
@@ -227,7 +225,7 @@ void menu_opciones_juego( partida *p,int u, int mapa){
 
                         }else{
                             printf("\033[33m");
-                            printf("Hay una salida bloqueada que me lleva a [%s]\n", p->sala[p->conexion[cont].id_origen-1].nombre_sala);
+                            printf("Hay una salida bloqueada que me lleva a [%s]\n", p->sala[p->conexion[cont].id_origen].nombre_sala);
                             printf("Quiza pueda hacer algo para desbloquear la salida\n\n");
                             printf("\033[0m");
                             system("pause");
@@ -236,7 +234,6 @@ void menu_opciones_juego( partida *p,int u, int mapa){
 
                     }
                 }
-
             system("pause");
             system("cls");
             break;
@@ -636,13 +633,6 @@ void menu_opciones_juego( partida *p,int u, int mapa){
                     for (i = 0; i < p->jugador[u].num_inventario; i++) {
                         fprintf(f, "-%s", p->jugador[u].id_obj[i]);
                     }
-
-                    fprintf(f,"-FININV");
-                    for(i=0;i<num_conexiones;i++)
-                    {
-                        fprintf(f,"-%s",p->conexion[i].cond);
-                    }
-
                     fprintf(f, "\n"); // El salto de línea fundamental
 
                     fclose(f);
