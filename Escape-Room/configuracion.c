@@ -65,7 +65,7 @@ void Cargar_partida(partida *p, int u)  //  Comprobado
 
                 aux=strtok(NULL,"-\n\r");
 
-                while(aux!=NULL)
+                while(aux!=NULL && strcmp(aux,"FININV")!=0)
                 {
                     char **temp;
                     temp=(char **)realloc(p->jugador[u].id_obj,(p->jugador[u].num_inventario + 1) * sizeof(char *));
@@ -104,6 +104,21 @@ void Cargar_partida(partida *p, int u)  //  Comprobado
                         mapa = 1;
                     }
                      aux = strtok(NULL, "-\n\r");
+                }
+                if(aux!=NULL && strcmp(aux, "FININV")==0)
+                {
+                    for(j=0;j<num_conexiones;j++)
+                    {
+                        aux=strtok(NULL,"-\n\r");
+
+                        if(aux!=NULL)
+                        {
+                            strcpy(p->conexion[j].estado,"Activa");
+                        } else
+                        {
+                            strcpy(p->conexion[j].estado, "Bloqueada");
+                        }
+                    }
                 }
             }
         }
