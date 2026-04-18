@@ -20,6 +20,10 @@ void Cargar_partida(partida *p, int u)  //  Comprobado
     int encontrada=0;
     int i, j;
     int mapa=0;
+    char *id_objeto = aux;
+    char *loc_texto;
+    int localizacion;
+    char **temp;
 
     system("cls");
     printf("\nCargando partida...\n");
@@ -65,49 +69,132 @@ void Cargar_partida(partida *p, int u)  //  Comprobado
 
                 aux=strtok(NULL,"-\n\r");
 
-                while(aux!=NULL)
+                while(aux!=NULL && strcmp(aux,"FINCON")!=0 && strcmp(aux,"FINPUZ")!=0)
                 {
-                    char **temp;
-                    temp=(char **)realloc(p->jugador[u].id_obj,(p->jugador[u].num_inventario + 1) * sizeof(char *));
+                    loc_texto=strtok(NULL,"-\n\r");
 
-                    if(temp==NULL)
+                    if(loc_texto==NULL)
                     {
-                        printf("Error de memoria al cargar inventario.\n");
-                        fclose(f);
-                        system("pause");
-                        return ;
+                        break;
                     }
 
-                    p->jugador[u].id_obj = temp;
-                    p->jugador[u].id_obj[p->jugador[u].num_inventario]=(char *)malloc((strlen(aux) + 1) * sizeof(char));
-
-                    if(p->jugador[u].id_obj[p->jugador[u].num_inventario]==NULL)
+                    if(strcmp(loc_texto,"INV")==0)
                     {
-                        printf("Error de memoria al cargar inventario.\n");
-                        fclose(f);
-                        system("pause");
-                        return ;
+                        localizacion=-1;
+                    } else
+                    {
+                        localizacion=atoi(loc_texto);
                     }
-
-                    strcpy(p->jugador[u].id_obj[p->jugador[u].num_inventario], aux);
-                    p->jugador[u].num_inventario++;
 
                     for (j = 0; j < num_objetos; j++)
                     {
-                        if (strcmp(p->objeto[j].id_obj, aux) == 0)
+                        if (strcmp(p->objeto[j].id_obj, id_objeto) == 0)
                         {
-                            p->objeto[j].id_sala = -1;
+                            p->objeto[j].id_sala = localizacion;
                             break;
                         }
                     }
-                    if (strcmp(aux, p->objeto[3].id_obj) == 0) {
-                        mapa = 1;
+
+                    if(localizacion==-1)
+                    {
+                        temp=(char **)realloc(p->jugador[u].id_obj,(p->jugador[u].num_inventario + 1) * sizeof(char *));
+
+                        if(temp==NULL)
+                        {
+                            printf("Error de memoria al cargar inventario,\n");
+                            fclose(f);
+                            system("pause");
+                            return;
+                        }
+
+                        p->jugador[u].id_obj = temp;
+                        p->jugador[u].id_obj[p->jugador[u].num_inventario]=(char *)malloc((strlen(id_objeto) + 1) * sizeof(char));
+
+                        if(p->jugador[u].id_obj[p->jugador[u].num_inventario]==NULL)
+                        {
+                            printf("Error de memoria alc arga inventario.\n");
+                            fclose(f);
+                            system("cls");
+                            return;
+                        }
+
+                        strcpy(p->jugador[u].id_obj[p->jugador[u].num_inventario], id_objeto);
+                        p->jugador[u].num_inventario++;
+
+                        if(strcmp(id_objeto,"OB04")==0)
+                        {
+                            mapa=1;
+                        }
                     }
-                     aux = strtok(NULL, "-\n\r");
+
+                    aux=strtok(NULL, "-\n\r");
+                }
+            }
+
+            //Cargar conexiones sbiertas
+            if(aux!=NULL && strcmp(aux, "FINCON")==0)
+            {
+                aux=strtok(NULL, "-\n\r");
+                while(aux!=NULL && strcmp(aux, "FINPUZ")!=0)
+                {
+                    char *id_conexion = aux;
+                    char *estado_conexion;
+
+                    estado_conexion=strtok(NULL,"-\n\r");
+
+                    if(estado_conexion==NULL)
+                    {
+                        break;
+                    }
+
+                    if(strcmp(estado_conexion,"Activa")==0)
+                    {
+                        for(j=0;j<num_conexiones;j++)
+                        {
+                            if(strcmp(p->conexion[j].id_conexion,id_conexion)==0)
+                            {
+                                strcpy(p->conexion[j].estado,"Activa");
+                                strcpy(p->conexion[j].cond,"0");
+                                break;
+                            }
+                        }
+                    }
+                    aux = strtok(NULL, "-\n\r");
+                }
+            }
+            // cargar estado de puzles
+
+            if(aux!=NULL && strcmp(aux,"FINPUZ")==0)
+            {
+                aux=strtok(NULL,"-\n\r");
+
+                while(aux!=NULL)
+                {
+                    char *id_puzle = aux;
+                    char *estado_puzle;
+
+                    estado_puzle=strtok(NULL,"-\n\r");
+                    if(estado_puzle==NULL)
+                    {
+                        break;
+                    }
+                    if(strcmp(estado_puzle,"Resuelto")==0)
+                    {
+                        for(j=0;j<num_conexiones;j++)
+                        {
+                            if(strcmp(p->conexion[j].cond,id_puzle)==0)
+                            {
+                                strcpy(p->conexion[j].cond,"0");
+                                strcpy(p->conexion[j].estado,"Activa");
+                            }
+                        }
+                    }
+                    aux = strtok(NULL, "-\n\r");
                 }
             }
         }
     }
+
     fclose(f);
 
     if(encontrada==0)
