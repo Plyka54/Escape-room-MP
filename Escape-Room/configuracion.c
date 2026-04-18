@@ -129,7 +129,7 @@ void Bienvenida(partida *p,int u){
     int opcion=0;
 
     system("cls");
-    printf("\n\n\n Bienvenido a Escape Room ESI!\n\n\n");
+    printf("\n\nBienvenido a Escape Room ESI!\n\n\n");
 
 
     printf("Introduce lo que quieras hacer\n\n");
@@ -178,7 +178,7 @@ void Nueva_partida(partida *p,int u)
     system("cls");
     printf("\nCreando una Nueva partida...\n");
     carga(p, &total_usuarios);
-    printf("Datas cargados correctamente.\n");
+    printf("Datos cargados correctamente.\n");
 
 
     for(i=0; i<p->jugador[u].num_inventario;i++)
@@ -190,7 +190,7 @@ void Nueva_partida(partida *p,int u)
     p->jugador[u].id_obj=NULL;
     p->jugador[u].num_inventario=0;     // 0 objetos
 
-    printf("Inventario vaciado.\n");
+    printf("Inventario vaciado.\n\n");
 
     system("pause");
 

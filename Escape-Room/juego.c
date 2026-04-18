@@ -270,8 +270,8 @@ void menu_opciones_juego( partida *p,int u, int mapa){
 
                                 p->jugador[u].id_obj[num_actual - 1] = strdup(p->objeto[i].id_obj);
 
-                                printf("Has cogido el objeto: %s!\n", p->objeto[i].nomb_obj);
-                                printf("%s\n", p->objeto[i].descrip);  // esto es pa ver la descripcion
+                                printf("\nHas cogido el objeto: %s!\n", p->objeto[i].nomb_obj);
+                                printf("%s\n\n", p->objeto[i].descrip);  // esto es pa ver la descripcion
                                 p->objeto[i].id_sala = -1; // Lo quitamos de la sala
 
 
@@ -289,7 +289,7 @@ void menu_opciones_juego( partida *p,int u, int mapa){
 
                 if (cont == 0){
                         printf("\033[33m");
-                        printf("No hay nada mas aqui.\n");
+                        printf("\nNo hay nada mas aqui.\n");
                         printf("\033[0m");
                         break;
                 }
@@ -313,7 +313,7 @@ void menu_opciones_juego( partida *p,int u, int mapa){
             printf("\033[0m");
 
             if(p->jugador[u].num_inventario==0){
-                printf("No tienes ningun objeto en el inventario para soltar\n");
+                printf("No tienes ningun objeto en el inventario para soltar\n\n");
                 system("pause");
                 system("cls");
                 break;
@@ -352,7 +352,7 @@ void menu_opciones_juego( partida *p,int u, int mapa){
                 for(j=0;j<num_objetos;j++){ //para que el objeto se quede en la sala actual
                     if(strcmp(p->jugador[u].id_obj[indice],p->objeto[j].id_obj)==0){
                         p->objeto[j].id_sala=p->sala[ubicacion_actual].id_sala;
-                        printf("Has soltado %s\n",p->objeto[j].nomb_obj);
+                        printf("Has soltado %s\n\n",p->objeto[j].nomb_obj);
                     }
                 }
 
@@ -382,9 +382,6 @@ void menu_opciones_juego( partida *p,int u, int mapa){
         {
             int i,j;
 
-              //Lucia aqui tienes que ponerlo en un if porque si no tienes ningun objeto queda feo (pruebalo y lo ves)
-              // Probado :)
-
             if(p->jugador[u].num_inventario == 0)
             {
                 printf("No tienes ningun objeto en el inventario.\n");
@@ -398,7 +395,7 @@ void menu_opciones_juego( partida *p,int u, int mapa){
                     {
                         if(strcmp(p->jugador[u].id_obj[i], p->objeto[j].id_obj) == 0)
                         {
-                            printf("%d. %s\n",i+1, p->objeto[j].nomb_obj);
+                            printf("%d. %s: %s\n\n",i+1, p->objeto[j].nomb_obj,  p->objeto[j].descrip);
                         }
                     }
                 }
@@ -498,7 +495,6 @@ void menu_opciones_juego( partida *p,int u, int mapa){
                             if (usado==0)
                             {
                                 printf("No puedes usar %s aqui.\n", p->objeto[pos_objeto].nomb_obj);
-                                printf("%s\n", p->objeto[pos_objeto].descrip);
                             }
                         }
                     }

@@ -11,7 +11,7 @@ int main(){
     char usuario[11], clave[9];         //En el fichero jugadores.txt  usuario = campo "jugador"
     int user=0, password=0;             //Booleanos para el login
     int opcion;
-    partida p; //= {0};
+    partida p;
 
 
     mostrar_titulo();
