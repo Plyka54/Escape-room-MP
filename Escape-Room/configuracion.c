@@ -20,10 +20,6 @@ void Cargar_partida(partida *p, int u)  //  Comprobado
     int encontrada=0;
     int i, j;
     int mapa=0;
-    char *id_objeto = aux;
-    char *loc_texto;
-    int localizacion;
-    char **temp;
 
     system("cls");
     printf("\nCargando partida...\n");
@@ -71,6 +67,11 @@ void Cargar_partida(partida *p, int u)  //  Comprobado
 
                 while(aux!=NULL && strcmp(aux,"FINCON")!=0 && strcmp(aux,"FINPUZ")!=0)
                 {
+                    char *id_objeto = aux;
+                    char *loc_texto;
+                    int localizacion;
+                    char **temp;
+
                     loc_texto=strtok(NULL,"-\n\r");
 
                     if(loc_texto==NULL)
