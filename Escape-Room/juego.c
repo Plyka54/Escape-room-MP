@@ -93,7 +93,7 @@ void menu_opciones_juego( partida *p,int u, int mapa){
             printf("Voy a buscar cosas en la sala...\n");
             printf("\033[0m");
 
-            int i,j,cont=0;
+            int i,j,k,cont=0, puzle_sala=0, conexion_asociada;
 
             for(i=0;i<num_objetos;i++){
                 if(p->sala[ubicacion_actual].id_sala==p->objeto[i].id_sala){
@@ -115,6 +115,37 @@ void menu_opciones_juego( partida *p,int u, int mapa){
                 printf("En esta sala no parece haber ningun objeto\n");
                 printf("\033[0m");
             }
+            for(i=0;i<0;i++)
+            {
+                conexion_asociada=-1;
+
+                if(p->puzle[i].id_sala==p->sala[ubicacion_actual].id_sala)
+                {
+                    for(k=0;k<num_conexiones;k++)
+                    {
+                        if(strcmp(p->conexion[k].cond,p->puzle[i].id_puzles)==0)
+                        {
+                            conexion_asociada=k;
+                            break;
+                        }
+                    }
+                    if(conexion_asociada=-1 && strcmp(p->conexion[conexion_asociada].cond, "0")!=0)
+                    {
+                        puzle_sala=1;
+                        break;
+                    }
+                }
+            }
+
+            printf("\033[33m");
+            if(puzle_sala==1)
+            {
+                printf("Parece que hay un puzle pendiente en esta sala.\n");
+            } else
+            {
+                printf("No parece haber ningun puzle pendiente en esta sala.\n");
+            }
+            printf("\033[33m");
 
             printf("\033[33m");
             printf("\nVoy a buscar las salidas de esta sala...\n\n");
