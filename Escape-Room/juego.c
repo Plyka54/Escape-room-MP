@@ -497,7 +497,7 @@ void menu_opciones_juego( partida *p,int u, int mapa){
 
                             if (usado==0)
                             {
-                                printf("Has usado %s.\n", p->objeto[pos_objeto].nomb_obj);
+                                printf("No puedes usar %s aqui.\n", p->objeto[pos_objeto].nomb_obj);
                                 printf("%s\n", p->objeto[pos_objeto].descrip);
                             }
                         }
@@ -586,8 +586,6 @@ void menu_opciones_juego( partida *p,int u, int mapa){
         }
 
         case 9:  //guardar partida
-
-
         {
             FILE *f;
             int i, id_leido;
@@ -650,7 +648,7 @@ void menu_opciones_juego( partida *p,int u, int mapa){
         case 10:  //volver - FUNCIONA NO TOCAR
 
             volver_menu=1;
-            Bienvenida(&p,u);
+            Bienvenida(p,u);  // he quitado la i inglesa pq bienvenida es con p y u
             break;
 
         default:

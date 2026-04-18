@@ -41,7 +41,7 @@ void Cargar_partida(partida *p, int u)  //  Comprobado
     {
         printf("No existe  ninguna partida guardada.\n");
         system("pause");
-        return 1;
+        return;  //he quitado el return 1 para que no termine el programa del tiron
     }
 
     while(fgets(linea, sizeof(linea), f) != NULL && encontrada ==0)
