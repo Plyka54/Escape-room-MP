@@ -47,7 +47,7 @@ void Inicio_escape_room(partida *p,int u){
 //Precondicion: Ubicacion actual del jugador inicializada
 //Postcondicion: La funcion presenta todas las opciones del menu del juego
 void menu_opciones_juego( partida *p,int u, int mapa){
-                                                                        º           //Lo de declarar 40 variables iguales en cada caso hay que arreglarlo eh
+                                                                                   //Lo de declarar 40 variables iguales en cada caso hay que arreglarlo eh
     int volver_menu=0, fin_de_juego=0, eleccion_switch=11, puzle=0, alarma=3;       //Booleanos
     char respuesta;
     int ubicacion_actual, destino;
@@ -432,72 +432,78 @@ void menu_opciones_juego( partida *p,int u, int mapa){
                             break;
                         }
                     }
-                }
+                }  //de aqui pa arriba bien
 
-                scanf("%d",&op);
-                indice=op-1;
-
-                if (indice<0 || indice>=p->jugador[u].num_inventario)
+                if(scanf("%d",&op)!=1)
                 {
                     printf("Opcion no valida.\n");
+                    while(getchar()!='\n');
                 } else
                 {
-                    id_usado = p->jugador[u].id_obj[indice];   // Se guarda el id del objeto elegido
+                    while(getchar()!='\n');
+                    indice=op-1;
 
-                    for (j=0;j<num_objetos;j++)
+                    if (indice<0 || indice>=p->jugador[u].num_inventario)
                     {
-                        if (strcmp(id_usado, p->objeto[j].id_obj)==0)
+                        printf("Opcion no valida.\n");
+                    } else
+                    {
+                        id_usado = p->jugador[u].id_obj[indice];   // Se guarda el id del objeto elegido
+
+                        for (j=0;j<num_objetos;j++)
                         {
-                            pos_objeto = j;
-                            break;
+                            if (strcmp(id_usado, p->objeto[j].id_obj)==0)
+                            {
+                                pos_objeto = j;
+                                break;
+                            }
                         }
-                    }
 
-                if (pos_objeto==-1)
-                {
-                    printf("No se ha encontrado ese objeto.\n");
-                }
-                else if (strcmp(id_usado,"OB04")==0)   // MAPA
-                {
-                    mapa = 1;
-                    printf("Has usado %s.\n", p->objeto[pos_objeto].nomb_obj);
-                    printf("%s\n", p->objeto[pos_objeto].descrip);
-                    printf("Ahora puedes consultar el mapa antes de moverte.\n");
-                }
-                else if (strcmp(id_usado,"OB05")==0)   // MORSE
-                {
-                    printf("Has usado %s.\n", p->objeto[pos_objeto].nomb_obj);
-                    printf("%s\n", p->objeto[pos_objeto].descrip);
-                    diccionario_morse();
-                    printf("\n");
-                }
-                else
-                {
-                    for (j=0;j<num_conexiones; j++)
-                    {
-                        if ((p->conexion[j].id_origen == p->sala[ubicacion_actual].id_sala || p->conexion[j].id_destino == p->sala[ubicacion_actual].id_sala) && strcmp(p->conexion[j].cond, id_usado) == 0)
+                        if (pos_objeto==-1)
                         {
-                            strcpy(p->conexion[j].cond, "0");
-                            strcpy(p->conexion[j].estado, "Activa");
+                            printf("No se ha encontrado ese objeto.\n");
+                        }
+                        else if (strcmp(id_usado,"OB04")==0)   // MAPA
+                        {
+                            mapa = 1;
                             printf("Has usado %s.\n", p->objeto[pos_objeto].nomb_obj);
                             printf("%s\n", p->objeto[pos_objeto].descrip);
-                            printf("\033[33m");
-                            printf("Parece que una salida se ha desbloqueado.\n");
-                            printf("\033[0m");
-                            usado = 1;
-                            break;
+                            printf("Ahora puedes consultar el mapa antes de moverte.\n");
                         }
-                    }
+                        else if (strcmp(id_usado,"OB05")==0)   // MORSE
+                        {
+                            printf("Has usado %s.\n", p->objeto[pos_objeto].nomb_obj);
+                            printf("%s\n", p->objeto[pos_objeto].descrip);
+                            diccionario_morse();
+                            printf("\n");
+                        }
+                        else
+                        {
+                            for (j=0;j<num_conexiones; j++)
+                            {
+                                if ((p->conexion[j].id_origen == p->sala[ubicacion_actual].id_sala || p->conexion[j].id_destino == p->sala[ubicacion_actual].id_sala) && strcmp(p->conexion[j].cond, id_usado) == 0)
+                                {
+                                    strcpy(p->conexion[j].cond, "0");
+                                    strcpy(p->conexion[j].estado, "Activa");
+                                    printf("Has usado %s.\n", p->objeto[pos_objeto].nomb_obj);
+                                    printf("%s\n", p->objeto[pos_objeto].descrip);
+                                    printf("\033[33m");
+                                    printf("Parece que una salida se ha desbloqueado.\n");
+                                    printf("\033[0m");
+                                    usado = 1;
+                                    break;
+                                }
+                            }
 
-                    if (usado==0)
-                    {
-                        printf("Has usado %s.\n", p->objeto[pos_objeto].nomb_obj);
-                        printf("%s\n", p->objeto[pos_objeto].descrip);
+                            if (usado==0)
+                            {
+                                printf("Has usado %s.\n", p->objeto[pos_objeto].nomb_obj);
+                                printf("%s\n", p->objeto[pos_objeto].descrip);
+                            }
+                        }
                     }
                 }
             }
-        }
-
             system("pause");
             system("cls");
             break;
