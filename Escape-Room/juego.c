@@ -640,13 +640,10 @@ void menu_opciones_juego( partida *p,int u, int mapa){
         case 9:  //guardar partida
         {
             FILE *f;
-            int i, j, id_leido, resuelto;
-            char linea[200];
-            char *ids_puzles[] = {"P01","P02","P03","P04","P05","P06"}; //hay que actualizarlo si se ponen mas puzles
-            int total_puzles = 6;
-
-            char **lineas_guardadas = NULL;
-            int num_lineas = 0;
+            int i, j, id_leido;
+            char linea[700];
+            char **lineas_guardadas=NULL;
+            int num_lineas=0;
 
             //mira si hay alguna partida anterior guardada en el fichero y la borra
             f=fopen("data/partida.txt","r");
@@ -661,6 +658,7 @@ void menu_opciones_juego( partida *p,int u, int mapa){
                                 num_lineas++;
                             } else {
                                 printf("Error de memoria al leer el fichero.\n");
+                                break;
                             }
                         }
                     }
@@ -681,58 +679,19 @@ void menu_opciones_juego( partida *p,int u, int mapa){
                     // Liberamos el vector principal ahora que está vacío
                     free(lineas_guardadas);
 
-                    // B) Escribimos la NUEVA partida del jugador actual
+                    // B) Escribimos la NUEVA partida del jugador actual id y sala
                     fprintf(f, "%02d-%d", p->jugador[u].id_jugador, p->sala[ubicacion_actual].id_sala);
 
-                    for (i = 0; i < p->jugador[u].num_inventario; i++) {
-                        fprintf(f, "-%s", p->jugador[u].id_obj[i]);
+                    // los objetos
+                    for (i = 0; i < num_objetos; i++) {
+                        fprintf(f, "-%s-%d", p->objeto[i].id_obj, p->objeto[i].id_sala);
                     }
 
-                    fprintf(f,"-FININV");
-
-                    for(i=0;i<num_objetos;i++)
-                    {
-                        if(p->objeto[i].id_sala==-1)
-                        {
-                            fprintf(f, "-%s-INV", p->objeto[i].id_obj);
-                        } else
-                        {
-                            fprintf(f, "-%s-%d", p->objeto[i].id_obj, p->objeto[i].id_sala);
-                        }
-                    }
-
-                    //conexiones abiertas
-                    fprintf(f,"-FINCON");
+                    // conexiones y si el puzle esta resuelto la condicion guardada es "0"
                     for (i = 0; i < num_conexiones; i++)
                     {
-                        if (strcmp(p->conexion[i].estado, "Activa") == 0)
-                        {
-                            fprintf(f, "-%s-%s", p->conexion[i].id_conexion, p->conexion[i].estado);
-                        }
-                    }
+                        fprintf(f, "-%s-%s", p->conexion[i].id_conexion, p->conexion[i].cond);
 
-                    //Estado de los puzles
-                    fprintf(f, "-FINPUZ");
-                    for (i = 0; i < total_puzles; i++)
-                    {
-                        resuelto = 1;
-
-                        for (j = 0; j < num_conexiones; j++)
-                        {
-                            if (strcmp(p->conexion[j].cond, ids_puzles[i]) == 0)
-                            {
-                                resuelto = 0;
-                                break;
-                            }
-                        }
-
-                        if (resuelto == 1)
-                        {
-                            fprintf(f, "-%s-Resuelto", ids_puzles[i]);
-                        } else
-                        {
-                            fprintf(f, "-%s-Pendiente", ids_puzles[i]);
-                        }
                     }
 
                     fprintf(f, "\n"); // El salto de línea fundamental

@@ -12,7 +12,7 @@
 void Cargar_partida(partida *p, int u)  //  Comprobado
 {
     FILE *f;
-    char linea[200];
+    char linea[700];
     char *aux;
     int total_usuarios;
     int id_guardado;
@@ -24,7 +24,7 @@ void Cargar_partida(partida *p, int u)  //  Comprobado
     system("cls");
     printf("\nCargando partida...\n");
 
-    for(i=0; i<p->jugador[u].num_inventario; i++)
+    for(i=0; i<p->jugador[u].num_inventario; i++)   // vaciar inventario
     {
         free(p->jugador[u].id_obj[i]);
     }
@@ -41,159 +41,84 @@ void Cargar_partida(partida *p, int u)  //  Comprobado
     {
         printf("No existe  ninguna partida guardada.\n");
         system("pause");
+        Bienvenida(p,u);   // si no hay partida guardada vuelve a bienbenida
         return;  //he quitado el return 1 para que no termine el programa del tiron
     }
 
     while(fgets(linea, sizeof(linea), f) != NULL && encontrada ==0)
     {
-        aux=strtok(linea, "-\n\r");
+         aux = strtok(linea, "-\n\r");
 
-        if(aux != NULL)
-        {
-            id_guardado=atoi(aux);
+         if(aux!=NULL)
+         {
+             id_guardado=atoi(aux);
 
-            if(id_guardado == p->jugador[u].id_jugador)
-            {
-                encontrada=1;
-                aux=strtok(NULL, "-\n\r");
+             if(id_guardado==p->jugador[u].id_jugador)
+             {
+                 encontrada=1;
 
-                if(aux!=NULL)
-                {
-                    ubicacion_actual=atoi(aux)-1;
-                    p->jugador[u].ubicacion_actual=ubicacion_actual;
-                }
+                 aux=strtok(NULL, "-\n\r");
+                 if(aux!=NULL)
+                 {
+                     ubicacion_actual=atoi(aux)-1;
+                     p->jugador[u].ubicacion_actual=ubicacion_actual;
+                 }
 
-                aux=strtok(NULL,"-\n\r");
+                 for(i=0;i<num_objetos;i++)  //objetos
+                 {
+                     char *id_obj = strtok(NULL, "-\n\r");
+                     char *loc_str = strtok(NULL, "-\n\r");
 
-                while(aux!=NULL && strcmp(aux,"FINCON")!=0 && strcmp(aux,"FINPUZ")!=0)
-                {
-                    char *id_objeto = aux;
-                    char *loc_texto;
-                    int localizacion;
-                    char **temp;
+                     if(id_obj!=NULL && loc_str!=NULL)
+                     {
+                         int loc=atoi(loc_str);
 
-                    loc_texto=strtok(NULL,"-\n\r");
+                         for(j = 0; j < num_objetos; j++)
+                         {
+                             if(strcmp(p->objeto[j].id_obj, id_obj) == 0)
+                             {
+                                 p->objeto[j].id_sala = loc;
 
-                    if(loc_texto==NULL)
-                    {
-                        break;
-                    }
+                                 if(loc == -1)    // Si la localizacion es -1, lo metemos en el inventario
+                                 {
+                                     p->jugador[u].id_obj = (char **)realloc(p->jugador[u].id_obj, (p->jugador[u].num_inventario + 1) * sizeof(char *));
+                                     p->jugador[u].id_obj[p->jugador[u].num_inventario] = strdup(id_obj);
+                                     p->jugador[u].num_inventario++;
 
-                    if(strcmp(loc_texto,"INV")==0)
-                    {
-                        localizacion=-1;
-                    } else
-                    {
-                        localizacion=atoi(loc_texto);
-                    }
+                                     if(strcmp(id_obj, "OB04") == 0) mapa = 1;
+                                 }
+                                 break;
+                             }
+                         }
+                     }
+                 }
+                 for(i = 0; i < num_conexiones; i++)  //conexiones y puzles
+                 {
+                     char *id_con = strtok(NULL, "-\n\r");
+                     char *cond_str = strtok(NULL, "-\n\r");
 
-                    for (j = 0; j < num_objetos; j++)
-                    {
-                        if (strcmp(p->objeto[j].id_obj, id_objeto) == 0)
-                        {
-                            p->objeto[j].id_sala = localizacion;
-                            break;
-                        }
-                    }
+                     if(id_con != NULL && cond_str != NULL)
+                     {
+                         for(j = 0; j < num_conexiones; j++)
+                         {
+                             if(strcmp(p->conexion[j].id_conexion, id_con) == 0)
+                             {
+                                 strcpy(p->conexion[j].cond, cond_str);
 
-                    if(localizacion==-1)
-                    {
-                        temp=(char **)realloc(p->jugador[u].id_obj,(p->jugador[u].num_inventario + 1) * sizeof(char *));
-
-                        if(temp==NULL)
-                        {
-                            printf("Error de memoria al cargar inventario,\n");
-                            fclose(f);
-                            system("pause");
-                            return;
-                        }
-
-                        p->jugador[u].id_obj = temp;
-                        p->jugador[u].id_obj[p->jugador[u].num_inventario]=(char *)malloc((strlen(id_objeto) + 1) * sizeof(char));
-
-                        if(p->jugador[u].id_obj[p->jugador[u].num_inventario]==NULL)
-                        {
-                            printf("Error de memoria alc arga inventario.\n");
-                            fclose(f);
-                            system("cls");
-                            return;
-                        }
-
-                        strcpy(p->jugador[u].id_obj[p->jugador[u].num_inventario], id_objeto);
-                        p->jugador[u].num_inventario++;
-
-                        if(strcmp(id_objeto,"OB04")==0)
-                        {
-                            mapa=1;
-                        }
-                    }
-
-                    aux=strtok(NULL, "-\n\r");
-                }
-            }
-
-            //Cargar conexiones sbiertas
-            if(aux!=NULL && strcmp(aux, "FINCON")==0)
-            {
-                aux=strtok(NULL, "-\n\r");
-                while(aux!=NULL && strcmp(aux, "FINPUZ")!=0)
-                {
-                    char *id_conexion = aux;
-                    char *estado_conexion;
-
-                    estado_conexion=strtok(NULL,"-\n\r");
-
-                    if(estado_conexion==NULL)
-                    {
-                        break;
-                    }
-
-                    if(strcmp(estado_conexion,"Activa")==0)
-                    {
-                        for(j=0;j<num_conexiones;j++)
-                        {
-                            if(strcmp(p->conexion[j].id_conexion,id_conexion)==0)
-                            {
-                                strcpy(p->conexion[j].estado,"Activa");
-                                strcpy(p->conexion[j].cond,"0");
-                                break;
-                            }
-                        }
-                    }
-                    aux = strtok(NULL, "-\n\r");
-                }
-            }
-            // cargar estado de puzles
-
-            if(aux!=NULL && strcmp(aux,"FINPUZ")==0)
-            {
-                aux=strtok(NULL,"-\n\r");
-
-                while(aux!=NULL)
-                {
-                    char *id_puzle = aux;
-                    char *estado_puzle;
-
-                    estado_puzle=strtok(NULL,"-\n\r");
-                    if(estado_puzle==NULL)
-                    {
-                        break;
-                    }
-                    if(strcmp(estado_puzle,"Resuelto")==0)
-                    {
-                        for(j=0;j<num_conexiones;j++)
-                        {
-                            if(strcmp(p->conexion[j].cond,id_puzle)==0)
-                            {
-                                strcpy(p->conexion[j].cond,"0");
-                                strcpy(p->conexion[j].estado,"Activa");
-                            }
-                        }
-                    }
-                    aux = strtok(NULL, "-\n\r");
-                }
-            }
-        }
+                                 if(strncmp(cond_str, "0", 1) == 0)
+                                 {
+                                     strcpy(p->conexion[j].estado, "Activa");
+                                 } else
+                                 {
+                                     strcpy(p->conexion[j].estado, "Bloqueada");
+                                 }
+                                 break;
+                             }
+                         }
+                     }
+                 }
+             }
+         }
     }
 
     fclose(f);
