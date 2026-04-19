@@ -224,7 +224,16 @@ void menu_opciones_juego( partida *p,int u, int mapa){
 
                                     if (respuesta=='s' || respuesta=='S'){ //Actualizamos la posicion actual del jugador
 
-                                        ubicacion_actual=p->sala[p->conexion[cont].id_destino - 1].id_sala -1; //el primer -1 accede al vector y el segundo -1 le cambia el valor a ubicacion actual
+                                        ubicacion_actual=p->sala[p->conexion[cont].id_destino - 1].id_sala -1;//el primer -1 accede al vector y el segundo -1 le cambia el valor a ubicacion actual
+
+                                        if (ubicacion_actual==17){  //hemos conseguido salir
+
+
+                                            fin_de_juego=1;
+                                            break;
+
+                                        }
+
                                         break; //no se a donde lleva este break -- LAURA ESTE BREAK TE LLEVA A LA VICTORIA
 
                                     }
@@ -732,9 +741,11 @@ void menu_opciones_juego( partida *p,int u, int mapa){
 
             printf("\033[33m");
             printf("-Nada mas abrir la puerta, eche a correr sin mirar atras, con miedo a que alguien pudiese haberme visto salir.-\n\n ");
-            printf("-Ya estaba amaneciendo, asi que me escondi entre los arboles, esperando a que algun autobus con alumnos llegase.-\n");
+            printf("-Ya estaba amaneciendo, asi que me escondi entre los arboles, esperando a que algun autobus con alumnos llegase.-\n\n");
             printf("\033[0m");
             printf("Pasada 1 hora, por fin viste llegar a un autobus de Cadiz, e incapaz de asistir ese dia a las clases de MP, decidiste irte a casa.\n");
+
+            printf("Los profesores la proxima semana se veian un poco inquietos, pues sabian que algo habia pasado por la noche, pero no consiguieron pillarte.\n\n");
 
             printf("\nENHORABUENA, HAS CONSEGUIDO ESCAPAR DE LA ESI\n");
 
@@ -820,75 +831,80 @@ void final_malo(){
     printf("1. Correr\n2. Esconderse\n\n");
     scanf("%d", &opcion_final);
 
-    switch(opcion_final){
+    do{
 
-    case 1: //Correr, FINAL MALO
+        switch(opcion_final){
 
-        printf("Sin saber muy bien a donde, empiezas a correr por el pasillo principal\n\n");
-        printf("Decides doblar la esquina en el pasillo B, para meterte en el baño.\n\n");
+            case 1: //Correr, FINAL MALO
 
-        printf("Para tu mala suerte, el guarda te habia visto entrar\n\n");
+                printf("Sin saber muy bien a donde, empiezas a correr por el pasillo principal\n\n");
+                printf("Decides doblar la esquina en el pasillo B, para meterte en el baño.\n\n");
 
-        printf("\033[36m");
-        printf("Guarda de seguridad: No sirve de nada esconderse, le he visto.\n\n");
-        printf("\033[0m");
+                printf("Para tu mala suerte, el guarda te habia visto entrar\n\n");
 
-        printf("Para evitar mas problemas de los que ya tienes encima, decides salir voluntariamente.\n\n");
+                printf("\033[36m");
+                printf("Guarda de seguridad: No sirve de nada esconderse, le he visto.\n\n");
+                printf("\033[0m");
 
-        printf("El guarda decide esposarte como medida de seguridad y avisan a un coche patrulla que habia por la zona para llevarte a comisaria\n\n");
+                printf("Para evitar mas problemas de los que ya tienes encima, decides salir voluntariamente.\n\n");
 
-        printf("Una vez han tomado declaracion y tus datos, deciden dejarte ir, no sin comunicarlo a la junta directiva de tu universidad.\n\n");
+                printf("El guarda decide esposarte como medida de seguridad y avisan a un coche patrulla que habia por la zona para llevarte a comisaria\n\n");
 
-        system("pause");
+                printf("Una vez han tomado declaracion y tus datos, deciden dejarte ir, no sin comunicarlo a la junta directiva de tu universidad.\n\n");
 
-        printf("Pasado el fin de semana, habiendo respondido a algunos correos, se instrujo que debias asistir a una reunion con el director.\n");
+                system("pause");
 
-        printf("Durante la reunion, intentas excusarte, contando que te despertaste en el aula encerrado, y que hiciste lo que pudiste para salir\n\n");
+                printf("Pasado el fin de semana, habiendo respondido a algunos correos, se instrujo que debias asistir a una reunion con el director.\n");
 
-        printf("Los profesores decidieron no abrirte expediente vistas las circunstancias, pero si que te hicieron ayudar con algunas tareas, a lo que aceptaste sin mas remedio.\n");
+                printf("Durante la reunion, intentas excusarte, contando que te despertaste en el aula encerrado, y que hiciste lo que pudiste para salir\n\n");
+
+                printf("Los profesores decidieron no abrirte expediente vistas las circunstancias, pero si que te hicieron ayudar con algunas tareas, a lo que aceptaste sin mas remedio.\n");
 
 
 
-        system("cls");
-        game_over();
+                system("cls");
+                game_over();
 
-        break;
+                break;
 
-    case 2: //Esconderse, FINAL MENOS MALO
+            case 2: //Esconderse, FINAL MENOS MALO
 
-        printf("Sin mucho tiempo para pensar, decides esconderte detras de la maquina de recargo de tarjetas de autobus que hay al lado de la entrada.\n\n");
+                printf("Sin mucho tiempo para pensar, decides esconderte detras de la maquina de recargo de tarjetas de autobus que hay al lado de la entrada.\n\n");
 
-        printf("Intentaste por todos los medios aguantar la respiracion, con la esperanza de no ser visto y poder escapar por la puerta que el guarda acababa de abrir.\n\n");
+                printf("Intentaste por todos los medios aguantar la respiracion, con la esperanza de no ser visto y poder escapar por la puerta que el guarda acababa de abrir.\n\n");
 
-        printf("Para tu mala suerte, el guarda habia anticipado esta posibilidad y te acabo viendo de todas maneras.\n\n");
+                printf("Para tu mala suerte, el guarda habia anticipado esta posibilidad y te acabo viendo de todas maneras.\n\n");
 
-        printf("El guarda decide esposarte como medida de seguridad y avisan a un coche patrulla que habia por la zona para llevarte a comisaria\n\n");
+                printf("El guarda decide esposarte como medida de seguridad y avisan a un coche patrulla que habia por la zona para llevarte a comisaria\n\n");
 
-        printf("Una vez han tomado declaracion y tus datos, deciden dejarte ir, no sin comunicarlo a la junta directiva de tu universidad.\n\n");
+                printf("Una vez han tomado declaracion y tus datos, deciden dejarte ir, no sin comunicarlo a la junta directiva de tu universidad.\n\n");
 
-        system("pause");
+                system("pause");
 
-        printf("Pasado el fin de semana, habiendo respondido a algunos correos, se instrujo que debias asistir a una reunion con el director.\n\n");
+                printf("Pasado el fin de semana, habiendo respondido a algunos correos, se instrujo que debias asistir a una reunion con el director.\n\n");
 
-        printf("Durante la reunion, intentas excusarte, contando que te despertaste en el aula encerrado, y que hiciste lo que pudiste para salir\n\n");
+                printf("Durante la reunion, intentas excusarte, contando que te despertaste en el aula encerrado, y que hiciste lo que pudiste para salir\n\n");
 
-        printf("Los directivos deciden hablar con tus tutores legales, quienes se quejan por las curiosas medidas de seguridad que tiene el centro.\n\n");
+                printf("Los directivos deciden hablar con tus tutores legales, quienes se quejan por las curiosas medidas de seguridad que tiene el centro.\n\n");
 
-        printf("Ante el argumento de 'como es que este lugar permite que un alumno se quede encerrado por la noche?' no pudieron decir mucho.\n\n");
+                printf("Ante el argumento de 'como es que este lugar permite que un alumno se quede encerrado por la noche?' no pudieron decir mucho.\n\n");
 
-        printf("Al final decidieron dejarte ir, pero no sin volverte alumno colaborativo de tu profesor de Metodologia de la programacion.\n\n");
+                printf("Al final decidieron dejarte ir, pero no sin volverte alumno colaborativo de tu profesor de Metodologia de la programacion.\n\n");
 
-        system("clear");
-        game_over();
+                system("clear");
+                game_over();
 
-        break;
+                break;
 
-    default:
+        default:
 
-        printf("No puedo hacer eso.\n");
-        break;
+                printf("No puedo hacer eso.\n");
+                break;
 
     }
+
+    }while(opcion_final>2 || opcion_final<1);
+
 
 
 }
