@@ -19,8 +19,6 @@ int main(){
     //CARGAMOS LOS FICHEROS
     int total_usuarios;
     carga(&p,&total_usuarios);
-    //printf("Probando: \240 \202 \241 \242 \243 \244 \245\n");
-
 
 // LOGIN DE USUARIO O REGISTRO -----------------------------------------------------------
     int u;

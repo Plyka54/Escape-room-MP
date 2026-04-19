@@ -544,7 +544,7 @@ void menu_opciones_juego( partida *p,int u, int mapa){
             char solucion[51];
 
 
-            for(int cont=0;cont<5;cont++){ //Recorremos todos los puzles     OJO QUE SI METEMOS MÁS HAY QUE CAMBIAR ESTE BUCLE
+            for(int cont=0;cont<6;cont++){ //Recorremos todos los puzles     OJO QUE SI METEMOS MÁS HAY QUE CAMBIAR ESTE BUCLE
 
                 int conexion_asociada = -1; // lo pongo aqui pa que reinicie valor
 
@@ -598,22 +598,26 @@ void menu_opciones_juego( partida *p,int u, int mapa){
 
                         printf("\033[33m");
                         printf("Parece que esta clave es incorrecta...\n");
+
                         printf("\033[0m");
 
-                        if(strcmp(p->puzle[cont].id_puzles, 'P06')==0){
+                        if(strcmp(p->puzle[cont].id_puzles, "P06")==0){
 
-                            if(alarma>0){
 
-                                alarma=alarma-1;
+                            alarma=alarma-1;
+                            printf("\033[33m");
+                            printf("Debo de tener cuidado! Solo me quedan %d intentos\n", alarma);
+                            printf("\033[0m");
 
-                                printf("Debo de tener cuidado! Solo me quedan %d intentos", alarma);
+                            if(alarma==0){
 
-                            }else{
-
-                                printf("No me quedan intentos.");
+                                printf("\033[33m");
+                                printf("No me quedan intentos.\n");
+                                printf("\033[0m");
 
                                 final_malo();
 
+                                break;
                             }
 
                         }
@@ -806,6 +810,8 @@ printf(
 }
 
 void game_over(){
+
+
     printf("\033[31m");
     printf(" _____   ___  ___  ___ _____   _____  _   _ ___________ \n"
        "|  __ \\ / _ \\ |  \\/  ||  ___| |  _  || | | |  ___| ___ \\\n"
@@ -834,7 +840,7 @@ void final_malo(){
 
     int opcion_final=2;
 
-    system("clear");
+    system("cls");
 
     printf("De repente, empieza a sonar una alarma bastante ruidosa\n\n");
 
@@ -847,32 +853,32 @@ void final_malo(){
     printf("De repente, a lo lejos podias ver una luz acercandose a ti, como si alguien estuviese corriendo en tu direccion.\n\n");
 
     printf("\033[36m");
-    printf("Guarda de seguridad: Quien anda ahi?");
+    printf("Guarda de seguridad: Quien anda ahi?\n");
     printf("\033[0m");
 
 
     printf("Rapido! Te estan persiguiendo! Que quieres hacer?\n");
-    printf("1. Correr\n2. Esconderse");
+    printf("1. Correr\n2. Esconderse\n\n");
     scanf("%d", &opcion_final);
 
     switch(opcion_final){
 
     case 1: //Correr, FINAL MALO
 
-        printf("Sin saber muy bien a donde, empiezas a correr por el pasillo principal\n");
-        printf("Decides doblar la esquina en el pasillo B, para meterte en el baño.\n");
+        printf("Sin saber muy bien a donde, empiezas a correr por el pasillo principal\n\n");
+        printf("Decides doblar la esquina en el pasillo B, para meterte en el baño.\n\n");
 
-        printf("Para tu mala suerte, el guarda te habia visto entrar\n");
+        printf("Para tu mala suerte, el guarda te habia visto entrar\n\n");
 
         printf("\033[36m");
         printf("Guarda de seguridad: No sirve de nada esconderse, le he visto.\n\n");
         printf("\033[0m");
 
-        printf("Para evitar mas problemas de los que ya tienes encima, decides salir voluntariamente.\n");
+        printf("Para evitar mas problemas de los que ya tienes encima, decides salir voluntariamente.\n\n");
 
-        printf("El guarda decide esposarte como medida de seguridad y avisan a un coche patrulla que habia por la zona para llevarte a comisaria\n");
+        printf("El guarda decide esposarte como medida de seguridad y avisan a un coche patrulla que habia por la zona para llevarte a comisaria\n\n");
 
-        printf("Una vez han tomado declaracion y tus datos, deciden dejarte ir, no sin comunicarlo a la junta directiva de tu universidad.\n");
+        printf("Una vez han tomado declaracion y tus datos, deciden dejarte ir, no sin comunicarlo a la junta directiva de tu universidad.\n\n");
 
         system("pause");
 
@@ -882,17 +888,38 @@ void final_malo(){
 
         printf("Los profesores decidieron no abrirte expediente vistas las circunstancias, pero si que te hicieron ayudar con algunas tareas, a lo que aceptaste sin mas remedio.\n");
 
+
+
+        system("cls");
         game_over();
 
         break;
 
     case 2: //Esconderse, FINAL MENOS MALO
 
-        printf("Sin mucho tiempo para pensar, decides esconderte detras de la maquina de recargo de tarjetas de autobus que hay al lado de la entrada.\n");
+        printf("Sin mucho tiempo para pensar, decides esconderte detras de la maquina de recargo de tarjetas de autobus que hay al lado de la entrada.\n\n");
 
-        printf("Intentaste por todos los medios aguantar la respiracion, con la esperanza de no ser visto y poder escapar por la puerta que el guarda acababa de abrir.\n");
+        printf("Intentaste por todos los medios aguantar la respiracion, con la esperanza de no ser visto y poder escapar por la puerta que el guarda acababa de abrir.\n\n");
 
-        printf("Para tu mala suerte, el guarda habia anticipado esta posibilidad y te acabo viendo de todas maneras.\n");
+        printf("Para tu mala suerte, el guarda habia anticipado esta posibilidad y te acabo viendo de todas maneras.\n\n");
+
+        printf("El guarda decide esposarte como medida de seguridad y avisan a un coche patrulla que habia por la zona para llevarte a comisaria\n\n");
+
+        printf("Una vez han tomado declaracion y tus datos, deciden dejarte ir, no sin comunicarlo a la junta directiva de tu universidad.\n\n");
+
+        system("pause");
+
+        printf("Pasado el fin de semana, habiendo respondido a algunos correos, se instrujo que debias asistir a una reunion con el director.\n\n");
+
+        printf("Durante la reunion, intentas excusarte, contando que te despertaste en el aula encerrado, y que hiciste lo que pudiste para salir\n\n");
+
+        printf("Los directivos deciden hablar con tus tutores legales, quienes se quejan por las curiosas medidas de seguridad que tiene el centro.\n\n");
+
+        printf("Ante el argumento de 'como es que este lugar permite que un alumno se quede encerrado por la noche?' no pudieron decir mucho.\n\n");
+
+        printf("Al final decidieron dejarte ir, pero no sin volverte alumno colaborativo de tu profesor de Metodologia de la programacion.\n\n");
+
+        system("clear");
         game_over();
 
         break;
