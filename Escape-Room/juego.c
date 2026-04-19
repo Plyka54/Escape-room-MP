@@ -21,7 +21,6 @@ void Inicio_escape_room(partida *p,int u){
     p->jugador[u].ubicacion_actual=0; //esto pa la estructura, lo suyo seria ir actualizando en funcion de el id_sala
     system("cls");
 
-    game_over();
 
     //printf("DEBUG: id_sala = %d\n", p->sala[0].id_sala); si pone 0 no esta cargado
 
@@ -883,13 +882,18 @@ void final_malo(){
 
         printf("Los profesores decidieron no abrirte expediente vistas las circunstancias, pero si que te hicieron ayudar con algunas tareas, a lo que aceptaste sin mas remedio.\n");
 
-        //GAME OVER
+        game_over();
 
         break;
 
     case 2: //Esconderse, FINAL MENOS MALO
 
+        printf("Sin mucho tiempo para pensar, decides esconderte detras de la maquina de recargo de tarjetas de autobus que hay al lado de la entrada.\n");
 
+        printf("Intentaste por todos los medios aguantar la respiracion, con la esperanza de no ser visto y poder escapar por la puerta que el guarda acababa de abrir.\n");
+
+        printf("Para tu mala suerte, el guarda habia anticipado esta posibilidad y te acabo viendo de todas maneras.\n");
+        game_over();
 
         break;
 
