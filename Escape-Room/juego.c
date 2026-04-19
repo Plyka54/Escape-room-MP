@@ -9,6 +9,8 @@
 #include "ficheros.h"
 
 void mostrar_mapa();
+void final_malo();
+void game_over();
 
 //Cabecera: void Inicio_escape_room(partida *p,int u)
 //Precondicion: El usuario debe de estar en una partida nueva, no en una cargada.
@@ -18,6 +20,8 @@ void Inicio_escape_room(partida *p,int u){
     int mapa=0;
     p->jugador[u].ubicacion_actual=0; //esto pa la estructura, lo suyo seria ir actualizando en funcion de el id_sala
     system("cls");
+
+    game_over();
 
     //printf("DEBUG: id_sala = %d\n", p->sala[0].id_sala); si pone 0 no esta cargado
 
@@ -597,6 +601,24 @@ void menu_opciones_juego( partida *p,int u, int mapa){
                         printf("Parece que esta clave es incorrecta...\n");
                         printf("\033[0m");
 
+                        if(strcmp(p->puzle[cont].id_puzles, 'P06')==0){
+
+                            if(alarma>0){
+
+                                alarma=alarma-1;
+
+                                printf("Debo de tener cuidado! Solo me quedan %d intentos", alarma);
+
+                            }else{
+
+                                printf("No me quedan intentos.");
+
+                                final_malo();
+
+                            }
+
+                        }
+
                     }
 
 
@@ -784,6 +806,21 @@ printf(
 
 }
 
+void game_over(){
+    printf("\033[31m");
+    printf(" _____   ___  ___  ___ _____   _____  _   _ ___________ \n"
+       "|  __ \\ / _ \\ |  \\/  ||  ___| |  _  || | | |  ___| ___ \\\n"
+       "| |  \\ / /_\\ \\| .  . || |__   | | | || | | | |__ | |_/ /\n"
+       "| | __ |  _  || |\\/| ||  __|  | | | || | | |  __||    / \n"
+       "| |_\\ \\| | | || |  | || |___  \\ \\_/ /\\ \\_/ / |___| |\\ \\ \n"
+       " \\____/\\_| |_/\\_|  |_/\\____/   \\___/  \\___/\\____/\\_| \\_|\n"
+       "                                                         \n"
+       "                                                        \n");
+
+    printf("\033[0m");
+
+}
+
 void diccionario_morse(){
 
     printf("A = .-\nB = -...\nC = -.-.\nE = .\nI = ..\nO = ---\nU = ..-\nS = ...\n");
@@ -791,5 +828,77 @@ void diccionario_morse(){
     printf("\033[33m");
     printf("\nParece que la parte de abajo se ha mojado, no puedo seguir leyendo.");
     printf("\033[0m");
+
+}
+
+void final_malo(){
+
+    int opcion_final=2;
+
+    system("clear");
+
+    printf("De repente, empieza a sonar una alarma bastante ruidosa\n\n");
+
+    printf("\033[33m");
+    printf("Maldicion! He fallado demasiadas veces.\n");
+    printf("\033[0m");
+
+    system("pause");
+
+    printf("De repente, a lo lejos podias ver una luz acercandose a ti, como si alguien estuviese corriendo en tu direccion.\n\n");
+
+    printf("\033[36m");
+    printf("Guarda de seguridad: Quien anda ahi?");
+    printf("\033[0m");
+
+
+    printf("Rapido! Te estan persiguiendo! Que quieres hacer?\n");
+    printf("1. Correr\n2. Esconderse");
+    scanf("%d", &opcion_final);
+
+    switch(opcion_final){
+
+    case 1: //Correr, FINAL MALO
+
+        printf("Sin saber muy bien a donde, empiezas a correr por el pasillo principal\n");
+        printf("Decides doblar la esquina en el pasillo B, para meterte en el baño.\n");
+
+        printf("Para tu mala suerte, el guarda te habia visto entrar\n");
+
+        printf("\033[36m");
+        printf("Guarda de seguridad: No sirve de nada esconderse, le he visto.\n\n");
+        printf("\033[0m");
+
+        printf("Para evitar mas problemas de los que ya tienes encima, decides salir voluntariamente.\n");
+
+        printf("El guarda decide esposarte como medida de seguridad y avisan a un coche patrulla que habia por la zona para llevarte a comisaria\n");
+
+        printf("Una vez han tomado declaracion y tus datos, deciden dejarte ir, no sin comunicarlo a la junta directiva de tu universidad.\n");
+
+        system("pause");
+
+        printf("Pasado el fin de semana, habiendo respondido a algunos correos, se instrujo que debias asistir a una reunion con el director.\n");
+
+        printf("Durante la reunion, intentas excusarte, contando que te despertaste en el aula encerrado, y que hiciste lo que pudiste para salir\n\n");
+
+        printf("Los profesores decidieron no abrirte expediente vistas las circunstancias, pero si que te hicieron ayudar con algunas tareas, a lo que aceptaste sin mas remedio.\n");
+
+        //GAME OVER
+
+        break;
+
+    case 2: //Esconderse, FINAL MENOS MALO
+
+
+
+        break;
+
+    default:
+
+        printf("No puedo hacer eso.\n");
+        break;
+
+    }
+
 
 }
