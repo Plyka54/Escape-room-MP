@@ -8,7 +8,9 @@
 //Todas las opciones para guardar la partida, crear, cargar...
 
 
-
+//Cabecera: void Cargar_partida(partida *p, int u)
+//Precondicion: Estructura partida inicializada y usuario logueado correctamente en la posicion 'u'.
+//Postcondicion: Lee el fichero de guardado para restaurar el inventario, ubicacion y estado de las conexiones. Da paso al juego o vuelve al menu si no hay partida.
 void Cargar_partida(partida *p, int u)  //  Comprobado
 {
     FILE *f;
@@ -136,6 +138,9 @@ void Cargar_partida(partida *p, int u)  //  Comprobado
     }
 }
 
+//Cabecera: void Bienvenida(partida *p, int u)
+//Precondicion: El jugador debe haberse logueado o registrado correctamente.
+//Postcondicion: Muestra el menu principal y redirige al usuario a una partida nueva, a cargar una partida existente o a salir del juego.
 void Bienvenida(partida *p,int u){
 
     int opcion=0;
@@ -182,6 +187,9 @@ void Bienvenida(partida *p,int u){
 
 }
 
+//Cabecera: void Nueva_partida(partida *p, int u)
+//Precondicion: Estructura partida inicializada y disponible en memoria.
+//Postcondicion: Reinicia el estado del mundo leyendo los datos base de los ficheros, vacia el inventario del jugador y da comienzo al juego.
 void Nueva_partida(partida *p,int u)
 {
     int total_usuarios;

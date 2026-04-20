@@ -64,6 +64,9 @@ int main(){
 
 }
 
+//Cabecera: void mostrar_titulo()
+//Precondicion:
+//Postcondicion: Muestra por pantalla el titulo del juego y el logo mediante arte ASCII.
 void mostrar_titulo(){
 
     // Azul
