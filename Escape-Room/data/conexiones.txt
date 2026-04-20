@@ -2,7 +2,7 @@ C01-01-02-Bloqueada-P01
 C02-02-03-Activa-0
 C03-02-04-Bloqueada-P02
 C04-09-05-Bloqueada-OB03
-C05-04-06-Activa-0
+C05-04-06-Bloqueada-OB07
 C06-04-07-Activa-0
 C07-13-08-Activa-0
 C08-04-09-Activa-0

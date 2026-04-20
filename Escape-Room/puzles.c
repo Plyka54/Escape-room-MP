@@ -100,3 +100,20 @@ void puzle_final(partida *p){ //cuando entras a conserjeria 16
         printf("\033[0m");
 
 }
+
+void llave_biblioteca(){
+    printf("\033[33m");
+    printf("\nWow, jamas he estado en el despacho de un profesor, hay bastantes documentos y cosas...\n");
+    printf("Mira este es el libro de verificacion de algoritmo del que Esther siempre habla.\n");
+    printf("En la portada hay un post-it que pone 'Porfavor devuelvelo a la Biblioteca' \n");
+    printf("Y al lado esta la tarjeta de Esther que abre las salas a las que solo pueden entrar los profes\n");
+    printf("Me pregunto si me servira de algo...\n");
+    printf("\033[0m");
+}
+
+
+
+
+
+
+

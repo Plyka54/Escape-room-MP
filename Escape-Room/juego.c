@@ -67,7 +67,14 @@ void menu_opciones_juego( partida *p,int u, int mapa){
     printf("1. Describir Sala\n2. Examinar Sala\n3. Moverse\n4. Coger objeto\n5. Soltar objeto\n");
     printf("6. Inventario\n7. Usar objeto\n8. Resolver puzle\n9. Guardar partida\n10. Volver\n\n\n");
 
-    scanf("%d", &eleccion_switch);
+
+    if(scanf("%d",&eleccion_switch)!=1){
+        printf("Por favor, introduce un numero valido del menu\n");
+        fflush(stdin);
+        system("pause");
+        system("cls");
+        continue;
+    }
     printf("\n\n");
 
     switch (eleccion_switch){
@@ -84,6 +91,7 @@ void menu_opciones_juego( partida *p,int u, int mapa){
             if(ubicacion_actual==7) puzle_switch(p);
             if(ubicacion_actual==6) puzle_despacho(p);
             if(ubicacion_actual==15) puzle_final(p);
+            if(ubicacion_actual==9) llave_biblioteca();
 
             system("pause");
             system("cls");
@@ -625,6 +633,7 @@ void menu_opciones_juego( partida *p,int u, int mapa){
                                 printf("\033[0m");
 
                                 final_malo();
+                                return 1;
 
                                 break;
                             }
@@ -794,6 +803,7 @@ void game_over(){
 
     printf("\033[0m");
 
+
 }
 
 void diccionario_morse(){
@@ -838,7 +848,7 @@ void final_malo(){
             case 1: //Correr, FINAL MALO
 
                 printf("Sin saber muy bien a donde, empiezas a correr por el pasillo principal\n\n");
-                printf("Decides doblar la esquina en el pasillo B, para meterte en el baño.\n\n");
+                printf("Decides doblar la esquina en el pasillo B, para meterte en el bano.\n\n");
 
                 printf("Para tu mala suerte, el guarda te habia visto entrar\n\n");
 
@@ -891,7 +901,7 @@ void final_malo(){
 
                 printf("Al final decidieron dejarte ir, pero no sin volverte alumno colaborativo de tu profesor de Metodologia de la programacion.\n\n");
 
-                system("clear");
+                system("cls");
                 game_over();
 
                 break;

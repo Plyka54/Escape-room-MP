@@ -1,6 +1,7 @@
-OB01-Folio arrugado-(A.P,B)Haciendo trazas en los algoritmos, podemos sacarlo.-02
+OB01-Folio arrugado-(A.P,B)Haciendo trazas en los algoritmos, podemos sacarlo.-05
 OB02-Nota doblada-Nota hallada en el aula B01,contiene clave "4ngE14"-01
 OB03-LLave Aula Magna-Es encontrada en el bano para abrir el aula magna-03
 OB04-Mapa de la ESI-Encontrado en el cuarto de limpieza, son unos planos de la ESI-12
 OB05-Hoja de Codigo Morse-Hoja suelta que sobresalia de un libro de la biblioteca-06
 OB06-Switch roto-Encuentras un viejo switch lleno de polvo-08
+OB07-Tarjeta de Esther-Llave en forma de tarjeta con los datos de Esther-10

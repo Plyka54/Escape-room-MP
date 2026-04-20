@@ -2,7 +2,7 @@
 #define JUEGO
 #include "configuracion.h"
 
-#define num_objetos 6 //esto se tiene que cambiar porque supongo que habrá más
+#define num_objetos 7
 #define num_salas 18
 #define num_conexiones 17
 
