@@ -12,7 +12,7 @@
 void Cargar_partida(partida *p, int u)  //  Comprobado
 {
     FILE *f;
-    char linea[200];
+    char linea[700];
     char *aux;
     int total_usuarios;
     int id_guardado;
@@ -24,7 +24,7 @@ void Cargar_partida(partida *p, int u)  //  Comprobado
     system("cls");
     printf("\nCargando partida...\n");
 
-    for(i=0; i<p->jugador[u].num_inventario; i++)
+    for(i=0; i<p->jugador[u].num_inventario; i++)   // vaciar inventario
     {
         free(p->jugador[u].id_obj[i]);
     }
@@ -41,73 +41,86 @@ void Cargar_partida(partida *p, int u)  //  Comprobado
     {
         printf("No existe  ninguna partida guardada.\n");
         system("pause");
-        return 1;
+        Bienvenida(p,u);   // si no hay partida guardada vuelve a bienbenida
+        return;  //he quitado el return 1 para que no termine el programa del tiron
     }
 
     while(fgets(linea, sizeof(linea), f) != NULL && encontrada ==0)
     {
-        aux=strtok(linea, "-\n\r");
+         aux = strtok(linea, "-\n\r");
 
-        if(aux != NULL)
-        {
-            id_guardado=atoi(aux);
+         if(aux!=NULL)
+         {
+             id_guardado=atoi(aux);
 
-            if(id_guardado == p->jugador[u].id_jugador)
-            {
-                encontrada=1;
-                aux=strtok(NULL, "-\n\r");
+             if(id_guardado==p->jugador[u].id_jugador)
+             {
+                 encontrada=1;
 
-                if(aux!=NULL)
-                {
-                    ubicacion_actual=atoi(aux)-1;
-                    p->jugador[u].ubicacion_actual=ubicacion_actual;
-                }
+                 aux=strtok(NULL, "-\n\r");
+                 if(aux!=NULL)
+                 {
+                     ubicacion_actual=atoi(aux)-1;
+                     p->jugador[u].ubicacion_actual=ubicacion_actual;
+                 }
 
-                aux=strtok(NULL,"-\n\r");
+                 for(i=0;i<num_objetos;i++)  //objetos
+                 {
+                     char *id_obj = strtok(NULL, "-\n\r");
+                     char *loc_str = strtok(NULL, "-\n\r");
 
-                while(aux!=NULL)
-                {
-                    char **temp;
-                    temp=(char **)realloc(p->jugador[u].id_obj,(p->jugador[u].num_inventario + 1) * sizeof(char *));
+                     if(id_obj!=NULL && loc_str!=NULL)
+                     {
+                         int loc=atoi(loc_str);
 
-                    if(temp==NULL)
-                    {
-                        printf("Error de memoria al cargar inventario.\n");
-                        fclose(f);
-                        system("pause");
-                        return ;
-                    }
+                         for(j = 0; j < num_objetos; j++)
+                         {
+                             if(strcmp(p->objeto[j].id_obj, id_obj) == 0)
+                             {
+                                 p->objeto[j].id_sala = loc;
 
-                    p->jugador[u].id_obj = temp;
-                    p->jugador[u].id_obj[p->jugador[u].num_inventario]=(char *)malloc((strlen(aux) + 1) * sizeof(char));
+                                 if(loc == -1)    // Si la localizacion es -1, lo metemos en el inventario
+                                 {
+                                     p->jugador[u].id_obj = (char **)realloc(p->jugador[u].id_obj, (p->jugador[u].num_inventario + 1) * sizeof(char *));
+                                     p->jugador[u].id_obj[p->jugador[u].num_inventario] = strdup(id_obj);
+                                     p->jugador[u].num_inventario++;
 
-                    if(p->jugador[u].id_obj[p->jugador[u].num_inventario]==NULL)
-                    {
-                        printf("Error de memoria al cargar inventario.\n");
-                        fclose(f);
-                        system("pause");
-                        return ;
-                    }
+                                     if(strcmp(id_obj, "OB04") == 0) mapa = 1;
+                                 }
+                                 break;
+                             }
+                         }
+                     }
+                 }
+                 for(i = 0; i < num_conexiones; i++)  //conexiones y puzles
+                 {
+                     char *id_con = strtok(NULL, "-\n\r");
+                     char *cond_str = strtok(NULL, "-\n\r");
 
-                    strcpy(p->jugador[u].id_obj[p->jugador[u].num_inventario], aux);
-                    p->jugador[u].num_inventario++;
+                     if(id_con != NULL && cond_str != NULL)
+                     {
+                         for(j = 0; j < num_conexiones; j++)
+                         {
+                             if(strcmp(p->conexion[j].id_conexion, id_con) == 0)
+                             {
+                                 strcpy(p->conexion[j].cond, cond_str);
 
-                    for (j = 0; j < num_objetos; j++)
-                    {
-                        if (strcmp(p->objeto[j].id_obj, aux) == 0)
-                        {
-                            p->objeto[j].id_sala = -1;
-                            break;
-                        }
-                    }
-                    if (strcmp(aux, p->objeto[3].id_obj) == 0) {
-                        mapa = 1;
-                    }
-                     aux = strtok(NULL, "-\n\r");
-                }
-            }
-        }
+                                 if(strncmp(cond_str, "0", 1) == 0)
+                                 {
+                                     strcpy(p->conexion[j].estado, "Activa");
+                                 } else
+                                 {
+                                     strcpy(p->conexion[j].estado, "Bloqueada");
+                                 }
+                                 break;
+                             }
+                         }
+                     }
+                 }
+             }
+         }
     }
+
     fclose(f);
 
     if(encontrada==0)
@@ -119,7 +132,6 @@ void Cargar_partida(partida *p, int u)  //  Comprobado
     } else
     {
         printf("Partida cargada con exito.\n");
-        printf("%d\n",ubicacion_actual);
         menu_opciones_juego(p, u, mapa);
     }
 }
@@ -129,7 +141,7 @@ void Bienvenida(partida *p,int u){
     int opcion=0;
 
     system("cls");
-    printf("\n\n\n Bienvenido a Escape Room ESI!\n\n\n");
+    printf("\n\nBienvenido a Escape Room ESI!\n\n\n");
 
 
     printf("Introduce lo que quieras hacer\n\n");
@@ -148,16 +160,16 @@ void Bienvenida(partida *p,int u){
 
             break;
 
-        case 2: //Cargar partida
+        case 2:
 
             Cargar_partida(p,u);
 
-
             break;
 
-        case 3: //Salir
+        case 3:
 
             exit(0);
+
             break;
 
         default:
@@ -178,7 +190,7 @@ void Nueva_partida(partida *p,int u)
     system("cls");
     printf("\nCreando una Nueva partida...\n");
     carga(p, &total_usuarios);
-    printf("Datas cargados correctamente.\n");
+    printf("Datos cargados correctamente.\n");
 
 
     for(i=0; i<p->jugador[u].num_inventario;i++)
@@ -190,7 +202,7 @@ void Nueva_partida(partida *p,int u)
     p->jugador[u].id_obj=NULL;
     p->jugador[u].num_inventario=0;     // 0 objetos
 
-    printf("Inventario vaciado.\n");
+    printf("Inventario vaciado.\n\n");
 
     system("pause");
 
