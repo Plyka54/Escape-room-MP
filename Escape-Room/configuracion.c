@@ -147,44 +147,27 @@ void Bienvenida(partida *p,int u){
 
     system("cls");
     printf("\n\nBienvenido a Escape Room ESI!\n\n\n");
-
-
     printf("Introduce lo que quieras hacer\n\n");
-
-    printf("1. Nueva Partida\n");
-    printf("2. Cargar Partida\n");
-    printf("3. Salir\n\n");
-
+    printf("1. Nueva Partida\n2. Cargar Partida\n3. Salir\n\n");
     scanf("%d", &opcion);
 
     switch(opcion){
-
         case 1:
-
             Nueva_partida(p,u);
-
             break;
 
         case 2:
-
             Cargar_partida(p,u);
-
             break;
 
         case 3:
-
             exit(0);
-
             break;
 
         default:
-
             printf("Opcion no valida");
-
             break;
-
         }
-
 }
 
 //Cabecera: void Nueva_partida(partida *p, int u)
