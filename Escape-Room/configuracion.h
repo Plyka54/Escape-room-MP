@@ -4,7 +4,7 @@
 #define num_objetos 7
 #define num_salas 18
 #define num_conexiones 17
-#define num_puzles 5
+#define num_puzles 6
 
 typedef struct
 {
@@ -56,10 +56,10 @@ typedef struct
 typedef struct
 {
     jugadores *jugador;
-    salas sala[num_salas];
-    puzles puzle[num_puzles];
-    objetos objeto[num_objetos];
-    conexiones conexion[num_conexiones];
+    salas sala[30];
+    puzles puzle[30];
+    objetos objeto[30];
+    conexiones conexion[30];
 } partida; /* aqui se unen todas las estructuras */
 
 void Nueva_partida(partida *p,int u);
