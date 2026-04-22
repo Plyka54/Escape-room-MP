@@ -3,7 +3,7 @@
 #include "puzles.h"
 
 //Cabecera: void puzle_morse(partida *p)
-//Precondicion:
+//Precondicion: Elegir la opcion examinar sala en el aula de practicas B
 //Postcondicion: Muestra la descripcion del ordenador por pantalla y, si el usuario acepta, reproduce un audio en codigo morse ('UCA') mediante pitidos del sistema
 void puzle_morse(partida *p){
 

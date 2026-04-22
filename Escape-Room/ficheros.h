@@ -3,7 +3,7 @@
 #define num_objetos 7
 #define num_salas 18
 #define num_conexiones 17
-#define num_puzles 5
+#define num_puzles 6
 
 #include "configuracion.h"
 

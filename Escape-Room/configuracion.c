@@ -5,9 +5,6 @@
 #include "ficheros.h"
 #include "juego.h"
 
-//Todas las opciones para guardar la partida, crear, cargar...
-
-
 //Cabecera: void Cargar_partida(partida *p, int u)
 //Precondicion: Estructura partida inicializada y usuario logueado correctamente en la posicion 'u'.
 //Postcondicion: Lee el fichero de guardado para restaurar el inventario, ubicacion y estado de las conexiones. Da paso al juego o vuelve al menu si no hay partida.
@@ -43,8 +40,8 @@ void Cargar_partida(partida *p, int u)  //  Comprobado
     {
         printf("No existe  ninguna partida guardada.\n");
         system("pause");
-        Bienvenida(p,u);   // si no hay partida guardada vuelve a bienbenida
-        return;  //he quitado el return 1 para que no termine el programa del tiron
+        Bienvenida(p,u);   // si no hay partida guardada vuelve a bienvenida
+        return;
     }
 
     while(fgets(linea, sizeof(linea), f) != NULL && encontrada ==0)

@@ -41,7 +41,7 @@ void carga(partida *p,int *total_leidos){
         //JUGADOR
         aux=strtok(NULL,"-");
         if(aux) strcpy(p->jugador[i].jugador,aux);
-        //CONTRASE—A
+        //CONTRASE√ëA
         aux=strtok(NULL,"-");
         if(aux) strcpy(p->jugador[i].contrasena,aux);
         //ID OBJETO
@@ -67,6 +67,9 @@ void carga(partida *p,int *total_leidos){
 
     *total_leidos=i;
     fclose(f);
+    for(int j=0; j<*total_leidos; j++){
+    printf("Jugador %d tiene %d objetos\n", j, p->jugador[j].num_inventario);
+}
 
     f=fopen("data/salas.txt","r");
     if(f==NULL){
@@ -147,11 +150,16 @@ void carga(partida *p,int *total_leidos){
     }
     fclose(f);
 
+    for(int i=0; i<6; i++){
+    printf("DEBUG CARGA: puzle %d ‚Üí id_sala = %d, id = %s\n",
+           i, p->puzle[i].id_sala, p->puzle[i].id_puzles);
+}
+
     }
 
 //Cabecera: int comprobar_usuario(char *user)
 //Precondicion: Cadena de caracteres inicializada
-//Postcondicion: La funcion devuelve un booleano que indicar· si el usuario coincide con alguno existente en el fichero "jugadores.txt"
+//Postcondicion: La funcion devuelve un booleano que indicar√° si el usuario coincide con alguno existente en el fichero "jugadores.txt"
 int comprobar_usuario(partida p,char user[11], int total_leidos, int *u){ //la u es para luego ubicar en que posicion del array esta el usuario y no tener que buscarlo otra vez okkk
     int i, encontrado=0;
     for(i=0;i<total_leidos;i++){

@@ -38,7 +38,7 @@ int main(){
         printf("\nClave: ");
         scanf(" %s", &clave[0]);
 
-        password=comprobar_clave(p,clave,u);  //si la clave es correcta password=1
+        password=comprobar_clave(p,clave,u);                //si la clave es correcta password=1
         if(password) printf("\nContrasena correcta\n");
         else {printf("\nContrasena incorrecta\n");}
         }while(password==0);
@@ -56,7 +56,7 @@ int main(){
 
 // BIENVENIDA Y COMIENZO --------------------------------------------------------
 
-    if (password==1){   //EL CONTENIDO DEL IF TIENE QUE SER UNA FUNCION APARTE
+    if (password==1){
 
         printf("\n");
         system("pause");
@@ -93,7 +93,7 @@ void mostrar_titulo(){
 //Cabecera: void registro()
 //Precondicion:
 //Postcondicion: Se rellena la estructura "Jugadores" con los datos del nuevo jugador
-void registro(partida *p, int *total_usuarios, int *u) //aqui deberias cambiar la estructura y cargar partida no jugadores deberias poner (partida *p)
+void registro(partida *p, int *total_usuarios, int *u)
 {
     int i,j;
     int n=*total_usuarios;
@@ -131,7 +131,7 @@ void registro(partida *p, int *total_usuarios, int *u) //aqui deberias cambiar l
            fgets(p->jugador[n].contrasena, sizeof(p->jugador[n].contrasena),stdin);
            p->jugador[n].contrasena[strcspn(p->jugador[n].contrasena, "\n")] = '\0';
 
-           //inventario vacio habria que hacer creo una funcion para añadir los objetos -> ya esta hecha -> vale angelita :)
+           //inventario vacio
            p->jugador[n].num_inventario=0;
            p->jugador[n].id_obj = NULL;
 
@@ -155,6 +155,7 @@ void registro(partida *p, int *total_usuarios, int *u) //aqui deberias cambiar l
 
                printf("Jugador registrado con exito.\n");
            }
+
            //actualizo las variables
            *u=n;
            (*total_usuarios)++;
