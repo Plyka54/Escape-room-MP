@@ -12,6 +12,7 @@ void mostrar_mapa();
 void final_malo();
 void game_over();
 void diccionario_morse();
+void describir_sala(partida *p, int ubicacion_actual);
 void moverse(partida *p, int u, int *ubicacion_actual, int *fin_de_juego, int mapa);
 void resolver_puzle(partida *p, int ubicacion_actual, int *destino, int *puzle, int *alarma);
 
@@ -83,21 +84,7 @@ void menu_opciones_juego( partida *p,int u, int mapa){
 
         case 1: //describir sala - FUNCIONA
 
-            printf("\033[33m");
-            printf("%s\n\n", p->sala[ubicacion_actual].descripcion);
-            printf("\033[0m");
-
-
-
-            if(ubicacion_actual==13) puzle_morse(p); //acordaos que los puzles hay que ponerlos en un numero menos porque es un vector las salas
-            if(ubicacion_actual==7) puzle_switch(p);
-            if(ubicacion_actual==6) puzle_despacho(p);
-            if(ubicacion_actual==15) puzle_final(p);
-            if(ubicacion_actual==9) llave_biblioteca();
-
-            system("pause");
-            system("cls");
-
+            describir_sala(p,ubicacion_actual);
             break;
 
         case 2: //examinar sala por objetos y salidas
@@ -750,7 +737,26 @@ void final_malo(){
 
 }
 
-void moverse(partida *p, int u, int *ubicacion_actual, int *fin_de_juego, int mapa){
+void describir_sala(partida *p, int ubicacion_actual){ //CASO 1
+
+        printf("\033[33m");
+        printf("%s\n\n", p->sala[ubicacion_actual].descripcion);
+        printf("\033[0m");
+
+
+
+        if(ubicacion_actual==13) puzle_morse(p); //acordaos que los puzles hay que ponerlos en un numero menos porque es un vector las salas
+        if(ubicacion_actual==7) puzle_switch(p);
+        if(ubicacion_actual==6) puzle_despacho(p);
+        if(ubicacion_actual==15) puzle_final(p);
+        if(ubicacion_actual==9) llave_biblioteca();
+
+        system("pause");
+        system("cls");
+
+}
+
+void moverse(partida *p, int u, int *ubicacion_actual, int *fin_de_juego, int mapa){ //CASO 3
 
     char respuesta;
 
@@ -799,7 +805,7 @@ void moverse(partida *p, int u, int *ubicacion_actual, int *fin_de_juego, int ma
                                         if (*ubicacion_actual==17){  //Estamos fuera de la ESI
 
 
-                                            fin_de_juego=1;
+                                            *fin_de_juego=1;
                                             break;
 
                                         }
@@ -851,7 +857,7 @@ void moverse(partida *p, int u, int *ubicacion_actual, int *fin_de_juego, int ma
             system("cls");
 }
 
-void resolver_puzle(partida *p, int ubicacion_actual, int *destino, int *puzle, int *alarma){
+void resolver_puzle(partida *p, int ubicacion_actual, int *destino, int *puzle, int *alarma){ //CASO 8
 
         char solucion[51];
 
@@ -874,7 +880,7 @@ void resolver_puzle(partida *p, int ubicacion_actual, int *destino, int *puzle, 
 
                 if (conexion_asociada == -1 || strcmp(p->conexion[conexion_asociada].cond, "0") == 0) continue;
 
-                    puzle=1;
+                    *puzle=1;
                     printf("\033[33m");
                     printf("Parece que tenemos un puzle. Veamos...\n\n");
                     printf("\033[0m");
@@ -904,7 +910,7 @@ void resolver_puzle(partida *p, int ubicacion_actual, int *destino, int *puzle, 
 
                             strcpy(p->conexion[conexion_asociada].cond, "0"); //cambiamos fichero
                             strcpy(p->conexion[conexion_asociada].estado, "Activa");
-                            puzle=0;
+                            *puzle=0;
 
 
                     }else{
@@ -917,12 +923,12 @@ void resolver_puzle(partida *p, int ubicacion_actual, int *destino, int *puzle, 
                         if(strcmp(p->puzle[cont].id_puzles, "P06")==0){
 
 
-                            alarma=alarma-1;
+                            *alarma=*alarma-1;
                             printf("\033[33m");
-                            printf("Debo de tener cuidado! Solo me quedan %d intentos\n", alarma);
+                            printf("Debo de tener cuidado! Solo me quedan %d intentos\n", *alarma);
                             printf("\033[0m");
 
-                            if(alarma==0){
+                            if(*alarma==0){
 
                                 printf("\033[33m");
                                 printf("No me quedan intentos.\n");
@@ -943,7 +949,7 @@ void resolver_puzle(partida *p, int ubicacion_actual, int *destino, int *puzle, 
 
             printf("\033[33m");
 
-            }if(puzle==0) printf("Parece que no queda ningun puzle que resolver aqui.\n");
+            }if(*puzle==0) printf("Parece que no queda ningun puzle que resolver aqui.\n");
             printf("\033[0m");
             system("pause");
             system("cls");
