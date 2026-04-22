@@ -23,7 +23,8 @@ void Cargar_partida(partida *p, int u)  //  Comprobado
     system("cls");
     printf("\nCargando partida...\n");
 
-    for(i=0; i<p->jugador[u].num_inventario; i++)   // vaciar inventario
+    //VACIAR INVENTARIO
+    for(i=0; i<p->jugador[u].num_inventario; i++)
     {
         free(p->jugador[u].id_obj[i]);
     }
@@ -34,6 +35,7 @@ void Cargar_partida(partida *p, int u)  //  Comprobado
 
     carga(p, &total_usuarios);
 
+    //DATOS DE LA PARTIDA GUARDADA
     f=fopen("data/partida.txt","r");
 
     if(f==NULL)
@@ -148,6 +150,7 @@ void Bienvenida(partida *p,int u){
     printf("1. Nueva Partida\n2. Cargar Partida\n3. Salir\n\n");
     scanf("%d", &opcion);
 
+    //MENU PRINCIPAL
     switch(opcion){
         case 1:
             Nueva_partida(p,u);
@@ -185,16 +188,15 @@ void Nueva_partida(partida *p,int u)
     {
         free(p->jugador[u].id_obj[i]);
     }
-
+    //INVENTARIO VACIADO
     free(p->jugador[u].id_obj);
     p->jugador[u].id_obj=NULL;
-    p->jugador[u].num_inventario=0;     // 0 objetos
+    p->jugador[u].num_inventario=0;
 
     printf("Inventario vaciado.\n\n");
 
     system("pause");
 
-    //Los printf son para ir indicando que las cosas funcionan
-
+    //INICIA EL JUEGO
     Inicio_escape_room(p,u);
 }

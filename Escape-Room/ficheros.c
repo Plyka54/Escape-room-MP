@@ -9,25 +9,30 @@
 //precondicion:
 //poscondicion:cargar en la estructura la informacion de todos los usuarios guardados en el
 //fichero jugadores.txt
-void carga(partida *p,int *total_leidos){
+void carga(partida *p,int *total_leidos)
+{
     FILE *f;
+    //DATOS DE JUGADORES
     f=fopen("data/jugadores.txt","r");
-    if (f==NULL){
+    if (f==NULL)
+    {
 
         printf("\nHa habido un error en la apertura del fichero\n");
     }
 
-     char linea[200];
-     char *aux;
-     int i=0;
+    char linea[200];
+    char *aux;
+    int i=0;
 
-     p->jugador=NULL;
-
-    while(fgets(linea,200,f)!=NULL){
+    p->jugador=NULL;
+    //reservamos memoria para el nuevo jugador
+    while(fgets(linea,200,f)!=NULL)
+    {
         if(linea[0]=='\n'||linea[0]=='\r'||linea[0]=='\0') continue;
         //Reservamos memoria
         jugadores *temp=(jugadores *)realloc(p->jugador, (i+1)*sizeof(jugadores));
-        if(temp==NULL){
+        if(temp==NULL)
+        {
             printf("Error de memoria al reservar para un nuevo jugador. \n");
             break;
         }
@@ -47,14 +52,15 @@ void carga(partida *p,int *total_leidos){
         //ID OBJETO
         p->jugador[i].num_inventario=0;
         p->jugador[i].id_obj=NULL;
-
         aux= strtok(NULL, "-\n\r");
-        while(aux!=NULL){
+        while(aux!=NULL)
+        {
             p->jugador[i].num_inventario++;
             int num_actual=p->jugador[i].num_inventario;
 
             p->jugador[i].id_obj= (char **)realloc(p->jugador[i].id_obj,num_actual*sizeof(char *));
-            if(p->jugador[i].id_obj==NULL){
+            if(p->jugador[i].id_obj==NULL)
+            {
                 printf("Error de memoria asignando objeto.\n");
             }
 
@@ -63,20 +69,20 @@ void carga(partida *p,int *total_leidos){
             aux=strtok(NULL,"-\n\r");
         }
         i++;
-        }
+    }
 
     *total_leidos=i;
     fclose(f);
-    for(int j=0; j<*total_leidos; j++){
-    printf("Jugador %d tiene %d objetos\n", j, p->jugador[j].num_inventario);
-}
 
+    //DATOS DE LAS SALAS
     f=fopen("data/salas.txt","r");
-    if(f==NULL){
+    if(f==NULL)
+    {
         printf("\n Ha habido un error en la apertura del fichero\n");
     }
     i=0;
-    while(fgets(linea,200,f)!=NULL && i<num_salas){
+    while(fgets(linea,200,f)!=NULL && i<num_salas)
+    {
         aux=strtok(linea,"-");
         if(aux) p->sala[i].id_sala=atoi(aux);
         aux=strtok(NULL,"-");
@@ -89,12 +95,15 @@ void carga(partida *p,int *total_leidos){
     }
     fclose(f);
 
-   f=fopen("data/conexiones.txt","r");
-    if(f==NULL){
+    //DATOS DE LAS CONEXIONES
+    f=fopen("data/conexiones.txt","r");
+    if(f==NULL)
+    {
         printf("\n Ha habido un error en la apertura del fichero\n");
     }
     i=0;
-    while(fgets(linea,200,f)!=NULL && i<num_conexiones){
+    while(fgets(linea,200,f)!=NULL && i<num_conexiones)
+    {
         aux=strtok(linea,"-");
         if(aux) strcpy(p->conexion[i].id_conexion,aux);
         aux=strtok(NULL,"-");
@@ -109,12 +118,15 @@ void carga(partida *p,int *total_leidos){
     }
     fclose(f);
 
+    //DATOS DE LOS OBJETOS
     f=fopen("data/objetos.txt","r");
-    if(f==NULL){
+    if(f==NULL)
+    {
         printf("\n Ha habido un error en la apertura del fichero\n");
     }
     i=0;
-    while(fgets(linea,200,f)!=NULL && i<num_objetos){
+    while(fgets(linea,200,f)!=NULL && i<num_objetos)
+    {
         aux=strtok(linea,"-");
         if(aux) strcpy(p->objeto[i].id_obj,aux);
         aux=strtok(NULL,"-");
@@ -127,13 +139,16 @@ void carga(partida *p,int *total_leidos){
     }
     fclose(f);
 
+    //DATOS DE LOS PUZLES
     f=fopen("data/puzles.txt","r");
-    if(f==NULL){
+    if(f==NULL)
+    {
         printf("\n Ha habido un error en la apertura del fichero\n");
     }
     i=0;
 
-    while(fgets(linea,200,f)!=NULL && i<num_puzles){
+    while(fgets(linea,200,f)!=NULL && i<num_puzles)
+    {
         aux=strtok(linea,"-");
         if(aux) strcpy(p->puzle[i].id_puzles,aux);
         aux=strtok(NULL,"-");
@@ -150,22 +165,23 @@ void carga(partida *p,int *total_leidos){
     }
     fclose(f);
 
-    for(int i=0; i<6; i++){
-    printf("DEBUG CARGA: puzle %d → id_sala = %d, id = %s\n",
-           i, p->puzle[i].id_sala, p->puzle[i].id_puzles);
-}
 
-    }
+}
 
 //Cabecera: int comprobar_usuario(char *user)
 //Precondicion: Cadena de caracteres inicializada
 //Postcondicion: La funcion devuelve un booleano que indicará si el usuario coincide con alguno existente en el fichero "jugadores.txt"
-int comprobar_usuario(partida p,char user[11], int total_leidos, int *u){ //la u es para luego ubicar en que posicion del array esta el usuario y no tener que buscarlo otra vez okkk
+int comprobar_usuario(partida p,char user[11], int total_leidos, int *u)  //la u es para luego ubicar en que posicion del array esta el usuario y no tener que buscarlo otra vez okkk
+{
     int i, encontrado=0;
-    for(i=0;i<total_leidos;i++){
-        if(strcmp(user,p.jugador[i].jugador)==0) {
+    //recorremos todos los usuarios
+    for(i=0; i<total_leidos; i++)
+    {
+        if(strcmp(user,p.jugador[i].jugador)==0)
+        {
             *u=i;
-            encontrado=1;}
+            encontrado=1;
+        }
     }
 
     return encontrado;
@@ -174,7 +190,8 @@ int comprobar_usuario(partida p,char user[11], int total_leidos, int *u){ //la u
 //cabecera: int comprobar_clave(jugadores lista[20], char clave, int u);
 //precondicion: se debe haber comprobado el usuario antes
 //poscondicion: la funcion devuelve un booleano que indicara si la clave es la del usuario
-int comprobar_clave(partida p, char clave[8], int u){
+int comprobar_clave(partida p, char clave[8], int u)
+{
     int comprobado=0;
     if(strcmp(clave,p.jugador[u].contrasena)==0) comprobado=1;
 

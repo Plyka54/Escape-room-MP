@@ -25,20 +25,20 @@ int main(){
 // LOGIN DE USUARIO O REGISTRO -----------------------------------------------------------
     int u;
 
-    printf("Inicie sesion o registrese para continuar\n"); //habra que poner para elegir una
+    printf("Inicie sesion o registrese para continuar\n");
 
     printf("\nUsuario: ");
     scanf("%s", usuario);
     fflush(stdin);
-
+    //comprobamos el usuario
     user=comprobar_usuario(p,usuario,total_usuarios,&u);
 
     if(user==1){
         do{
         printf("\nClave: ");
         scanf(" %s", &clave[0]);
-
-        password=comprobar_clave(p,clave,u);                //si la clave es correcta password=1
+        //comprobamos la contrasena
+        password=comprobar_clave(p,clave,u);
         if(password) printf("\nContrasena correcta\n");
         else {printf("\nContrasena incorrecta\n");}
         }while(password==0);

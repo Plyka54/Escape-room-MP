@@ -16,6 +16,7 @@ void puzle_morse(partida *p){
 
     scanf(" %c", &respuesta);
 
+    //se reproduce un sonido
     if (respuesta=='s'){
 
 

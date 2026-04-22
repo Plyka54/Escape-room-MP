@@ -8,6 +8,7 @@
 #include "configuracion.h"
 #include "ficheros.h"
 
+//CABECERAS
 void mostrar_mapa();
 void final_malo();
 void game_over();
@@ -28,11 +29,8 @@ void guardar_partida(partida *p, int u, int ubicacion_actual);
 void Inicio_escape_room(partida *p,int u){
 
     int mapa=0;
-    p->jugador[u].ubicacion_actual=0; //esto pa la estructura
+    p->jugador[u].ubicacion_actual=0;
     system("cls");
-
-
-    //printf("DEBUG: id_sala = %d\n", p->sala[0].id_sala); si pone 0 no esta cargado
 
     printf(" %s\n", p->sala[p->jugador[u].ubicacion_actual].nombre_sala);
     printf("--------------------------------\n\n");
@@ -49,6 +47,7 @@ void Inicio_escape_room(partida *p,int u){
     printf("\033[0m");
     printf("Poco a poco te incorporas y te levantas de lo que parece ser un pupitre.\n\n\n");
 
+    //se vacia el inventario
     p->jugador[u].num_inventario = 0;
     p->jugador[u].id_obj = NULL;
 
@@ -59,8 +58,8 @@ void Inicio_escape_room(partida *p,int u){
 //Precondicion: Ubicacion actual del jugador inicializada
 //Postcondicion: La funcion presenta todas las opciones del menu del juego
 void menu_opciones_juego( partida *p,int u, int mapa){
-                                                                                   //Lo de declarar 40 variables iguales en cada caso hay que arreglarlo eh
-    int volver_menu=0, fin_de_juego=0, eleccion_switch=11, puzle=0, alarma=3;       //Booleanos
+
+    int volver_menu=0, fin_de_juego=0, eleccion_switch=11, puzle=0, alarma=3;
     int ubicacion_actual, destino;
     ubicacion_actual=p->jugador[u].ubicacion_actual;
 
@@ -69,12 +68,11 @@ void menu_opciones_juego( partida *p,int u, int mapa){
 
    do{
 
-    printf(" %s\n", p->sala[ubicacion_actual].nombre_sala);
+    printf(" %s\n", p->sala[ubicacion_actual].nombre_sala);  //muestra la ubicacion actual en todo momento
     printf("--------------------------------\n\n");
 
     printf("1. Describir Sala\n2. Examinar Sala\n3. Moverse\n4. Coger objeto\n5. Soltar objeto\n");
     printf("6. Inventario\n7. Usar objeto\n8. Resolver puzle\n9. Guardar partida\n10. Volver\n\n\n");
-
 
     if(scanf("%d",&eleccion_switch)!=1){
         printf("Por favor, introduce un numero valido del menu\n");
@@ -85,9 +83,10 @@ void menu_opciones_juego( partida *p,int u, int mapa){
     }
     printf("\n\n");
 
+    //menu del juego
     switch (eleccion_switch){
 
-        case 1: //describir sala - FUNCIONA
+        case 1: //describir sala
 
             describir_sala(p,ubicacion_actual);
             break;
@@ -101,19 +100,19 @@ void menu_opciones_juego( partida *p,int u, int mapa){
 
             break;
 
-        case 3: //Moverse (fichero conexiones)
+        case 3: //Moverse
 
             moverse(p, u, &ubicacion_actual, &fin_de_juego, mapa);
             p->jugador[u].ubicacion_actual = ubicacion_actual;
             break;
 
-        case 4: //Coger objeto (si lo hay)
+        case 4: //Coger objeto
             coger_objeto(p, u, ubicacion_actual, &mapa);
 
             system("pause");
             system("cls");
             break;
-        case 5: //Soltar objeto (si es que tienes)
+        case 5: //Soltar objeto
             soltar_objeto(p, u, ubicacion_actual);
             system("pause");
             system("cls");
@@ -127,14 +126,14 @@ void menu_opciones_juego( partida *p,int u, int mapa){
             system("cls");
             break;
 
-        case 7: //Usar objeto (Si es necesario en la sala)
+        case 7: //Usar objeto
             usar_objeto(p, u, ubicacion_actual, &mapa);
 
             system("pause");
             system("cls");
             break;
 
-        case 8:{ //Resolver puzle (si hay puzle)
+        case 8:{ //Resolver puzle
 
             resolver_puzle(p, ubicacion_actual, &destino, &puzle, &alarma);
             break;
@@ -480,11 +479,9 @@ void resolver_puzle(partida *p, int ubicacion_actual, int *destino, int *puzle, 
 
         char solucion[51];
 
-            for(int cont=0;cont<num_puzles;cont++){ //Recorremos todos los puzles     OJO QUE SI METEMOS MÁS HAY QUE CAMBIAR ESTE BUCLE
+            for(int cont=0;cont<num_puzles;cont++){ //Recorremos todos los puzles
 
-                printf("DEBUG: puzle %d está en sala %d\n", cont, p->puzle[cont].id_sala);
-
-                int conexion_asociada = -1; // lo pongo aqui pa que reinicie valor
+                int conexion_asociada = -1;
 
                 if(p->puzle[cont].id_sala == p->sala[ubicacion_actual].id_sala){ //puzle en esta sala
 
