@@ -16,5 +16,3 @@
 16-CONSERJERIA-NORMAL-Sala con mucha documentacion, carteles de la universidad y algunos ordenadores apagados.
 17-HALL-NORMAL-Vestibulo, ya deberia de estar muy cerca de la salida.
 18-SALIDA(entrada ESI)-SALIDA-El exterior esta aqui.
-
-
