@@ -18,7 +18,7 @@ void game_over();
 void Inicio_escape_room(partida *p,int u){
 
     int mapa=0;
-    p->jugador[u].ubicacion_actual=0; //esto pa la estructura, lo suyo seria ir actualizando en funcion de el id_sala
+    p->jugador[u].ubicacion_actual=0; //esto pa la estructura
     system("cls");
 
 
@@ -27,7 +27,6 @@ void Inicio_escape_room(partida *p,int u){
     printf(" %s\n", p->sala[p->jugador[u].ubicacion_actual].nombre_sala);
     printf("--------------------------------\n\n");
 
-    //voy a ser una dramas que todos los sepais
     printf("\033[33m");
     printf("Mhm... Donde estoy?\n");
 
@@ -98,7 +97,7 @@ void menu_opciones_juego( partida *p,int u, int mapa){
 
             break;
 
-        case 2: //examinar sala por objetos y salidas - FUNCIONA NO TOCAR
+        case 2: //examinar sala por objetos y salidas
 
             printf("\033[33m");
             printf("Voy a buscar cosas en la sala...\n");
@@ -184,7 +183,7 @@ void menu_opciones_juego( partida *p,int u, int mapa){
 
             break;
 
-        case 3: //Moverse (fichero conexiones)  FUNCIONA - NO TOCAR
+        case 3: //Moverse (fichero conexiones)
 
                 if(mapa==1){ //si tenemos el mapa podremos usarlo siempre que queramos
 
@@ -214,12 +213,6 @@ void menu_opciones_juego( partida *p,int u, int mapa){
 
                     if (p->conexion[cont].id_origen == p->sala[ubicacion_actual].id_sala){ //CONEXION ENCONTRADA
 
-
-                          /*  printf("ORIGEN=%d DESTINO=%d COND=[%s]\n",
-                                p->conexion[cont].id_origen,
-                                p->conexion[cont].id_destino,
-                                p->conexion[cont].cond);*/
-
                             if(strcmp(p->conexion[cont].cond, "0")== 0){ //CONEXION ABIERTA, POSIBLE DESPLAZAMIENTO DEL JUGADOR
 
                                 printf("\033[33m");
@@ -230,11 +223,11 @@ void menu_opciones_juego( partida *p,int u, int mapa){
 
                                     scanf(" %c", &respuesta);
 
-                                    if (respuesta=='s' || respuesta=='S'){ //Actualizamos la posicion actual del jugador
+                                    if (respuesta=='s' || respuesta=='S'){ //Actualizamos posicion del jugador
 
                                         ubicacion_actual=p->sala[p->conexion[cont].id_destino - 1].id_sala -1;//el primer -1 accede al vector y el segundo -1 le cambia el valor a ubicacion actual
 
-                                        if (ubicacion_actual==17){  //hemos conseguido salir
+                                        if (ubicacion_actual==17){  //Estamos fuera de la ESI
 
 
                                             fin_de_juego=1;
@@ -242,7 +235,7 @@ void menu_opciones_juego( partida *p,int u, int mapa){
 
                                         }
 
-                                        break; //no se a donde lleva este break -- LAURA ESTE BREAK TE LLEVA A LA VICTORIA
+                                        break;
 
                                     }
 
@@ -267,10 +260,9 @@ void menu_opciones_juego( partida *p,int u, int mapa){
 
                                     scanf(" %c", &respuesta);
 
-                                    if (respuesta=='s' || respuesta=='S'){ //Actualizamos la posicion actual del jugador
+                                    if (respuesta=='s' || respuesta=='S'){ //Actualizamos posicion actual jugador
 
-                                        ubicacion_actual=p->sala[p->conexion[cont].id_origen -1].id_sala -1;
-                                        break; //tampoco se donde lleva
+                                        ubicacion_actual=p->sala[p->conexion[cont].id_origen -1].id_sala
 
                                     }
 
@@ -429,7 +421,7 @@ void menu_opciones_juego( partida *p,int u, int mapa){
 
             break;}
 
-        case 6:  //Ver inventario - FUNCIONA
+        case 6:  //Ver inventario
         {
             int i,j;
 
@@ -565,7 +557,7 @@ void menu_opciones_juego( partida *p,int u, int mapa){
             break;
         }
 
-        case 8:{ //Resolver puzle (si hay puzle) FUNCIONA NO TOCAR
+        case 8:{ //Resolver puzle (si hay puzle)
 
             char solucion[51];
 
@@ -733,10 +725,10 @@ void menu_opciones_juego( partida *p,int u, int mapa){
                 break;
         }
 
-        case 10:  //volver - FUNCIONA NO TOCAR
+        case 10:  //volver
 
             volver_menu=1;
-            Bienvenida(p,u);  // he quitado la i inglesa pq bienvenida es con p y u
+            Bienvenida(p,u);
             break;
 
         default:
