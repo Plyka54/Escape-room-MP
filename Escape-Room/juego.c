@@ -262,7 +262,8 @@ void menu_opciones_juego( partida *p,int u, int mapa){
 
                                     if (respuesta=='s' || respuesta=='S'){ //Actualizamos posicion actual jugador
 
-                                        ubicacion_actual=p->sala[p->conexion[cont].id_origen -1].id_sala
+                                        ubicacion_actual=p->sala[p->conexion[cont].id_origen -1].id_sala -1;
+                                        break;
 
                                     }
 
