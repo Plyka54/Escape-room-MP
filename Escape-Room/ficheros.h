@@ -1,5 +1,9 @@
 #ifndef FICHEROS
 #define FICHEROS
+#define num_objetos 7
+#define num_salas 18
+#define num_conexiones 17
+#define num_puzles 5
 
 #include "configuracion.h"
 

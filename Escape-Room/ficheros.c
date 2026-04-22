@@ -21,8 +21,17 @@ void carga(partida *p,int *total_leidos){
      char *aux;
      int i=0;
 
+     p->jugador=NULL;
 
-     while(fgets(linea,200,f)!=NULL && i<20){ //memoria dinamica: realloc de lo que habia +1
+    while(fgets(linea,200,f)!=NULL){
+        if(linea[0]=='\n'||linea[0]=='\r'||linea[0]=='\0') continue;
+        //Reservamos memoria
+        jugadores *temp=(jugadores *)realloc(p->jugador, (i+1)*sizeof(jugadores));
+        if(temp==NULL){
+            printf("Error de memoria al reservar para un nuevo jugador. \n");
+            break;
+        }
+        p->jugador=temp;
         //ID(lo convierto en entero)
         aux=strtok(linea,"-");
         if(aux) p->jugador[i].id_jugador=atoi(aux);
@@ -64,7 +73,7 @@ void carga(partida *p,int *total_leidos){
         printf("\n Ha habido un error en la apertura del fichero\n");
     }
     i=0;
-    while(fgets(linea,200,f)!=NULL && i<20){
+    while(fgets(linea,200,f)!=NULL && i<num_salas){
         aux=strtok(linea,"-");
         if(aux) p->sala[i].id_sala=atoi(aux);
         aux=strtok(NULL,"-");
@@ -82,7 +91,7 @@ void carga(partida *p,int *total_leidos){
         printf("\n Ha habido un error en la apertura del fichero\n");
     }
     i=0;
-    while(fgets(linea,200,f)!=NULL && i<20){
+    while(fgets(linea,200,f)!=NULL && i<num_conexiones){
         aux=strtok(linea,"-");
         if(aux) strcpy(p->conexion[i].id_conexion,aux);
         aux=strtok(NULL,"-");
@@ -102,7 +111,7 @@ void carga(partida *p,int *total_leidos){
         printf("\n Ha habido un error en la apertura del fichero\n");
     }
     i=0;
-    while(fgets(linea,200,f)!=NULL && i<13){
+    while(fgets(linea,200,f)!=NULL && i<num_objetos){
         aux=strtok(linea,"-");
         if(aux) strcpy(p->objeto[i].id_obj,aux);
         aux=strtok(NULL,"-");
@@ -121,7 +130,7 @@ void carga(partida *p,int *total_leidos){
     }
     i=0;
 
-    while(fgets(linea,200,f)!=NULL && i<6){
+    while(fgets(linea,200,f)!=NULL && i<num_puzles){
         aux=strtok(linea,"-");
         if(aux) strcpy(p->puzle[i].id_puzles,aux);
         aux=strtok(NULL,"-");
@@ -145,7 +154,7 @@ void carga(partida *p,int *total_leidos){
 //Postcondicion: La funcion devuelve un booleano que indicará si el usuario coincide con alguno existente en el fichero "jugadores.txt"
 int comprobar_usuario(partida p,char user[11], int total_leidos, int *u){ //la u es para luego ubicar en que posicion del array esta el usuario y no tener que buscarlo otra vez okkk
     int i, encontrado=0;
-    for(i=0;i<total_leidos-1;i++){    // al final no hice nada tranquila
+    for(i=0;i<total_leidos;i++){
         if(strcmp(user,p.jugador[i].jugador)==0) {
             *u=i;
             encontrado=1;}

@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "main.h"
 #include "ficheros.h"
 #include "configuracion.h"
 
 void mostrar_titulo();
+void registro(partida *, int *, int *);
 
 int main(){
 
@@ -32,21 +34,21 @@ int main(){
     user=comprobar_usuario(p,usuario,total_usuarios,&u);
 
     if(user==1){
-
+        do{
         printf("\nClave: ");
         scanf(" %s", &clave[0]);
 
         password=comprobar_clave(p,clave,u);  //si la clave es correcta password=1
         if(password) printf("\nContrasena correcta\n");
         else {printf("\nContrasena incorrecta\n");}
-
+        }while(password==0);
     }else{
 
         printf("Usuario no encontrado.");
         printf("Vamos a registrarte en la base de datos\n");
 
         getchar();
-        registro(&p);
+        registro(&p,&total_usuarios,&u);
         password=1;
 
     }
@@ -91,59 +93,47 @@ void mostrar_titulo(){
 //Cabecera: void registro()
 //Precondicion:
 //Postcondicion: Se rellena la estructura "Jugadores" con los datos del nuevo jugador
-void registro(partida *p, int password) //aqui deberias cambiar la estructura y cargar partida no jugadores deberias poner (partida *p)
+void registro(partida *p, int *total_usuarios, int *u) //aqui deberias cambiar la estructura y cargar partida no jugadores deberias poner (partida *p)
 {
     int i,j;
-    int pos=-1;
+    int n=*total_usuarios;
     int max_id=0;  // esto es para calcular el siguiente id
-    partida *reg;
     FILE *f;
 
-    reg=(partida *)malloc(sizeof(partida)); //Angela verifica he puesto malloc pero pusiste realloc
-
+    jugadores *reg=(jugadores *)realloc(p->jugador, (n+1)*sizeof(jugadores));
     if(reg==NULL)
     {
         printf("Error: no se pudo asignar memoria.\n");
     } else
     {
-       *reg=*p;
+       p->jugador=reg;
 
-       for(i=0; i<20; i++)
+        //busco el ID mas alto para sumarle 1 (y asi no se repiten)
+       for(i=0; i<n; i++)
        {
-           if(reg->jugador[i].id_jugador == 0 && pos == -1)
-           {
-               pos=i;
-           }
-
-           if(reg->jugador[i].id_jugador > max_id)
-           {
-               max_id = reg->jugador[i].id_jugador;
+           if(p->jugador[i].id_jugador>max_id){
+            max_id=p->jugador[i].id_jugador;
            }
        }
 
-       if(pos==-1)
-       {
-           printf("No hay espacio para más jugadores.\n");
-       } else
-       {
-           reg->jugador[pos].id_jugador = max_id+1;
+           p->jugador[n].id_jugador = max_id+1;
 
            printf("Introduce tu nombre:");
-           fgets(reg->jugador[pos].nomb_jugador, sizeof(reg->jugador[pos].nomb_jugador),stdin);
-           reg->jugador[pos].nomb_jugador[strcspn(reg->jugador[pos].nomb_jugador, "\n")] = '\0';
+           fgets(p->jugador[n].nomb_jugador, sizeof(p->jugador[n].nomb_jugador),stdin);
+           p->jugador[n].nomb_jugador[strcspn(p->jugador[n].nomb_jugador, "\n")] = '\0';
 
            printf("\nIntroduce tu nombre de usuario (10 caracteres max): ");
-           fgets(reg->jugador[pos].jugador, sizeof(reg->jugador[pos].jugador),stdin);
-           reg->jugador[pos].jugador[strcspn(reg->jugador[pos].jugador, "\n")] = '\0';
+           fgets(p->jugador[n].jugador, sizeof(p->jugador[n].jugador),stdin);
+           p->jugador[n].jugador[strcspn(p->jugador[n].jugador, "\n")] = '\0';
 
 
            printf("\nIntroduce una contrasena (8 caracteres max):");
-           fgets(reg->jugador[pos].contrasena, sizeof(reg->jugador[pos].contrasena),stdin);
-           reg->jugador[pos].contrasena[strcspn(reg->jugador[pos].contrasena, "\n")] = '\0';
+           fgets(p->jugador[n].contrasena, sizeof(p->jugador[n].contrasena),stdin);
+           p->jugador[n].contrasena[strcspn(p->jugador[n].contrasena, "\n")] = '\0';
 
            //inventario vacio habria que hacer creo una funcion para añadir los objetos -> ya esta hecha -> vale angelita :)
-           reg->jugador[pos].num_inventario=0;
-           reg->jugador[pos].id_obj = NULL;
+           p->jugador[n].num_inventario=0;
+           p->jugador[n].id_obj = NULL;
 
            f=fopen("data/jugadores.txt","a");
 
@@ -154,19 +144,21 @@ void registro(partida *p, int password) //aqui deberias cambiar la estructura y 
            {
                fflush(stdin);
                fprintf(f, "%02d-%s-%s-%s-\n",
-                        reg->jugador[pos].id_jugador,
-                        reg->jugador[pos].nomb_jugador,
-                        reg->jugador[pos].jugador,
-                        reg->jugador[pos].contrasena);
+                        p->jugador[n].id_jugador,
+                        p->jugador[n].nomb_jugador,
+                        p->jugador[n].jugador,
+                        p->jugador[n].contrasena);
 
                fclose(f);
 
-               *p=*reg;
+
 
                printf("Jugador registrado con exito.\n");
            }
+           //actualizo las variables
+           *u=n;
+           (*total_usuarios)++;
        }
     }
 
-    free(reg);
-}
+
