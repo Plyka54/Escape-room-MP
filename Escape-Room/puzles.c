@@ -2,6 +2,9 @@
 #include <windows.h>
 #include "puzles.h"
 
+//Cabecera: void puzle_morse(partida *p)
+//Precondicion:
+//Postcondicion: Muestra la descripcion del ordenador por pantalla y, si el usuario acepta, reproduce un audio en codigo morse ('UCA') mediante pitidos del sistema
 void puzle_morse(partida *p){
 
     char respuesta;
@@ -41,6 +44,9 @@ void puzle_morse(partida *p){
 
 }
 
+//Cabecera: void puzle_switch(partida *p)
+//Precondicion:
+//Postcondicion: Imprime por pantalla las pistas visuales sobre los cables y los puertos conectados al switch para que el jugador deduzca el codigo (8152).
 void puzle_switch (partida *p){
 
     printf("\033[33m");
@@ -52,6 +58,9 @@ void puzle_switch (partida *p){
     //8152
 }
 
+//Cabecera: void puzle_despacho(partida *p)
+//Precondicion:
+//Postcondicion: Muestra al jugador la pista descriptiva sobre el orden de los circulos de colores en el panel de acceso del despacho.
 void puzle_despacho(partida *p){
 
     printf("\033[33m");
@@ -61,6 +70,9 @@ void puzle_despacho(partida *p){
     printf("\033[0m");
 }
 
+//Cabecera: void puzle_final(partida *p)
+//Precondicion:
+//Postcondicion: Imprime un texto narrativo seguido de un grafico ASCII que simula una nota de papel con el codigo final (4869) y la advertencia de los intentos.
 void puzle_final(partida *p){ //cuando entras a conserjeria 16
 
     printf("\033[33m");
@@ -101,6 +113,9 @@ void puzle_final(partida *p){ //cuando entras a conserjeria 16
 
 }
 
+//Cabecera: void llave_biblioteca()
+//Precondicion:
+//Postcondicion: Imprime la descripcion narrativa de los objetos encontrados en el despacho (libro de algoritmos y tarjeta) para dar contexto de la historia.
 void llave_biblioteca(){
     printf("\033[33m");
     printf("\nWow, jamas he estado en el despacho de un profesor, hay bastantes documentos y cosas...\n");

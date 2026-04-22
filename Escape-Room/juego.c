@@ -468,8 +468,9 @@ void menu_opciones_juego( partida *p,int u, int mapa){
                 printf("No tienes ningun objeto en el inventario.\n");
             } else
             {
-                printf("Que objeto quieres usar?\n");   // Mostramos el inventario para elegir objeto
+                printf("Que objeto quieres usar?\n");
 
+                // Mostramos el inventario para elegir objeto
                 for (i=0;i<p->jugador[u].num_inventario;i++)
                 {
                     for (j=0;j<num_objetos;j++)
@@ -526,20 +527,28 @@ void menu_opciones_juego( partida *p,int u, int mapa){
                             printf("\n");
                         }
                         else
-                        {
+                        { // lo de las salas y conexiones
                             for (j=0;j<num_conexiones; j++)
                             {
-                                if ((p->conexion[j].id_origen == p->sala[ubicacion_actual].id_sala || p->conexion[j].id_destino == p->sala[ubicacion_actual].id_sala) && strcmp(p->conexion[j].cond, id_usado) == 0)
+                                int sala_actual_id = p->sala[ubicacion_actual].id_sala;
+                                int origen_conexion = p->conexion[j].id_origen;
+                                int destino_conexion = p->conexion[j].id_destino;
+
+                                if (sala_actual_id == origen_conexion || sala_actual_id == destino_conexion)  // primero comprobamos
                                 {
-                                    strcpy(p->conexion[j].cond, "0");
-                                    strcpy(p->conexion[j].estado, "Activa");
-                                    printf("Has usado %s.\n", p->objeto[pos_objeto].nomb_obj);
-                                    printf("%s\n", p->objeto[pos_objeto].descrip);
-                                    printf("\033[33m");
-                                    printf("Parece que una salida se ha desbloqueado.\n");
-                                    printf("\033[0m");
-                                    usado = 1;
-                                    break;
+                                    if (strcmp(p->conexion[j].cond, id_usado) == 0)     //comprueba si la puerta pide el objeto que tenga en el inventario
+                                    {
+                                        strcpy(p->conexion[j].cond, "0"); // Cambiamos a 0 para abrirla
+                                        strcpy(p->conexion[j].estado, "Activa");
+
+                                        printf("\033[32m"); // Verde exito
+                                        printf("\nHas usado %s.\n", p->objeto[pos_objeto].nomb_obj);
+                                        printf("!Click! Parece que una salida se ha desbloqueado.\n");
+                                        printf("\033[0m");
+
+                                        usado = 1;
+                                        break; // Paramos de buscar puertas
+                                    }
                                 }
                             }
 
@@ -763,6 +772,9 @@ void menu_opciones_juego( partida *p,int u, int mapa){
 
 }
 
+//Cabecera: void mostrar_mapa()
+//Precondicion:
+//Postcondicion: Imprime por pantalla un esquema general en formato texto del mapa de la escuela.
 void mostrar_mapa(){
 
 
@@ -788,6 +800,9 @@ printf(
 
 }
 
+//Cabecera: void game_over()
+//Precondicion:
+//Postcondicion: Imprime por pantalla el texto "GAME OVER" en color rojo usando arte ASCII.
 void game_over(){
 
 
@@ -806,6 +821,9 @@ void game_over(){
 
 }
 
+//Cabecera: void diccionario_morse()
+//Precondicion:
+//Postcondicion: Muestra por pantalla la equivalencia de letras a codigo morse y una pista narrativa sobre el estado del documento.
 void diccionario_morse(){
 
     printf("A = .-\nB = -...\nC = -.-.\nE = .\nI = ..\nO = ---\nU = ..-\nS = ...\n");
@@ -816,6 +834,9 @@ void diccionario_morse(){
 
 }
 
+//Cabecera: void final_malo()
+//Precondicion:
+//Postcondicion: Ejecuta la secuencia narrativa del final alternativo donde el jugador es descubierto, dando a elegir entre dos opciones y terminando el juego en un GAME OVER.
 void final_malo(){
 
     int opcion_final=2;
