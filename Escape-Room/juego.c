@@ -15,6 +15,12 @@ void diccionario_morse();
 void describir_sala(partida *p, int ubicacion_actual);
 void moverse(partida *p, int u, int *ubicacion_actual, int *fin_de_juego, int mapa);
 void resolver_puzle(partida *p, int ubicacion_actual, int *destino, int *puzle, int *alarma);
+void examinar_sala(partida *p, int ubicacion_actual);
+void coger_objeto(partida *p, int u, int ubicacion_actual, int *mapa);
+void soltar_objeto(partida *p, int u, int ubicacion_actual);
+void ver_inventario(partida *p, int u);
+void usar_objeto(partida *p, int u, int ubicacion_actual, int *mapa);
+void guardar_partida(partida *p, int u, int ubicacion_actual);
 
 //Cabecera: void Inicio_escape_room(partida *p,int u)
 //Precondicion: El usuario debe de estar en una partida nueva, no en una cargada.
@@ -88,84 +94,7 @@ void menu_opciones_juego( partida *p,int u, int mapa){
 
         case 2: //examinar sala por objetos y salidas
 
-            printf("\033[33m");
-            printf("Voy a buscar cosas en la sala...\n");
-            printf("\033[0m");
-
-            int i,j,k,cont=0, puzle_sala=0, conexion_asociada;
-
-            for(i=0;i<num_objetos;i++){
-                if(p->sala[ubicacion_actual].id_sala==p->objeto[i].id_sala){
-                    if(cont==0){
-                        printf("\033[33m");
-                        printf("He encontrado...\n\n");
-                        printf("\033[0m");
-                    }
-                    cont++;
-                    printf("%d.%s\n",cont,p->objeto[i].nomb_obj);
-                }
-            }
-
-            printf("\033[0m");
-
-            if(cont==0){
-
-                printf("\033[33m");
-                printf("En esta sala no parece haber ningun objeto\n");
-                printf("\033[0m");
-            }
-            for(i=0;i<num_puzles;i++)
-            {
-                conexion_asociada=-1;
-
-                if(p->puzle[i].id_sala==p->sala[ubicacion_actual].id_sala)
-                {
-                    for(k=0;k<num_conexiones;k++)
-                    {
-                        if(strcmp(p->conexion[k].cond,p->puzle[i].id_puzles)==0)
-                        {
-                            conexion_asociada=k;
-                            break;
-                        }
-                    }
-                    if(conexion_asociada==-1 && strcmp(p->conexion[conexion_asociada].cond, "0")!=0)
-                    {
-                        puzle_sala=1;
-                        break;
-                    }
-                }
-            }
-
-            printf("\033[33m");
-            if(puzle_sala==1)
-            {
-                printf("Parece que hay un puzle pendiente en esta sala.\n");
-            } else
-            {
-                printf("No parece haber ningun puzle pendiente en esta sala.\n");
-            }
-            printf("\033[33m");
-
-            printf("\033[33m");
-            printf("\nVoy a buscar las salidas de esta sala...\n\n");
-            printf("\033[0m");
-
-            cont=0;
-
-                for(j=0;j<num_conexiones;j++){
-
-                    if(p->sala[ubicacion_actual].id_sala==p->conexion[j].id_origen){
-                        cont++;
-                        printf("%d. %s\n",cont,p->sala[p->conexion[j].id_destino-1].nombre_sala);
-                    }
-
-                    if(p->sala[ubicacion_actual].id_sala==p->conexion[j].id_destino){
-                        cont++;
-                        printf("%d. %s\n",cont,p->sala[p->conexion[j].id_origen-1].nombre_sala);
-                    }
-                }
-
-            printf("\033[0m");
+            examinar_sala(p,ubicacion_actual);
 
             system("pause");
             system("cls");
@@ -178,281 +107,32 @@ void menu_opciones_juego( partida *p,int u, int mapa){
             p->jugador[u].ubicacion_actual = ubicacion_actual;
             break;
 
-        case 4: {//Coger objeto (si lo hay)
-            int i, cont, num_actual;
-            char op1, op2;
-            char **inventario;
-
-            printf("\033[33m");
-            printf("Veamos que hay para coger...\n");
-            printf("\033[0m");
-
-            do {
-                cont = 0;
-                for (i = 0; i < num_objetos; i++) {
-                    if (p->sala[ubicacion_actual].id_sala == p->objeto[i].id_sala) {
-                        cont++;
-                        printf("\033[33m");
-                        printf("He encontrado un %s\n", p->objeto[i].nomb_obj);
-                        printf("\033[0m");
-                        printf("Quieres cogerlo? s/n\n");
-                        scanf(" %c", &op1);
-
-
-                        if (op1 == 's' || op1=='S') {
-                            p->jugador[u].num_inventario++;
-                            num_actual = p->jugador[u].num_inventario;
-
-                            inventario = (char **)realloc(p->jugador[u].id_obj, num_actual * sizeof(char *));
-
-                            if (inventario != NULL) {
-                                p->jugador[u].id_obj = inventario;
-
-                                p->jugador[u].id_obj[num_actual - 1] = strdup(p->objeto[i].id_obj);
-
-                                printf("\nHas cogido el objeto: %s!\n", p->objeto[i].nomb_obj);
-                                printf("%s\n\n", p->objeto[i].descrip);  // esto es pa ver la descripcion
-                                p->objeto[i].id_sala = -1; // Lo quitamos de la sala
-
-
-                                if (strcmp(p->jugador[u].id_obj[num_actual-1], p->objeto[3].id_obj)==0) mapa=1;
-
-                            } else {
-                                printf("Error de memoria.\n");
-                                p->jugador[u].num_inventario--; // Deshacemos el incremento si falla
-                            }
-
-
-                        }
-                    }
-                }
-
-                if (cont == 0){
-                        printf("\033[33m");
-                        printf("\nNo hay nada mas aqui.\n");
-                        printf("\033[0m");
-                        break;
-                }
-
-                printf("Quieres coger otro objeto? (s/n)\n");
-                scanf(" %c", &op2);
-
-            } while (op2 == 's' || op2=='S');
+        case 4: //Coger objeto (si lo hay)
+            coger_objeto(p, u, ubicacion_actual, &mapa);
 
             system("pause");
             system("cls");
             break;
-        }
         case 5: //Soltar objeto (si es que tienes)
-            //AQUI LO UNICO QUE FALTA ES SI PONE OTRO NUMERO SE CIERRA EL PROGRAMA
-            {
-            int i,j,op;
-
-            printf("\033[33m");
-            printf("Veamos que objetos tengo en el inventario...\n");
-            printf("\033[0m");
-
-            if(p->jugador[u].num_inventario==0){
-                printf("No tienes ningun objeto en el inventario para soltar\n\n");
-                system("pause");
-                system("cls");
-                break;
-            }
-            else{
-                printf("Que objeto quieres soltar?\n");
-                for(i=0;i<p->jugador[u].num_inventario;i++){
-                    for(j=0;j<num_objetos;j++){
-                        if(strcmp(p->jugador[u].id_obj[i],p->objeto[j].id_obj)==0){
-                            printf("%d. %s\n",i+1,p->objeto[j].nomb_obj);
-                        }
-                    }
-                }
-
-
-                //por si se introduce una letra
-                if (scanf("%d", &op) != 1) {
-                    printf("Error: Debes introducir un numero.\n");
-
-                    fflush(stdin);
-
-                    system("pause");
-                    system("cls");
-                    break;
-                }
-
-
-                if (op < 1 || op > p->jugador[u].num_inventario) {
-                    printf("Error: Ese numero no corresponde a ningun objeto de tu inventario.\n");
-                    system("pause");
-                    system("cls");
-                    break;
-                }
-
-                int indice=op-1;
-                for(j=0;j<num_objetos;j++){ //para que el objeto se quede en la sala actual
-                    if(strcmp(p->jugador[u].id_obj[indice],p->objeto[j].id_obj)==0){
-                        p->objeto[j].id_sala=p->sala[ubicacion_actual].id_sala;
-                        printf("Has soltado %s\n\n",p->objeto[j].nomb_obj);
-                    }
-                }
-
-                //vaciar el inventario
-                free(p->jugador[u].id_obj[indice]);
-                for(i=indice;i<p->jugador[u].num_inventario;i++){
-                    p->jugador[u].id_obj[i]=p->jugador[u].id_obj[i+1];
-                }
-                p->jugador[u].num_inventario--;
-
-                //ajustar memoria
-                if (p->jugador[u].num_inventario > 0) {
-                    p->jugador[u].id_obj = (char **)realloc(p->jugador[u].id_obj, p->jugador[u].num_inventario * sizeof(char *));
-                }
-                    else {
-                        free(p->jugador[u].id_obj);
-                        p->jugador[u].id_obj = NULL;
-            }
-        }
-
+            soltar_objeto(p, u, ubicacion_actual);
             system("pause");
             system("cls");
 
-            break;}
+            break;
 
         case 6:  //Ver inventario
-        {
-            int i,j;
-
-            if(p->jugador[u].num_inventario == 0)
-            {
-                printf("No tienes ningun objeto en el inventario.\n");
-            } else
-            {
-                printf("Los objetos que tengo encima son:\n");
-
-                for(i=0;i<p->jugador[u].num_inventario;i++)
-                {
-                    for(j=0;j<num_objetos;j++)
-                    {
-                        if(strcmp(p->jugador[u].id_obj[i], p->objeto[j].id_obj) == 0)
-                        {
-                            printf("%d. %s: %s\n\n",i+1, p->objeto[j].nomb_obj,  p->objeto[j].descrip);
-                        }
-                    }
-                }
-            }
+            ver_inventario(p, u);
 
             system("pause");
             system("cls");
             break;
-
-        }
 
         case 7: //Usar objeto (Si es necesario en la sala)
-        {
-            int i, j, op, indice, pos_objeto = -1, usado = 0;
-            char *id_usado;
+            usar_objeto(p, u, ubicacion_actual, &mapa);
 
-            if (p->jugador[u].num_inventario==0)
-            {
-                printf("No tienes ningun objeto en el inventario.\n");
-            } else
-            {
-                printf("Que objeto quieres usar?\n");
-
-                // Mostramos el inventario para elegir objeto
-                for (i=0;i<p->jugador[u].num_inventario;i++)
-                {
-                    for (j=0;j<num_objetos;j++)
-                    {
-                        if (strcmp(p->jugador[u].id_obj[i], p->objeto[j].id_obj)==0)
-                        {
-                            printf("%d. %s\n", i + 1, p->objeto[j].nomb_obj);
-                            break;
-                        }
-                    }
-                }  //de aqui pa arriba bien
-
-                if(scanf("%d",&op)!=1)
-                {
-                    printf("Opcion no valida.\n");
-                    while(getchar()!='\n');
-                } else
-                {
-                    while(getchar()!='\n');
-                    indice=op-1;
-
-                    if (indice<0 || indice>=p->jugador[u].num_inventario)
-                    {
-                        printf("Opcion no valida.\n");
-                    } else
-                    {
-                        id_usado = p->jugador[u].id_obj[indice];   // Se guarda el id del objeto elegido
-
-                        for (j=0;j<num_objetos;j++)
-                        {
-                            if (strcmp(id_usado, p->objeto[j].id_obj)==0)
-                            {
-                                pos_objeto = j;
-                                break;
-                            }
-                        }
-
-                        if (pos_objeto==-1)
-                        {
-                            printf("No se ha encontrado ese objeto.\n");
-                        }
-                        else if (strcmp(id_usado,"OB04")==0)   // MAPA
-                        {
-                            mapa = 1;
-                            printf("Has usado %s.\n", p->objeto[pos_objeto].nomb_obj);
-                            printf("%s\n", p->objeto[pos_objeto].descrip);
-                            printf("Ahora puedes consultar el mapa antes de moverte.\n");
-                        }
-                        else if (strcmp(id_usado,"OB05")==0)   // MORSE
-                        {
-                            printf("Has usado %s.\n", p->objeto[pos_objeto].nomb_obj);
-                            printf("%s\n", p->objeto[pos_objeto].descrip);
-                            diccionario_morse();
-                            printf("\n");
-                        }
-                        else
-                        { // lo de las salas y conexiones
-                            for (j=0;j<num_conexiones; j++)
-                            {
-                                int sala_actual_id = p->sala[ubicacion_actual].id_sala;
-                                int origen_conexion = p->conexion[j].id_origen;
-                                int destino_conexion = p->conexion[j].id_destino;
-
-                                if (sala_actual_id == origen_conexion || sala_actual_id == destino_conexion)  // primero comprobamos
-                                {
-                                    if (strcmp(p->conexion[j].cond, id_usado) == 0)     //comprueba si la puerta pide el objeto que tenga en el inventario
-                                    {
-                                        strcpy(p->conexion[j].cond, "0"); // Cambiamos a 0 para abrirla
-                                        strcpy(p->conexion[j].estado, "Activa");
-
-                                        printf("\033[32m"); // Verde exito
-                                        printf("\nHas usado %s.\n", p->objeto[pos_objeto].nomb_obj);
-                                        printf("!Click! Parece que una salida se ha desbloqueado.\n");
-                                        printf("\033[0m");
-
-                                        usado = 1;
-                                        break; // Paramos de buscar puertas
-                                    }
-                                }
-                            }
-
-                            if (usado==0)
-                            {
-                                printf("No puedes usar %s aqui.\n", p->objeto[pos_objeto].nomb_obj);
-                            }
-                        }
-                    }
-                }
-            }
             system("pause");
             system("cls");
             break;
-        }
 
         case 8:{ //Resolver puzle (si hay puzle)
 
@@ -461,73 +141,12 @@ void menu_opciones_juego( partida *p,int u, int mapa){
         }
 
         case 9:  //guardar partida
-        {
-            FILE *f;
-            int i, j, id_leido;
-            char linea[700];
-            char **lineas_guardadas=NULL;
-            int num_lineas=0;
+            guardar_partida(p, u, ubicacion_actual);
 
-            //mira si hay alguna partida anterior guardada en el fichero y la borra
-            f=fopen("data/partida.txt","r");
-            if (f != NULL) {
-                while (fgets(linea, sizeof(linea), f) != NULL) {
-                    if (sscanf(linea, "%d-", &id_leido) == 1) {
-                        if (id_leido != p->jugador[u].id_jugador) {
-                            char **temp = (char **)realloc(lineas_guardadas, (num_lineas + 1) * sizeof(char *));
-                            if (temp != NULL) {
-                                lineas_guardadas = temp;
-                                lineas_guardadas[num_lineas] = strdup(linea);
-                                num_lineas++;
-                            } else {
-                                printf("Error de memoria al leer el fichero.\n");
-                                break;
-                            }
-                        }
-                    }
-                }
-                fclose(f);
-            }
-                //escribimos en el fichero
-                f = fopen("data/partida.txt", "w");
-                if (f == NULL) {
-                    printf("Error al abrir el fichero para guardar.\n");
-                } else {
-                    // A) Volcamos las líneas de los otros jugadores
-                    for (i = 0; i < num_lineas; i++) {
-                        fprintf(f, "%s", lineas_guardadas[i]);
-                        free(lineas_guardadas[i]); // Liberamos la memoria de la cadena ya usada
-                    }
+            system("pause");
+            system("cls");
+            break;
 
-                    // Liberamos el vector principal ahora que está vacío
-                    free(lineas_guardadas);
-
-                    // B) Escribimos la NUEVA partida del jugador actual id y sala
-                    fprintf(f, "%02d-%d", p->jugador[u].id_jugador, p->sala[ubicacion_actual].id_sala);
-
-                    // los objetos
-                    for (i = 0; i < num_objetos; i++) {
-                        fprintf(f, "-%s-%d", p->objeto[i].id_obj, p->objeto[i].id_sala);
-                    }
-
-                    // conexiones y si el puzle esta resuelto la condicion guardada es "0"
-                    for (i = 0; i < num_conexiones; i++)
-                    {
-                        fprintf(f, "-%s-%s", p->conexion[i].id_conexion, p->conexion[i].cond);
-
-                    }
-
-                    fprintf(f, "\n"); // El salto de línea fundamental
-
-                    fclose(f);
-                    printf("\nPartida guardada con exito.\n");
-                }
-
-                system("pause");
-                system("cls");
-
-                break;
-        }
 
         case 10:  //volver
 
@@ -549,6 +168,7 @@ void menu_opciones_juego( partida *p,int u, int mapa){
 
 
 
+
    }while(fin_de_juego==0 && volver_menu==0);
 
         if(fin_de_juego==1){
@@ -565,8 +185,8 @@ void menu_opciones_juego( partida *p,int u, int mapa){
 
         }
 
-
 }
+
 
 //Cabecera: void mostrar_mapa()
 //Precondicion:
@@ -954,3 +574,395 @@ void resolver_puzle(partida *p, int ubicacion_actual, int *destino, int *puzle, 
             system("cls");
 }
 
+
+
+// Cabecera: void examinar_sala(partida *p, int ubicacion_actual)
+// Precondicion: Partida y ubicacion inicializadas
+// Postcondicion: Imprime por pantalla los objetos, puzles pendientes y salidas
+void examinar_sala(partida *p, int ubicacion_actual) {
+    int i, j, k, cont = 0, puzle_sala = 0, conexion_asociada;
+
+    printf("\033[33m");
+    printf("Voy a buscar cosas en la sala...\n");
+    printf("\033[0m");
+
+    // 1. BUSCAR OBJETOS
+    for(i=0; i<num_objetos; i++){
+        if(p->sala[ubicacion_actual].id_sala == p->objeto[i].id_sala){
+            if(cont==0){
+                printf("\033[33m");
+                printf("He encontrado...\n\n");
+                printf("\033[0m");
+            }
+            cont++;
+            printf("%d.%s\n", cont, p->objeto[i].nomb_obj);
+        }
+    }
+
+    if(cont==0){
+        printf("\033[33m");
+        printf("En esta sala no parece haber ningun objeto\n");
+        printf("\033[0m");
+    }
+
+    // 2. BUSCAR PUZLES PENDIENTES
+    for(i=0; i<num_puzles; i++)
+    {
+        conexion_asociada = -1;
+
+        if(p->puzle[i].id_sala == p->sala[ubicacion_actual].id_sala)
+        {
+            for(k=0; k<num_conexiones; k++)
+            {
+                if(strcmp(p->conexion[k].cond, p->puzle[i].id_puzles)==0)
+                {
+                    conexion_asociada = k;
+                    break;
+                }
+            }
+
+            if(conexion_asociada != -1 && strcmp(p->conexion[conexion_asociada].cond, "0") != 0)
+            {
+                puzle_sala = 1;
+                break;
+            }
+        }
+    }
+
+    printf("\033[33m");
+    if(puzle_sala==1)
+    {
+        printf("Parece que hay un puzle pendiente en esta sala.\n");
+    } else
+    {
+        printf("No parece haber ningun puzle pendiente en esta sala.\n");
+    }
+
+    // 3. BUSCAR SALIDAS
+    printf("\nVoy a buscar las salidas de esta sala...\n\n");
+    printf("\033[0m");
+
+    cont = 0;
+    for(j=0; j<num_conexiones; j++){
+        if(p->sala[ubicacion_actual].id_sala == p->conexion[j].id_origen){
+            cont++;
+            printf("%d. %s\n", cont, p->sala[p->conexion[j].id_destino - 1].nombre_sala);
+        }
+        if(p->sala[ubicacion_actual].id_sala == p->conexion[j].id_destino){
+            cont++;
+            printf("%d. %s\n", cont, p->sala[p->conexion[j].id_origen - 1].nombre_sala);
+        }
+    }
+    printf("\033[0m");
+}
+
+// Cabecera: void coger_objeto(partida *p, int u, int ubicacion_actual, int *mapa)
+// Precondicion:
+// Postcondicion: Permite al usuario recoger objetos de la sala y guardarlos en su inventario dinámico
+void coger_objeto(partida *p, int u, int ubicacion_actual, int *mapa) {
+    int i, cont, num_actual;
+    char op1, op2;
+    char **inventario;
+
+    printf("\033[33m");
+    printf("Veamos que hay para coger...\n");
+    printf("\033[0m");
+
+    do {
+        cont = 0;
+        for (i = 0; i < num_objetos; i++) {
+            if (p->sala[ubicacion_actual].id_sala == p->objeto[i].id_sala) {
+                cont++;
+                printf("\033[33m");
+                printf("He encontrado un %s\n", p->objeto[i].nomb_obj);
+                printf("\033[0m");
+                printf("Quieres cogerlo? s/n\n");
+                scanf(" %c", &op1);
+
+                if (op1 == 's' || op1 == 'S') {
+                    p->jugador[u].num_inventario++;
+                    num_actual = p->jugador[u].num_inventario;
+
+                    inventario = (char **)realloc(p->jugador[u].id_obj, num_actual * sizeof(char *));
+
+                    if (inventario != NULL) {
+                        p->jugador[u].id_obj = inventario;
+
+                        p->jugador[u].id_obj[num_actual - 1] = strdup(p->objeto[i].id_obj);
+
+                        printf("\nHas cogido el objeto: %s!\n", p->objeto[i].nomb_obj);
+                        printf("%s\n\n", p->objeto[i].descrip);
+
+                        p->objeto[i].id_sala = -1; // Lo quitamos de la sala
+
+                        // ¡OJO AQUÍ! Usamos *mapa porque es un puntero
+                        if (strcmp(p->jugador[u].id_obj[num_actual-1], p->objeto[3].id_obj) == 0) {
+                            *mapa = 1;
+                        }
+
+                    } else {
+                        printf("Error de memoria.\n");
+                        p->jugador[u].num_inventario--; // Deshacemos el incremento si falla
+                    }
+                }
+            }
+        }
+
+        if (cont == 0) {
+            printf("\033[33m");
+            printf("\nNo hay nada mas aqui.\n");
+            printf("\033[0m");
+            break;
+        }
+
+        printf("Quieres coger otro objeto? (s/n)\n");
+        scanf(" %c", &op2);
+
+    } while (op2 == 's' || op2 == 'S');
+}
+
+// Cabecera: void soltar_objeto(partida *p, int u, int ubicacion_actual)
+// Precondicion: Partida, jugador y ubicacion inicializadas
+// Postcondicion: Permite al jugador dejar un objeto de su inventario en la sala actual
+void soltar_objeto(partida *p, int u, int ubicacion_actual) {
+    int i, j, op;
+
+    printf("\033[33m");
+    printf("Veamos que objetos tengo en el inventario...\n");
+    printf("\033[0m");
+
+    if (p->jugador[u].num_inventario == 0) {
+        printf("No tienes ningun objeto en el inventario para soltar\n\n");
+        return; // Salimos de la función si no hay objetos
+    }
+
+    printf("Que objeto quieres soltar?\n");
+    for (i = 0; i < p->jugador[u].num_inventario; i++) {
+        for (j = 0; j < num_objetos; j++) {
+            if (strcmp(p->jugador[u].id_obj[i], p->objeto[j].id_obj) == 0) {
+                printf("%d. %s\n", i + 1, p->objeto[j].nomb_obj);
+            }
+        }
+    }
+
+    // Por si se introduce una letra
+    if (scanf("%d", &op) != 1) {
+        printf("\033[31mError: Debes introducir un numero.\033[0m\n");
+        while(getchar() != '\n'); // Limpiamos el buffer del teclado
+        return;
+    }
+
+    if (op < 1 || op > p->jugador[u].num_inventario) {
+        printf("\033[31mError: Ese numero no corresponde a ningun objeto de tu inventario.\033[0m\n");
+        return;
+    }
+
+    int indice = op - 1;
+    for (j = 0; j < num_objetos; j++) { // Para que el objeto se quede en la sala actual
+        if (strcmp(p->jugador[u].id_obj[indice], p->objeto[j].id_obj) == 0) {
+            p->objeto[j].id_sala = p->sala[ubicacion_actual].id_sala;
+            printf("\033[32mHas soltado %s\033[0m\n\n", p->objeto[j].nomb_obj);
+        }
+    }
+
+    // Vaciar el inventario
+    free(p->jugador[u].id_obj[indice]);
+    for (i = indice; i < p->jugador[u].num_inventario - 1; i++) {
+        p->jugador[u].id_obj[i] = p->jugador[u].id_obj[i + 1];
+    }
+    p->jugador[u].num_inventario--;
+
+    // Ajustar memoria dinámica
+    if (p->jugador[u].num_inventario > 0) {
+        p->jugador[u].id_obj = (char **)realloc(p->jugador[u].id_obj, p->jugador[u].num_inventario * sizeof(char *));
+    } else {
+        free(p->jugador[u].id_obj);
+        p->jugador[u].id_obj = NULL;
+    }
+}
+
+void ver_inventario(partida *p, int u) {
+    int i, j;
+
+    if(p->jugador[u].num_inventario == 0)
+    {
+        printf("No tienes ningun objeto en el inventario.\n");
+    } else
+    {
+        printf("Los objetos que tengo encima son:\n");
+
+        for(i=0;i<p->jugador[u].num_inventario;i++)
+        {
+            for(j=0;j<num_objetos;j++)
+            {
+                if(strcmp(p->jugador[u].id_obj[i], p->objeto[j].id_obj) == 0)
+                {
+                    printf("%d. %s: %s\n\n",i+1, p->objeto[j].nomb_obj,  p->objeto[j].descrip);
+                }
+            }
+        }
+    }
+}
+
+void usar_objeto(partida *p, int u, int ubicacion_actual, int *mapa) {
+    int i, j, op, indice, pos_objeto = -1, usado = 0;
+    char *id_usado;
+
+    if (p->jugador[u].num_inventario==0)
+    {
+        printf("No tienes ningun objeto en el inventario.\n");
+    } else
+    {
+        printf("Que objeto quieres usar?\n");
+
+        // Mostramos el inventario para elegir objeto
+        for (i=0;i<p->jugador[u].num_inventario;i++)
+        {
+            for (j=0;j<num_objetos;j++)
+            {
+                if (strcmp(p->jugador[u].id_obj[i], p->objeto[j].id_obj)==0)
+                {
+                    printf("%d. %s\n", i + 1, p->objeto[j].nomb_obj);
+                    break;
+                }
+            }
+        }  //de aqui pa arriba bien
+
+        if(scanf("%d",&op)!=1)
+        {
+            printf("Opcion no valida.\n");
+            while(getchar()!='\n');
+        } else
+        {
+            while(getchar()!='\n');
+            indice=op-1;
+
+            if (indice<0 || indice>=p->jugador[u].num_inventario)
+            {
+                printf("Opcion no valida.\n");
+            } else
+            {
+                id_usado = p->jugador[u].id_obj[indice];   // Se guarda el id del objeto elegido
+
+                for (j=0;j<num_objetos;j++)
+                {
+                    if (strcmp(id_usado, p->objeto[j].id_obj)==0)
+                    {
+                        pos_objeto = j;
+                        break;
+                    }
+                }
+
+                if (pos_objeto==-1)
+                {
+                    printf("No se ha encontrado ese objeto.\n");
+                }
+                else if (strcmp(id_usado,"OB04")==0)   // MAPA
+                {
+                    *mapa = 1;
+                    printf("Has usado %s.\n", p->objeto[pos_objeto].nomb_obj);
+                    printf("%s\n", p->objeto[pos_objeto].descrip);
+                    printf("Ahora puedes consultar el mapa antes de moverte.\n");
+                }
+                else if (strcmp(id_usado,"OB05")==0)   // MORSE
+                {
+                    printf("Has usado %s.\n", p->objeto[pos_objeto].nomb_obj);
+                    printf("%s\n", p->objeto[pos_objeto].descrip);
+                    diccionario_morse();
+                    printf("\n");
+                }
+                else
+                { // lo de las salas y conexiones
+                    for (j=0;j<num_conexiones; j++)
+                    {
+                        int sala_actual_id = p->sala[ubicacion_actual].id_sala;
+                        int origen_conexion = p->conexion[j].id_origen;
+                        int destino_conexion = p->conexion[j].id_destino;
+
+                        if (sala_actual_id == origen_conexion || sala_actual_id == destino_conexion)  // primero comprobamos
+                        {
+                            if (strcmp(p->conexion[j].cond, id_usado) == 0)     //comprueba si la puerta pide el objeto que tenga en el inventario
+                            {
+                                strcpy(p->conexion[j].cond, "0"); // Cambiamos a 0 para abrirla
+                                strcpy(p->conexion[j].estado, "Activa");
+
+                                printf("\033[32m"); // Verde exito
+                                printf("\nHas usado %s.\n", p->objeto[pos_objeto].nomb_obj);
+                                printf("!Click! Parece que una salida se ha desbloqueado.\n");
+                                printf("\033[0m");
+
+                                usado = 1;
+                                break; // Paramos de buscar puertas
+                            }
+                        }
+                    }
+
+                    if (usado==0)
+                    {
+                        printf("No puedes usar %s aqui.\n", p->objeto[pos_objeto].nomb_obj);
+                    }
+                }
+            }
+        }
+    }
+}
+
+void guardar_partida(partida *p, int u, int ubicacion_actual) {
+    FILE *f;
+    int i, id_leido;
+    char linea[700];
+    char **lineas_guardadas=NULL;
+    int num_lineas=0;
+
+    //mira si hay alguna partida anterior guardada en el fichero y la borra
+    f=fopen("data/partida.txt","r");
+    if (f != NULL) {
+        while (fgets(linea, sizeof(linea), f) != NULL) {
+            if (sscanf(linea, "%d-", &id_leido) == 1) {
+                if (id_leido != p->jugador[u].id_jugador) {
+                    char **temp = (char **)realloc(lineas_guardadas, (num_lineas + 1) * sizeof(char *));
+                    if (temp != NULL) {
+                        lineas_guardadas = temp;
+                        lineas_guardadas[num_lineas] = strdup(linea);
+                        num_lineas++;
+                    } else {
+                        printf("Error de memoria al leer el fichero.\n");
+                        break;
+                    }
+                }
+            }
+        }
+        fclose(f);
+    }
+    //escribimos en el fichero
+    f = fopen("data/partida.txt", "w");
+    if (f == NULL) {
+        printf("Error al abrir el fichero para guardar.\n");
+    } else {
+        // A) Volcamos las líneas de los otros jugadores
+        for (i = 0; i < num_lineas; i++) {
+            fprintf(f, "%s", lineas_guardadas[i]);
+            free(lineas_guardadas[i]); // Liberamos la memoria de la cadena ya usada
+        }
+        // Liberamos el vector principal ahora que está vacío
+        free(lineas_guardadas);
+
+        // B) Escribimos la NUEVA partida del jugador actual id y sala
+        fprintf(f, "%02d-%d", p->jugador[u].id_jugador, p->sala[ubicacion_actual].id_sala);
+
+        // los objetos
+        for (i = 0; i < num_objetos; i++) {
+            fprintf(f, "-%s-%d", p->objeto[i].id_obj, p->objeto[i].id_sala);
+        }
+
+        // conexiones y si el puzle esta resuelto la condicion guardada es "0"
+        for (i = 0; i < num_conexiones; i++)
+        {
+            fprintf(f, "-%s-%s", p->conexion[i].id_conexion, p->conexion[i].cond);
+        }
+
+        fprintf(f, "\n"); // El salto de línea fundamental
+        fclose(f);
+        printf("\nPartida guardada con exito.\n");
+    }
+}
