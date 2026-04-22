@@ -55,7 +55,6 @@ void Inicio_escape_room(partida *p,int u){
 void menu_opciones_juego( partida *p,int u, int mapa){
                                                                                    //Lo de declarar 40 variables iguales en cada caso hay que arreglarlo eh
     int volver_menu=0, fin_de_juego=0, eleccion_switch=11, puzle=0, alarma=3;       //Booleanos
-    char respuesta;
     int ubicacion_actual, destino;
     ubicacion_actual=p->jugador[u].ubicacion_actual;
 
