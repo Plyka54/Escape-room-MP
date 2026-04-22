@@ -188,7 +188,7 @@ void menu_opciones_juego( partida *p,int u, int mapa){
 
 
 //Cabecera: void mostrar_mapa()
-//Precondicion:
+//Precondicion: mapa=1
 //Postcondicion: Imprime por pantalla un esquema general en formato texto del mapa de la escuela.
 void mostrar_mapa(){
 
@@ -216,7 +216,7 @@ printf(
 }
 
 //Cabecera: void game_over()
-//Precondicion:
+//Precondicion: Alarma=0
 //Postcondicion: Imprime por pantalla el texto "GAME OVER" en color rojo usando arte ASCII.
 void game_over(){
 
@@ -355,6 +355,9 @@ void final_malo(){
 
 }
 
+//cabecera: void describir_sala(partida *p, int ubicacion_actual)
+//precondicion: Elegir el caso 1 en el menu de opciones del juego
+//postcondicion: Imprime en pantalla la descripcion de la sala en la que el usuario esta actualmente
 void describir_sala(partida *p, int ubicacion_actual){ //CASO 1
 
         printf("\033[33m");
@@ -374,6 +377,9 @@ void describir_sala(partida *p, int ubicacion_actual){ //CASO 1
 
 }
 
+//cabecera:void moverse(partida *p, int u, int *ubicacion_actual, int *fin_de_juego, int mapa)
+//precondicion: Elegir caso 3 en el menu de opciones
+//postcondicion: Cambia de sala al personaje si las conexiones estan desbloqueadas
 void moverse(partida *p, int u, int *ubicacion_actual, int *fin_de_juego, int mapa){ //CASO 3
 
     char respuesta;
@@ -475,6 +481,10 @@ void moverse(partida *p, int u, int *ubicacion_actual, int *fin_de_juego, int ma
             system("cls");
 }
 
+
+//cabecera:void resolver_puzle(partida *p, int ubicacion_actual, int *destino, int *puzle, int *alarma)
+//precondicion: Elegir el caso 8 en el menu de opciones
+//postcondicion: desbloquea conexiones de los ficheros si se da la respuesta correcta, lo que permite nuevo movimiento del personaje
 void resolver_puzle(partida *p, int ubicacion_actual, int *destino, int *puzle, int *alarma){ //CASO 8
 
         char solucion[51];
