@@ -832,7 +832,7 @@ void usar_objeto(partida *p, int u, int ubicacion_actual, int *mapa) {
                     break;
                 }
             }
-        }  //de aqui pa arriba bien
+        }
 
         if(scanf("%d",&op)!=1)
         {
