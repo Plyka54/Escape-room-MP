@@ -169,7 +169,7 @@ void menu_opciones_juego( partida *p,int u, int mapa){
 
 
    }while(fin_de_juego==0 && volver_menu==0);
-
+        //FINAL BUENO
         if(fin_de_juego==1){
 
             printf("\033[33m");
@@ -364,9 +364,8 @@ void describir_sala(partida *p, int ubicacion_actual){ //CASO 1
         printf("%s\n\n", p->sala[ubicacion_actual].descripcion);
         printf("\033[0m");
 
-
-
-        if(ubicacion_actual==13) puzle_morse(p); //acordaos que los puzles hay que ponerlos en un numero menos porque es un vector las salas
+        //dependiendo de la sala en la que estamos se hace una descripcion u otra
+        if(ubicacion_actual==13) puzle_morse(p);
         if(ubicacion_actual==7) puzle_switch(p);
         if(ubicacion_actual==6) puzle_despacho(p);
         if(ubicacion_actual==15) puzle_final(p);
@@ -415,7 +414,7 @@ void moverse(partida *p, int u, int *ubicacion_actual, int *fin_de_juego, int ma
                             if(strcmp(p->conexion[cont].cond, "0")== 0){ //CONEXION ABIERTA, POSIBLE DESPLAZAMIENTO DEL JUGADOR
 
                                 printf("\033[33m");
-                                printf("\nPuedo ir a [%s]\n", p->sala[p->conexion[cont].id_destino - 1].nombre_sala); //-1 porque el destino tiene id=2 y el indice debe ser el 1 (por ejemplo)
+                                printf("\nPuedo ir a [%s]\n", p->sala[p->conexion[cont].id_destino - 1].nombre_sala);
                                 printf("\033[0m");
 
                                 printf("Quieres ir por aqui? (s/n)\n");
@@ -424,7 +423,7 @@ void moverse(partida *p, int u, int *ubicacion_actual, int *fin_de_juego, int ma
 
                                     if (respuesta=='s' || respuesta=='S'){ //Actualizamos posicion del jugador
 
-                                        *ubicacion_actual=p->sala[p->conexion[cont].id_destino - 1].id_sala -1;//el primer -1 accede al vector y el segundo -1 le cambia el valor a ubicacion actual
+                                        *ubicacion_actual=p->sala[p->conexion[cont].id_destino - 1].id_sala -1;
 
                                         if (*ubicacion_actual==17){  //Estamos fuera de la ESI
 
@@ -677,6 +676,7 @@ void coger_objeto(partida *p, int u, int ubicacion_actual, int *mapa) {
 
     do {
         cont = 0;
+        //recorremos los objetos
         for (i = 0; i < num_objetos; i++) {
             if (p->sala[ubicacion_actual].id_sala == p->objeto[i].id_sala) {
                 cont++;
@@ -702,7 +702,6 @@ void coger_objeto(partida *p, int u, int ubicacion_actual, int *mapa) {
 
                         p->objeto[i].id_sala = -1; // Lo quitamos de la sala
 
-                        // ¡OJO AQUÍ! Usamos *mapa porque es un puntero
                         if (strcmp(p->jugador[u].id_obj[num_actual-1], p->objeto[3].id_obj) == 0) {
                             *mapa = 1;
                         }
