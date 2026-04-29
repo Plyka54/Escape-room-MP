@@ -878,7 +878,7 @@ void usar_objeto(partida *p, int u, int ubicacion_actual, int *mapa) {
                     printf("\n");
                 }
                 else
-                { // lo de las salas y conexiones
+                { // salas y conexiones
                     for (j=0;j<num_conexiones; j++)
                     {
                         int sala_actual_id = p->sala[ubicacion_actual].id_sala;
